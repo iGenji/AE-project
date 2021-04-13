@@ -14,7 +14,7 @@ public interface AddressDTO {
    * 
    * @param id_address - int ID of the address.
    */
-  void setIdAddress(int id_address);
+  void setIdAddress(int idAddress);
 
   /**
    * {@inheritDoc} This method returns the street of the address DTO.

@@ -23,15 +23,17 @@ public class FurnitureDAOImpl implements FurnitureDAO {
 
   private final String updateFurnitureSpecialPrice =
       "UPDATE pae_project.meubles SET prix_special=? WHERE id_meuble=?";
-  
-  private final String findFurnitures = "SELECT "
-      + "id_meuble,etat_meuble,type_meuble,description,prix_achat,prix_vente,prix_special,photo_preferee"
-      + "visite,date_emporte_patron,date_depot FROM pae_project.meubles";
+
+  private final String findFurnitures =
+      "SELECT " + "id_meuble,etat_meuble,type_meuble,description,prix_achat,prix_vente,"
+          + "prix_special,photo_preferee"
+          + "visite,date_emporte_patron,date_depot FROM pae_project.meubles";
 
   @Inject
   private DalServices dalServices;
 
-  @Inject FurnitureFactory factory;
+  @Inject
+  FurnitureFactory factory;
 
   @Override
   public FurnitureDTO findByID(int furnitureID) {
@@ -72,34 +74,34 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       ps = dalServices.getPreparedStatement(updateFurnitureSellingPrice);
       double sellingPrice = furniture.getSellingPrice();
       ps.setDouble(1, sellingPrice);
-      ps.setInt(2,furniture.getIdFurniture());
+      ps.setInt(2, furniture.getIdFurniture());
       ps.executeUpdate();
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
 
-    try{
+    try {
       ps = dalServices.getPreparedStatement(updateFurnitureSpecialPrice);
       double specialPrice = furniture.getSpecialSalePrice();
       ps.setDouble(1, specialPrice);
-      ps.setInt(2,furniture.getIdFurniture());
+      ps.setInt(2, furniture.getIdFurniture());
       ps.executeUpdate();
-    }catch (Exception e){
-      throw new FatalException(e.getMessage(),e);
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
     }
 
-    try{
+    try {
       ps = dalServices.getPreparedStatement(updateFurnitureState);
       ps.setString(1, furniture.getStateFurniture());
-      ps.setInt(2,furniture.getIdFurniture());
+      ps.setInt(2, furniture.getIdFurniture());
       ps.executeUpdate();
-    }catch (Exception e){
-      throw new FatalException(e.getMessage(),e);
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
     }
 
     return furniture;
   }
-  
+
   @Override
   public List<FurnitureDTO> findAll() {
     ArrayList<FurnitureDTO> toReturn = new ArrayList<FurnitureDTO>();

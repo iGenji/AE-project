@@ -12,7 +12,8 @@ public interface UserDAO {
   List<UserDTO> findAll();
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled from the database with the ID that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled
+   * from the database with the ID that was given.
    * 
    * @param userID - int.
    * @return The user or null if not found.
@@ -20,7 +21,8 @@ public interface UserDAO {
   UserDTO findByID(int userID);
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled from the database with the username that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled
+   * from the database with the username that was given.
    * 
    * @param username - String.
    * @return The user or null if not found. {
@@ -28,12 +30,13 @@ public interface UserDAO {
   UserDTO findByUsername(String username);
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled from the database with the last name that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled from
+   * the database with the last name that was given.
    * 
    * @param last_name - String.
    * @return The user or null if not found.
    */
-  UserDTO findByLastName(String last_name);
+  UserDTO findByLastName(String lastName);
 
   /**
    * {@inheritDoc} This method insert into the database the UserDTO.

@@ -12,9 +12,9 @@ import jakarta.ws.rs.ext.Provider;
 
 @Provider
 public class LoggingExceptionMapper implements ExceptionMapper<Throwable> {
-  
+
   private static final Logger logger = LogManager.getLogger(LoggingExceptionMapper.class.getName());
-  
+
   @Override
   public Response toResponse(Throwable exception) {
     System.out.println("toResponse()");
@@ -36,14 +36,14 @@ public class LoggingExceptionMapper implements ExceptionMapper<Throwable> {
       logger.error(exception.getStackTrace());
       System.out.println(exception.getClass().getName());
       return ((WebApplicationException) exception).getResponse().getStatus();
-    }else{
+    } else {
       logger.error("Error: Database level");
       System.out.println("DataBaseException instanceOf");
       logger.error(exception.getMessage());
       logger.error(exception.getStackTrace());
     }
     logger.error("Erreur ! getStatusCode");
-   
+
     return Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
   }
 

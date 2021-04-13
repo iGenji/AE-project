@@ -12,7 +12,7 @@ public class AddressDAOImpl implements AddressDAO {
 
   private final String insertAddress = "INSERT INTO pae_project.adresses (" + " rue," + " numero,"
       + " boite," + " code_postal," + " commune," + " pays ) VALUES (" + " ?, ?, ?, ?, ?, ?)";
-  private final String SelectByAllAttributes = "SELECT ad.id_adresse, ad.rue, ad.numero, ad.boite, "
+  private final String selectByAllAttributes = "SELECT ad.id_adresse, ad.rue, ad.numero, ad.boite, "
       + " ad.code_postal, ad.commune, ad.pays" + " FROM pae_project.adresses ad"
       + " WHERE ad.rue =?" + " AND ad.numero =?" + " AND ad.boite =?" + " AND ad.code_postal =?"
       + " AND ad.commune =?" + " AND ad.pays =?";
@@ -117,7 +117,7 @@ public class AddressDAOImpl implements AddressDAO {
     PreparedStatement ps;
     try {
 
-      ps = dalServices.getPreparedStatement(SelectByAllAttributes);
+      ps = dalServices.getPreparedStatement(selectByAllAttributes);
       ps.setString(1, address.getStreet());
       ps.setInt(2, address.getBuildingNumber());
       ps.setString(3, address.getUnitNumber());

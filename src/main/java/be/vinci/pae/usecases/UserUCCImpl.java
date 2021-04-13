@@ -1,4 +1,4 @@
-package be.vinci.pae.useCases;
+package be.vinci.pae.usecases;
 
 
 
@@ -41,10 +41,10 @@ public class UserUCCImpl implements UserUCC {
         return false;
       }
       // insert the address and get her autoIncremented Id
-      int id_address = addressDao.insert(addressDTO);
+      int idAdresse = addressDao.insert(addressDTO);
 
       // put the id_address into the user
-      userDto.setAddress(id_address);
+      userDto.setAddress(idAdresse);
 
       // get the password of the user
       String password = userDto.getPassword();
@@ -63,7 +63,7 @@ public class UserUCCImpl implements UserUCC {
       System.out.println("register failed");
       return false;
 
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     } finally {
       rollBackError();
@@ -101,12 +101,14 @@ public class UserUCCImpl implements UserUCC {
   }
 
   /**
-   * {@inheritDoc} This method is used to roll back the database if an exception was caught. It also frees the connection and release the thread
+   * {@inheritDoc} This method is used to roll back the database
+   * if an exception was caught.
+   * It also frees the connection and release the thread
    */
   private void rollBackError() {
     try {
       dal.rollBackTransaction();
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new FatalException(e.getMessage(), e);
     }

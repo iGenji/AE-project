@@ -14,7 +14,7 @@ public interface PhotoDTO {
    * 
    * @param id_photo - int ID of the photo.
    */
-  public void setIdphoto(int id_photo);
+  public void setIdphoto(int idPhoto);
 
   /**
    * {@inheritDoc} This method returns the furniture ID of the photo DTO.
@@ -45,7 +45,8 @@ public interface PhotoDTO {
   public void setPhoto(String photo);
 
   /**
-   * {@inheritDoc} This method returns 0 or 1 to indicate whether the image is visible or not of the photo DTO.
+   * {@inheritDoc} This method returns 0 or 1 to indicate whether
+   * the image is visible or not of the photo DTO.
    * 
    * @return int 0 or 1, 0 for false and 1 for true, of the photo DTO.
    */
@@ -56,5 +57,5 @@ public interface PhotoDTO {
    * 
    * @param is_visible - int 0 or 1, 0 for false and 1 for true, of the photo DTO.
    */
-  public void setIsVisible(int is_visible);
+  public void setIsVisible(int isVisible);
 }

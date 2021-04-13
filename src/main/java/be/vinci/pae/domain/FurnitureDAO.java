@@ -5,7 +5,8 @@ import java.util.List;
 public interface FurnitureDAO {
 
   /**
-   * {@inheritDoc} This method returns a furniture DTO fulfilled from the database with the ID that was given.
+   * {@inheritDoc} This method returns a furniture DTO
+   * fulfilled from the database with the ID that was given.
    *
    * @param furnitureID - int.
    * @return The furniture or null if not found.

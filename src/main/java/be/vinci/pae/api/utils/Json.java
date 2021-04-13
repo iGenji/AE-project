@@ -53,7 +53,7 @@ public class Json {
    * @param list - List T that contains a list that we have to save in our database.
    * @param dbFilePath - String that contains the data base file path.
    * @param collectionName - String that contains the collection name.
-   * @return a list that contains objects of the targetClass type.
+   * @return T a list that contains objects of the targetClass type.
    */
   public static <T> void saveDataToFile(List<T> list, String dbFilePath, String collectionName) {
     try {

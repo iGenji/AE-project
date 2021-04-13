@@ -25,11 +25,9 @@ public class DalServicesImpl implements DalServices, DalTransactions {
   // private String driverClassName = "org.h2.Driver";
 
 
-  /**
-   * {@inheritDoc} Constructor of the class
-   */
+
   public DalServicesImpl() {
-    
+
 
     properties = new Properties();
 
@@ -156,7 +154,7 @@ public class DalServicesImpl implements DalServices, DalTransactions {
   /**
    * {@inheritDoc} This method close the connection and free the thread
    * 
-   * @param connection
+   * @param connection Connection of the database
    */
   private void closeConnections(Connection connection) {
     try {

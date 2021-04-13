@@ -42,7 +42,19 @@ class UserImpl implements User {
   @JsonView(Views.Internal.class)
   private String password;
 
-
+  /**
+   * Constructor of the class
+   * 
+   * @param idUser - int
+   * @param username - String
+   * @param lastName - String
+   * @param password - String
+   * @param firstName - String
+   * @param email - String
+   * @param registrationDate - LocalDateTime
+   * @param role - String
+   * @param address - String
+   */
   public UserImpl(int idUser, String username, String lastName, String password, String firstName,
       String email, LocalDateTime registrationDate, String role, int address) {
     super();
@@ -57,6 +69,9 @@ class UserImpl implements User {
     this.address = address;
   }
 
+  /**
+   * Another constructor of the class
+   */
   public UserImpl() {
     super();
     this.idUser = -1;
@@ -76,8 +91,8 @@ class UserImpl implements User {
   }
 
   @Override
-  public void setIdUser(int id_user) {
-    this.idUser = id_user;
+  public void setIdUser(int idUser) {
+    this.idUser = idUser;
 
   }
 
@@ -87,8 +102,8 @@ class UserImpl implements User {
   }
 
   @Override
-  public void setLastName(String last_name) {
-    this.lastName = last_name;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
 
   }
 
@@ -109,8 +124,8 @@ class UserImpl implements User {
   }
 
   @Override
-  public void setFirstName(String first_name) {
-    this.firstName = first_name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
 
   }
 
@@ -143,8 +158,8 @@ class UserImpl implements User {
   }
 
   @Override
-  public void setRegistrationDate(LocalDateTime registration_date) {
-    this.registrationDate = registration_date;
+  public void setRegistrationDate(LocalDateTime registrationDate) {
+    this.registrationDate = registrationDate;
 
   }
 

@@ -12,11 +12,16 @@ public interface DalServices {
    * 
    * @param sqlQuery - String, query.
    * @return PreparedStatement.
-   * @throws DataBaseException
    */
-  PreparedStatement getPreparedStatement(String sqlQuery) throws DataBaseException;
+  PreparedStatement getPreparedStatement(String sqlQuery);
 
-  PreparedStatement getPreparedStatementReturningId(String sqlQuery) throws DataBaseException;
+  /**
+   * {@inheritDoc} This method takes a query in parameter and return it PreparedStatement.
+   * 
+   * @param sqlQuery - String, query.
+   * @return PreparedStatement.
+   */
+  PreparedStatement getPreparedStatementReturningId(String sqlQuery);
 
 
 

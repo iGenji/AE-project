@@ -11,7 +11,7 @@ public class MockPhotoDAO implements PhotoDAO {
   }
 
   @Override
-  public List<PhotoDTO> findByIDFurniture(int IDFurniture) {
+  public List<PhotoDTO> findByIDFurniture(int idFurniture) {
     // TODO Auto-generated method stub
     return null;
   }

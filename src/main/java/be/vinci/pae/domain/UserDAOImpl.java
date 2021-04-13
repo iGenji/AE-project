@@ -85,7 +85,7 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public UserDTO findByLastName(String last_name) {
+  public UserDTO findByLastName(String lastName) {
     // TODO Auto-generated method stub
     return null;
   }

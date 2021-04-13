@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;;
 
 @DisplayName("Classe de tests de la classe UserImpl")
 public class UserImplTest {
@@ -20,8 +22,7 @@ public class UserImplTest {
   @Test
   void testGetNumUtilisateur() {
     userTest.setIdUser(0);
-    assertEquals(0, userTest.getIdUser(),
-        "Le numero d'utilisateur renvoye est incorrect");
+    assertEquals(0, userTest.getIdUser(), "Le numero d'utilisateur renvoye est incorrect");
   }
 
   @DisplayName("Test de la méthode setNumUtilisateur")

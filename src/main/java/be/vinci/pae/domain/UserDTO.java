@@ -16,7 +16,7 @@ public interface UserDTO {
    * 
    * @param id_user - int number that is given to the user DTO.
    */
-  void setIdUser(int id_user);
+  void setIdUser(int idUser);
 
   /**
    * {@inheritDoc} This method returns the last name of the user DTO.
@@ -30,7 +30,7 @@ public interface UserDTO {
    * 
    * @param last_name - String last name of the user DTO.
    */
-  void setLastName(String last_name);
+  void setLastName(String lastName);
 
   /**
    * {@inheritDoc} This method returns the password of the user DTO.
@@ -58,7 +58,7 @@ public interface UserDTO {
    * 
    * @param first_name - String first name of the user DTO.
    */
-  void setFirstName(String first_name);
+  void setFirstName(String firstName);
 
   /**
    * {@inheritDoc} This method returns the email of the user DTO.

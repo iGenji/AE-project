@@ -12,7 +12,8 @@ public interface AddressDAO {
   List<AddressDTO> findAll();
 
   /**
-   * {@inheritDoc} This method returns a address DTO fulfilled from the database with the ID that was given.
+   * {@inheritDoc} This method returns a address DTO fulfilled
+   * from the database with the ID that was given.
    * 
    * @param address - AddressDTO.
    * @return The id address or null if not found.
@@ -20,7 +21,8 @@ public interface AddressDAO {
   int findByAllAttributes(AddressDTO address);
 
   /**
-   * {@inheritDoc} This method returns a address DTO fulfilled from the database with the ID that was given.
+   * {@inheritDoc} This method returns a address DTO fulfilled
+   * from the database with the ID that was given.
    * 
    * @param addressID - int.
    * @return The address or null if not found.
@@ -28,7 +30,8 @@ public interface AddressDAO {
   AddressDTO findByID(int addressID);
 
   /**
-   * {@inheritDoc} This method returns a list of all the addresses that the database has with the postcode that was given.
+   * {@inheritDoc} This method returns a list of all the addresses
+   * that the database has with the postcode that was given.
    * 
    * @param postcode - int.
    * @return List of addresses.
@@ -37,7 +40,8 @@ public interface AddressDAO {
 
 
   /**
-   * {@inheritDoc} This method returns a list of all the addresses that the database has with the commune that was given.
+   * {@inheritDoc} This method returns a list of all the addresses
+   * that the database has with the commune that was given.
    * 
    * @param commune - String.
    * @return List of addresses.

@@ -18,10 +18,10 @@ import be.vinci.pae.domain.UserFactoryImpl;
 import be.vinci.pae.services.DalServices;
 import be.vinci.pae.services.DalServicesImpl;
 import be.vinci.pae.services.DalTransactions;
-import be.vinci.pae.useCases.FurnitureUCC;
-import be.vinci.pae.useCases.FurnitureUCCImpl;
-import be.vinci.pae.useCases.UserUCC;
-import be.vinci.pae.useCases.UserUCCImpl;
+import be.vinci.pae.usecases.FurnitureUCC;
+import be.vinci.pae.usecases.FurnitureUCCImpl;
+import be.vinci.pae.usecases.UserUCC;
+import be.vinci.pae.usecases.UserUCCImpl;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.ext.Provider;
 

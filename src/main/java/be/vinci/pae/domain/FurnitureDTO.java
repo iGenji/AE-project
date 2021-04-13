@@ -17,7 +17,7 @@ public interface FurnitureDTO {
    * 
    * @param id_furniture - int ID of the furniture.
    */
-  public void setIdFurniture(int id_furniture);
+  public void setIdFurniture(int idFurniture);
 
   /**
    * {@inheritDoc} This method returns the state of the furniture DTO.
@@ -31,7 +31,7 @@ public interface FurnitureDTO {
    * 
    * @param state_furniture - String state of the furniture.
    */
-  public void setStateFurniture(String state_furniture);
+  public void setStateFurniture(String stateFurniture);
 
 
   /**
@@ -46,7 +46,7 @@ public interface FurnitureDTO {
    * 
    * @param type_furniture - int the type of furniture's id.
    */
-  public void setTypeFurniture(int type_furniture);
+  public void setTypeFurniture(int typeFurniture);
 
 
   /**
@@ -76,7 +76,7 @@ public interface FurnitureDTO {
    * 
    * @param purchase_price - double the purchase price of the furniture DTO.
    */
-  public void setPurchasePrice(double purchase_price);
+  public void setPurchasePrice(double purchasePrice);
 
 
   /**
@@ -91,7 +91,7 @@ public interface FurnitureDTO {
    * 
    * @param selling_price - double the selling price of the furniture DTO.
    */
-  public void setSellingPrice(double selling_price);
+  public void setSellingPrice(double sellingPrice);
 
 
   /**
@@ -106,7 +106,7 @@ public interface FurnitureDTO {
    * 
    * @param special_sale_price - double the special sale price of the furniture DTO.
    */
-  public void setSpecialSalePrice(double special_sale_price);
+  public void setSpecialSalePrice(double specialSalePrice);
 
 
   /**
@@ -121,7 +121,7 @@ public interface FurnitureDTO {
    * 
    * @param favourite_photo - int the favourite photo id of the furniture DTO.
    */
-  public void setFavouritePhoto(int favourite_photo);
+  public void setFavouritePhoto(int favouritePhoto);
 
 
   /**
@@ -149,9 +149,11 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the boss's furniture collection date of the furniture DTO.
    * 
-   * @param furniture_collection_date_boss - Timestamp the boss's furniture collection date of the furniture DTO.
+   * @param furniture_collection_date_boss - Timestamp
+   * the boss's furniture collection date of the
+   * furniture DTO.
    */
-  public void setFurnitureCollectionDateBoss(Timestamp furniture_collection_date_boss);
+  public void setFurnitureCollectionDateBoss(Timestamp furnitureCollectionDate_boss);
 
 
   /**
@@ -166,5 +168,5 @@ public interface FurnitureDTO {
    * 
    * @param deposit_date - Timestamp the deposit date of the furniture DTO.
    */
-  public void setDepositDate(Timestamp deposit_date);
+  public void setDepositDate(Timestamp depositDate);
 }

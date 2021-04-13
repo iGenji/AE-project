@@ -3,7 +3,7 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.domain.FurnitureDAO;
 import be.vinci.pae.domain.FurnitureDTO;
-import be.vinci.pae.useCases.FurnitureUCC;
+import be.vinci.pae.usecases.FurnitureUCC;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -30,9 +30,9 @@ public class FurnitureResource {
    */
 
   /**
-   * {@inheritDoc} This method
+   * {@inheritDoc} This method is to complete
    * 
-   * @param json
+   * @param json - Json file non empty
    * @return FurnitureDTO Object
    */
   @POST
@@ -45,11 +45,11 @@ public class FurnitureResource {
     checkJson("prix_vente", json);
     checkJson("prix_special", json);
 
-    int id_meuble = json.get("id_meuble").asInt();
-    double prix_vente = json.get("prix_vente").asDouble();
-    double prix_special = json.get("prix_special").asDouble();
+    int idMeuble = json.get("id_meuble").asInt();
+    double prixVente = json.get("prix_vente").asDouble();
+    double prixSpecial = json.get("prix_special").asDouble();
 
-    FurnitureDTO toReturn = uccService.proposedToSell(id_meuble, prix_vente, prix_special);
+    FurnitureDTO toReturn = uccService.proposedToSell(idMeuble, prixVente, prixSpecial);
     return toReturn;
   }
 
@@ -60,7 +60,8 @@ public class FurnitureResource {
    *
    * @param field - String , field's name of a user.
    *
-   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED if the field is not empty,
+   * if not, run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

@@ -17,7 +17,7 @@ import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.domain.UserFactory;
 import be.vinci.pae.exceptions.FatalException;
-import be.vinci.pae.useCases.UserUCC;
+import be.vinci.pae.usecases.UserUCC;
 import be.vinci.pae.utils.Config;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -33,7 +33,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/auths")
 public class Authentication {
 
-  public final static long EXPIRATION_TIME = 1800 * 1000; // 30min (1 800 000 ms)
+
 
   private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
   private final ObjectMapper jsonMapper = new ObjectMapper();
@@ -47,13 +47,18 @@ public class Authentication {
   @Inject
   private AddressFactory addressFactory;
 
+  public final static long EXPIRATION_TIME = 1800 * 1000; // 30min (1 800 000 ms)
+
 
 
   /**
    * {@inheritDoc} This method log in the user
    * 
-   * @param json - JsonNode which contains the pseudo and password entered by the user via the form
-   * @return a response.ok saying that the login method worked. This response gives access to the user's id and token, gives an exception.
+   * @param json - JsonNode which contains the pseudo and password
+   * entered by the user via the form
+   * @return a response.ok saying that the login method worked.
+   * This response gives access to the user's id and token,
+   * gives an exception.
    */
   @POST
   @Path("login")
@@ -95,6 +100,12 @@ public class Authentication {
 
   }
 
+  /**
+   * This method register a user to the database.
+   * 
+   * @param json - Json file non empty
+   * @return response
+   */
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -111,27 +122,27 @@ public class Authentication {
     checkJson("postcode", json);
     checkJson("commune", json);
     checkJson("country", json);
+    UserDTO userDTO = userFactory.getInstance();
 
     String username = json.get("username").asText();
+    userDTO.setUsername(username);
     String firstname = json.get("firstname").asText();
+    userDTO.setFirstName(firstname);
     String lastname = json.get("lastname").asText();
+    userDTO.setLastName(lastname);
     String email = json.get("email").asText();
+    userDTO.setEmail(email);
     String password = json.get("password").asText();
-
+    userDTO.setPassword(password);
     String street = json.get("street").asText();
-    int building_number = json.get("building_number").asInt();
-    String unit_number = json.get("unit_number").asText();
+    int buildingNumber = json.get("building_number").asInt();
+    String unitNumber = json.get("unit_number").asText();
     int postcode = json.get("postcode").asInt();
     String commune = json.get("commune").asText();
     String country = json.get("country").asText();
 
-    UserDTO userDTO = userFactory.getInstance();
-    userDTO.setUsername(username);
-    userDTO.setFirstName(firstname);
-    userDTO.setLastName(lastname);
-    userDTO.setEmail(email);
-    userDTO.setPassword(password);
-    // met le role à inactif car doit encore être validé par patron/neveu
+
+    // puting role
     userDTO.setRole("inactif");
     LocalDateTime now = LocalDateTime.now();
     userDTO.setRegistrationDate(now);
@@ -139,8 +150,8 @@ public class Authentication {
 
     AddressDTO addressDTO = addressFactory.getInstance();
     addressDTO.setStreet(street);
-    addressDTO.setBuildingNumber(building_number);
-    addressDTO.setUnitNumber(unit_number);
+    addressDTO.setBuildingNumber(buildingNumber);
+    addressDTO.setUnitNumber(unitNumber);
     addressDTO.setPostcode(postcode);
     addressDTO.setCommune(commune);
     addressDTO.setCountry(country);
@@ -163,7 +174,8 @@ public class Authentication {
    * 
    * @param field - String , field's name of a user.
    * 
-   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED if the field is not empty,
+   * if not,run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

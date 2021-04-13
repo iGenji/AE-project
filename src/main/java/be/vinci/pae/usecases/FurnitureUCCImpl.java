@@ -1,4 +1,4 @@
-package be.vinci.pae.useCases;
+package be.vinci.pae.usecases;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,24 +21,23 @@ public class FurnitureUCCImpl implements FurnitureUCC {
   private DalTransactions dal;
 
   @Override
-  public FurnitureDTO proposedToSell(int id_meuble, double prix_vente, double prix_special) {
+  public FurnitureDTO proposedToSell(int idMeuble, double prixVente, double prixSpecial) {
     FurnitureDTO furnitureDTO = null;
     try {
       dal.startTransaction();
-      furnitureDTO = this.furnitureDAO.findByID(id_meuble);
+      furnitureDTO = this.furnitureDAO.findByID(idMeuble);
       if (furnitureDTO == null) {
         dal.rollBackTransaction();
       } else {
-        furnitureDTO.setSellingPrice(prix_vente);
-        furnitureDTO.setSpecialSalePrice(prix_special);
+        furnitureDTO.setSellingPrice(prixVente);
+        furnitureDTO.setSpecialSalePrice(prixSpecial);
         furnitureDTO.setStateFurniture("vente");
         furnitureDAO.update(furnitureDTO);
         dal.commitTransaction();
       }
-    } catch (SQLException e) {
-      throw new FatalException(e.getMessage(), e);
-    }finally {
+    } catch (Exception e) {
       rollBackError();
+      throw new FatalException(e.getMessage(), e);
     }
     return furnitureDTO;
   }
@@ -61,12 +60,16 @@ public class FurnitureUCCImpl implements FurnitureUCC {
   }
 
   /**
-   * {@inheritDoc} This method is used to roll back the database if an exception was caught. It also frees the connection and release the thread
+   * {@inheritDoc}This method
+   * is used to roll back the
+   * database if an exception was caught.
+   * It also frees the connection and release
+   * the thread.
    */
   private void rollBackError() {
     try {
       dal.rollBackTransaction();
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new FatalException(e.getMessage(), e);
     }

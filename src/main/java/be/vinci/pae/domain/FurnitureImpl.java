@@ -36,7 +36,21 @@ public class FurnitureImpl implements Furniture {
   @JsonView(Views.Public.class)
   private Timestamp depositDate;
 
-
+  /**
+   * Constructor of the class
+   * 
+   * @param idFurniture - int
+   * @param stateFurniture - String
+   * @param typeFurniture - int
+   * @param description - String
+   * @param purchasePrice - double
+   * @param sellingPrice - double
+   * @param specialSalePrice - double
+   * @param favouritePhoto - int
+   * @param visit - int
+   * @param furnitureCollectionDateBoss - Timestamp
+   * @param depositDate - Timestamp
+   */
   public FurnitureImpl(int idFurniture, String stateFurniture, int typeFurniture,
       String description, double purchasePrice, double sellingPrice, double specialSalePrice,
       int favouritePhoto, int visit, Timestamp furnitureCollectionDateBoss, Timestamp depositDate) {
@@ -54,6 +68,9 @@ public class FurnitureImpl implements Furniture {
     this.depositDate = depositDate;
   }
 
+  /**
+   * Another constructor of the class
+   */
   public FurnitureImpl() {
     super();
     this.idFurniture = -1;
@@ -75,8 +92,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setIdFurniture(int id_furniture) {
-    this.idFurniture = id_furniture;
+  public void setIdFurniture(int idFurniture) {
+    this.idFurniture = idFurniture;
   }
 
   @Override
@@ -85,8 +102,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setStateFurniture(String state_furniture) {
-    this.stateFurniture = state_furniture;
+  public void setStateFurniture(String stateFurniture) {
+    this.stateFurniture = stateFurniture;
   }
 
   @Override
@@ -95,8 +112,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setTypeFurniture(int type_furniture) {
-    this.typeFurniture = type_furniture;
+  public void setTypeFurniture(int typeFurniture) {
+    this.typeFurniture = typeFurniture;
   }
 
   @Override
@@ -115,8 +132,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setPurchasePrice(double purchase_price) {
-    this.purchasePrice = purchase_price;
+  public void setPurchasePrice(double purchasePrice) {
+    this.purchasePrice = purchasePrice;
   }
 
   @Override
@@ -125,8 +142,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setSellingPrice(double selling_price) {
-    this.sellingPrice = selling_price;
+  public void setSellingPrice(double sellingPrice) {
+    this.sellingPrice = sellingPrice;
   }
 
   @Override
@@ -135,8 +152,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setSpecialSalePrice(double special_sale_price) {
-    this.specialSalePrice = special_sale_price;
+  public void setSpecialSalePrice(double specialSalePrice) {
+    this.specialSalePrice = specialSalePrice;
   }
 
   @Override
@@ -144,8 +161,8 @@ public class FurnitureImpl implements Furniture {
     return favouritePhoto;
   }
 
-  public void setFavouritePhoto(int favourite_photo) {
-    this.favouritePhoto = favourite_photo;
+  public void setFavouritePhoto(int favouritePhoto) {
+    this.favouritePhoto = favouritePhoto;
   }
 
   public int getVisit() {
@@ -163,8 +180,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setFurnitureCollectionDateBoss(Timestamp furniture_collection_date_boss) {
-    this.furnitureCollectionDateBoss = furniture_collection_date_boss;
+  public void setFurnitureCollectionDateBoss(Timestamp funitureCollectionDateBoss) {
+    this.furnitureCollectionDateBoss = funitureCollectionDateBoss;
   }
 
   @Override
@@ -173,8 +190,8 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public void setDepositDate(Timestamp deposit_date) {
-    this.depositDate = deposit_date;
+  public void setDepositDate(Timestamp depositDate) {
+    this.depositDate = depositDate;
   }
 
   @Override
@@ -187,15 +204,19 @@ public class FurnitureImpl implements Furniture {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     FurnitureImpl other = (FurnitureImpl) obj;
-    if (idFurniture != other.idFurniture)
+    if (idFurniture != other.idFurniture) {
       return false;
+    }
     return true;
   }
 

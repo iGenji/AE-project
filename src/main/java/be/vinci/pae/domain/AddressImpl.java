@@ -27,7 +27,16 @@ public class AddressImpl implements Address {
   @JsonView(Views.Public.class)
   private String country;
 
-
+  /**
+   * Constructor for AdresseImpl
+   * @param idAddress - int that represents the id
+   * @param street - String that represents the street
+   * @param buildingNumber - int that represents the number
+   * @param unitNumber - String 
+   * @param postCode - int post code
+   * @param commune - String area
+   * @param country - String country
+   */
   public AddressImpl(int idAddress, String street, int buildingNumber, String unitNumber,
       int postCode, String commune, String country) {
     super();
@@ -39,7 +48,10 @@ public class AddressImpl implements Address {
     this.commune = commune;
     this.country = country;
   }
-
+  
+  /**
+   * Another constructor of this class with 0 paramaters
+   */
   public AddressImpl() {
     super();
     this.idAddress = -1;
@@ -57,9 +69,9 @@ public class AddressImpl implements Address {
   }
 
   @Override
-  public void setIdAddress(int id_address) {
+  public void setIdAddress(int idAddress) {
     // TODO Auto-generated method stub
-    this.idAddress = id_address;
+    this.idAddress = idAddress;
 
   }
 
@@ -151,15 +163,19 @@ public class AddressImpl implements Address {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     AddressImpl other = (AddressImpl) obj;
-    if (idAddress != other.idAddress)
+    if (idAddress != other.idAddress) {
       return false;
+    }
     return true;
   }
 
