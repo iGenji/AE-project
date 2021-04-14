@@ -1,6 +1,6 @@
 package be.vinci.pae.services;
 
-import java.sql.SQLException;
+
 
 public interface DalTransactions {
 

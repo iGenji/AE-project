@@ -2,7 +2,6 @@ package be.vinci.pae.usecases;
 
 
 
-import java.sql.SQLException;
 import be.vinci.pae.domain.AddressDAO;
 import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;

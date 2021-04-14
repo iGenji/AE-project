@@ -7,42 +7,42 @@ public interface PhotoDTO {
    * 
    * @return int ID of the photo.
    */
-  public int getIdPhoto();
+  int getIdPhoto();
 
   /**
    * {@inheritDoc} This method set the photo ID of the photo DTO.
    * 
    * @param idPhoto - int ID of the photo.
    */
-  public void setIdphoto(int idPhoto);
+  void setIdphoto(int idPhoto);
 
   /**
    * {@inheritDoc} This method returns the furniture ID of the photo DTO.
    * 
    * @return int the furniture ID of the photo DTO.
    */
-  public int getFurniture();
+  int getFurniture();
 
   /**
    * {@inheritDoc} This method set the furniture ID of the photo DTO.
    * 
    * @param furniture - int the furniture ID of the photo DTO.
    */
-  public void setFurniture(int furniture);
+  void setFurniture(int furniture);
 
   /**
    * {@inheritDoc} This method returns the image's link of the photo DTO.
    * 
    * @return String the image's link of the photo DTO.
    */
-  public String getPhoto();
+  String getPhoto();
 
   /**
    * {@inheritDoc} This method set the image's link of the photo DTO.
    * 
    * @param photo - String the image's link of the photo DTO.
    */
-  public void setPhoto(String photo);
+  void setPhoto(String photo);
 
   /**
    * {@inheritDoc} This method returns 0 or 1 to indicate whether
@@ -50,7 +50,7 @@ public interface PhotoDTO {
    * 
    * @return int 0 or 1, 0 for false and 1 for true, of the photo DTO.
    */
-  public int getIsVisible();
+  int getIsVisible();
 
   /**
    * {@inheritDoc} This method set the attribute "est_visible" to
@@ -58,5 +58,5 @@ public interface PhotoDTO {
    * 
    * @param isVisible - int 0 or 1, 0 for false and 1 for true, of the photo DTO.
    */
-  public void setIsVisible(int isVisible);
+  void setIsVisible(int isVisible);
 }

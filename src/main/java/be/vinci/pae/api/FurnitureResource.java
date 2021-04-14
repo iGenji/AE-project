@@ -1,7 +1,6 @@
 
 package be.vinci.pae.api;
 
-import be.vinci.pae.domain.FurnitureDAO;
 import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,8 +18,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/furnitures")
 public class FurnitureResource {
 
-  @Inject
-  private FurnitureDAO dataService;
+  
 
   @Inject
   private FurnitureUCC uccService;
@@ -61,7 +59,7 @@ public class FurnitureResource {
    * @param field - String , field's name of a user.
    *
    * @return Response Status.ACCEPTED if the field is not empty,
-   *   if not, run an Response Status.UNAUTHORIZED.
+   *  if not, run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

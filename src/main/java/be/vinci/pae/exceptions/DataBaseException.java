@@ -1,6 +1,6 @@
 package be.vinci.pae.exceptions;
 
-import java.sql.SQLException;
+
 
 
 public class DataBaseException extends RuntimeException {

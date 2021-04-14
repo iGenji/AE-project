@@ -3,7 +3,7 @@ package be.vinci.pae.services;
 
 
 import java.sql.PreparedStatement;
-import be.vinci.pae.exceptions.DataBaseException;
+
 
 public interface DalServices {
 
