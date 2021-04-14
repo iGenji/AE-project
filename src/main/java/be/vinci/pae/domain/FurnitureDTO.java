@@ -15,7 +15,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the furniture ID of the furniture DTO.
    * 
-   * @param id_furniture - int ID of the furniture.
+   * @param idFurniture - int ID of the furniture.
    */
   public void setIdFurniture(int idFurniture);
 
@@ -29,7 +29,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the furniture state of the furniture DTO.
    * 
-   * @param state_furniture - String state of the furniture.
+   * @param stateFurniture - String state of the furniture.
    */
   public void setStateFurniture(String stateFurniture);
 
@@ -44,7 +44,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the type of furniture's id of the furniture DTO.
    * 
-   * @param type_furniture - int the type of furniture's id.
+   * @param typeFurniture - int the type of furniture's id.
    */
   public void setTypeFurniture(int typeFurniture);
 
@@ -74,7 +74,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the purchase price of the furniture DTO.
    * 
-   * @param purchase_price - double the purchase price of the furniture DTO.
+   * @param purchasePrice - double the purchase price of the furniture DTO.
    */
   public void setPurchasePrice(double purchasePrice);
 
@@ -89,7 +89,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the selling price of the furniture DTO.
    * 
-   * @param selling_price - double the selling price of the furniture DTO.
+   * @param sellingPrice - double the selling price of the furniture DTO.
    */
   public void setSellingPrice(double sellingPrice);
 
@@ -104,7 +104,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the special sale price of the furniture DTO.
    * 
-   * @param special_sale_price - double the special sale price of the furniture DTO.
+   * @param specialSalePrice - double the special sale price of the furniture DTO.
    */
   public void setSpecialSalePrice(double specialSalePrice);
 
@@ -119,7 +119,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the favourite photo id of the furniture DTO.
    * 
-   * @param favourite_photo - int the favourite photo id of the furniture DTO.
+   * @param favouritePhoto - int the favourite photo id of the furniture DTO.
    */
   public void setFavouritePhoto(int favouritePhoto);
 
@@ -149,11 +149,11 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the boss's furniture collection date of the furniture DTO.
    * 
-   * @param furniture_collection_date_boss - Timestamp
-   * the boss's furniture collection date of the
-   * furniture DTO.
+   * @param furnitureCollectionDateBoss - Timestamp
+   *    the boss's furniture collection date of the
+   *    furniture DTO.
    */
-  public void setFurnitureCollectionDateBoss(Timestamp furnitureCollectionDate_boss);
+  public void setFurnitureCollectionDateBoss(Timestamp furnitureCollectionDateBoss);
 
 
   /**
@@ -166,7 +166,7 @@ public interface FurnitureDTO {
   /**
    * {@inheritDoc} This method set the deposit date of the furniture DTO.
    * 
-   * @param deposit_date - Timestamp the deposit date of the furniture DTO.
+   * @param depositDate - Timestamp the deposit date of the furniture DTO.
    */
   public void setDepositDate(Timestamp depositDate);
 }

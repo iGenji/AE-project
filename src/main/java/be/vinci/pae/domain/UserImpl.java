@@ -43,7 +43,7 @@ class UserImpl implements User {
   private String password;
 
   /**
-   * Constructor of the class
+   * Constructor of the class.
    * 
    * @param idUser - int
    * @param username - String
@@ -70,7 +70,7 @@ class UserImpl implements User {
   }
 
   /**
-   * Another constructor of the class
+   * Another constructor of the class.
    */
   public UserImpl() {
     super();

@@ -37,7 +37,7 @@ public class FurnitureImpl implements Furniture {
   private Timestamp depositDate;
 
   /**
-   * Constructor of the class
+   * Constructor of the class.
    * 
    * @param idFurniture - int
    * @param stateFurniture - String
@@ -69,7 +69,7 @@ public class FurnitureImpl implements Furniture {
   }
 
   /**
-   * Another constructor of the class
+   * Another constructor of the class.
    */
   public FurnitureImpl() {
     super();

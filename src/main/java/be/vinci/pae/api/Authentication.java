@@ -37,7 +37,7 @@ public class Authentication {
 
   private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
   private final ObjectMapper jsonMapper = new ObjectMapper();
-
+  public final static long EXPIRATION_TIME = 1800 * 1000; // 30min (1 800 000 ms)
   @Inject
   private UserUCC uccService;
 
@@ -47,18 +47,15 @@ public class Authentication {
   @Inject
   private AddressFactory addressFactory;
 
-  public final static long EXPIRATION_TIME = 1800 * 1000; // 30min (1 800 000 ms)
-
 
 
   /**
    * {@inheritDoc} This method log in the user
    * 
    * @param json - JsonNode which contains the pseudo and password
-   * entered by the user via the form
+   *    entered by the user via the form
    * @return a response.ok saying that the login method worked.
-   * This response gives access to the user's id and token,
-   * gives an exception.
+   *    This response gives access to the user's id and token, gives an exception.
    */
   @POST
   @Path("login")
@@ -123,7 +120,7 @@ public class Authentication {
     checkJson("commune", json);
     checkJson("country", json);
     UserDTO userDTO = userFactory.getInstance();
-
+    AddressDTO addressDTO = addressFactory.getInstance();
     String username = json.get("username").asText();
     userDTO.setUsername(username);
     String firstname = json.get("firstname").asText();
@@ -135,27 +132,22 @@ public class Authentication {
     String password = json.get("password").asText();
     userDTO.setPassword(password);
     String street = json.get("street").asText();
+    addressDTO.setStreet(street);
     int buildingNumber = json.get("building_number").asInt();
+    addressDTO.setBuildingNumber(buildingNumber);
     String unitNumber = json.get("unit_number").asText();
+    addressDTO.setUnitNumber(unitNumber);
     int postcode = json.get("postcode").asInt();
+    addressDTO.setPostcode(postcode);
     String commune = json.get("commune").asText();
+    addressDTO.setCommune(commune);
     String country = json.get("country").asText();
-
+    addressDTO.setCountry(country);
 
     // puting role
     userDTO.setRole("inactif");
     LocalDateTime now = LocalDateTime.now();
     userDTO.setRegistrationDate(now);
-
-
-    AddressDTO addressDTO = addressFactory.getInstance();
-    addressDTO.setStreet(street);
-    addressDTO.setBuildingNumber(buildingNumber);
-    addressDTO.setUnitNumber(unitNumber);
-    addressDTO.setPostcode(postcode);
-    addressDTO.setCommune(commune);
-    addressDTO.setCountry(country);
-
 
     // check if user exists
     boolean userDTORegister = this.uccService.register(userDTO, addressDTO);
@@ -174,8 +166,7 @@ public class Authentication {
    * 
    * @param field - String , field's name of a user.
    * 
-   * @return Response Status.ACCEPTED if the field is not empty,
-   * if not,run an Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED if the field is not empty, if not,run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

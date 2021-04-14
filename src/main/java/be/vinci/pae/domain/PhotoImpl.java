@@ -22,10 +22,10 @@ public class PhotoImpl implements Photo {
   /**
    * Constructor of the class.
    * 
-   * @param idPhoto
-   * @param furniture
-   * @param photo
-   * @param isVisible
+   * @param idPhoto - int
+   * @param furniture - int
+   * @param photo - String
+   * @param isVisible - int
    */
   public PhotoImpl(int idPhoto, int furniture, String photo, int isVisible) {
     super();
@@ -36,7 +36,7 @@ public class PhotoImpl implements Photo {
   }
 
   /**
-   * Another constructor of the class
+   * Another constructor of the class.
    */
   public PhotoImpl() {
     super();

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Classe de tests de la classe UserImpl")
 public class UserImplTest {

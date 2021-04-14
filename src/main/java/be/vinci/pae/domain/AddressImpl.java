@@ -28,7 +28,7 @@ public class AddressImpl implements Address {
   private String country;
 
   /**
-   * Constructor for AdresseImpl
+   * Constructor for AdresseImpl.
    * @param idAddress - int that represents the id
    * @param street - String that represents the street
    * @param buildingNumber - int that represents the number
@@ -50,7 +50,7 @@ public class AddressImpl implements Address {
   }
   
   /**
-   * Another constructor of this class with 0 paramaters
+   * constructor of this class with 0 parameters.
    */
   public AddressImpl() {
     super();

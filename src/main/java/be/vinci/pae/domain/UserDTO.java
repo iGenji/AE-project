@@ -14,7 +14,7 @@ public interface UserDTO {
   /**
    * {@inheritDoc} This method set the user ID of the user DTO.
    * 
-   * @param id_user - int number that is given to the user DTO.
+   * @param idUser - int number that is given to the user DTO.
    */
   void setIdUser(int idUser);
 
@@ -28,7 +28,7 @@ public interface UserDTO {
   /**
    * {@inheritDoc} This method sets the last name of the user DTO.
    * 
-   * @param last_name - String last name of the user DTO.
+   * @param lastName - String last name of the user DTO.
    */
   void setLastName(String lastName);
 
@@ -56,7 +56,7 @@ public interface UserDTO {
   /**
    * {@inheritDoc} this method sets the first name of the user DTO.
    * 
-   * @param first_name - String first name of the user DTO.
+   * @param firstName - String first name of the user DTO.
    */
   void setFirstName(String firstName);
 

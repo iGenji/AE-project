@@ -33,7 +33,7 @@ public interface UserDAO {
    * {@inheritDoc} This method returns a user DTO fulfilled from
    * the database with the last name that was given.
    * 
-   * @param last_name - String.
+   * @param lastName - String.
    * @return The user or null if not found.
    */
   UserDTO findByLastName(String lastName);

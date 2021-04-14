@@ -12,7 +12,7 @@ public interface AddressDTO {
   /**
    * {@inheritDoc} This method set the address ID of the address DTO.
    * 
-   * @param id_address - int ID of the address.
+   * @param idAddress - int ID of the address.
    */
   void setIdAddress(int idAddress);
 

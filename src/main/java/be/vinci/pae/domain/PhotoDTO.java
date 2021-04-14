@@ -12,7 +12,7 @@ public interface PhotoDTO {
   /**
    * {@inheritDoc} This method set the photo ID of the photo DTO.
    * 
-   * @param id_photo - int ID of the photo.
+   * @param idPhoto - int ID of the photo.
    */
   public void setIdphoto(int idPhoto);
 
@@ -53,9 +53,10 @@ public interface PhotoDTO {
   public int getIsVisible();
 
   /**
-   * {@inheritDoc} This method set the attribute "est_visible" to indicate whether the image is visible or not of the photo DTO.
+   * {@inheritDoc} This method set the attribute "est_visible" to
+   *    indicate whether the image is visible or not of the photo DTO.
    * 
-   * @param is_visible - int 0 or 1, 0 for false and 1 for true, of the photo DTO.
+   * @param isVisible - int 0 or 1, 0 for false and 1 for true, of the photo DTO.
    */
   public void setIsVisible(int isVisible);
 }

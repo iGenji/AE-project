@@ -25,7 +25,9 @@ public class DalServicesImpl implements DalServices, DalTransactions {
   // private String driverClassName = "org.h2.Driver";
 
 
-
+  /**
+   * Constructor of the class.
+   */
   public DalServicesImpl() {
 
 
