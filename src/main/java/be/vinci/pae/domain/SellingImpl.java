@@ -11,7 +11,7 @@ import views.Views;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class SellingImpl implements Selling{
+public class SellingImpl implements Selling {
 
   @JsonView(Views.Public.class)
   private int idSelling;
