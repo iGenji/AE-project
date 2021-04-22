@@ -57,6 +57,20 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
     return list;
   }
+  
+  @Override
+  public FurnitureDTO getFurnitureById(int id) {
+    FurnitureDTO toReturn = null;
+    try {
+      dal.startTransaction();
+      toReturn = furnitureDAO.findByID(id);
+      dal.commitTransaction();
+    }catch (Exception e) {
+      rollBackError();
+      throw new DataBaseException(e.getMessage());
+    }
+    return null;
+  }
 
   /**
    * {@inheritDoc}This method
@@ -75,5 +89,7 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
 
   }
+
+  
 
 }

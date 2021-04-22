@@ -63,9 +63,8 @@ public class UserUCCImpl implements UserUCC {
       return false;
 
     } catch (Exception e) {
-      throw new FatalException(e.getMessage(), e);
-    } finally {
       rollBackError();
+      throw new FatalException(e.getMessage(), e);
     }
   }
 
