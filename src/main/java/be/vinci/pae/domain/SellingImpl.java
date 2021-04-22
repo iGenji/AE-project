@@ -11,7 +11,7 @@ import views.Views;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class SellingImpl implements  Selling{
+public class SellingImpl implements Selling{
 
   @JsonView(Views.Public.class)
   private int idSelling;
@@ -53,7 +53,7 @@ public class SellingImpl implements  Selling{
   /**
    * constructor of this class with 0 parameters.
    */
-  public SellingImpl(){
+  public SellingImpl() {
     super();
     this.idSelling = -1;
     this.idFurniture = -1;
