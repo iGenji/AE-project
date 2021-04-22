@@ -1,16 +1,8 @@
 package be.vinci.pae.domain;
 
-import be.vinci.pae.services.DalServices;
-import jakarta.inject.Inject;
 import java.util.List;
 
 public class SellingDAOImpl implements SellingDAO {
-
-  @Inject
-  private DalServices dalServices;
-
-  @Inject
-  private SellingFactory factory;
 
   @Override
   public List<SellingDTO> findAll() {
