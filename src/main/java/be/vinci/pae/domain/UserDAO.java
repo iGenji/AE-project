@@ -5,7 +5,7 @@ import java.util.List;
 public interface UserDAO {
 
   /**
-   * {@inheritDoc} This method returns a list of all the users that the database has.
+   * {@inheritDoc} This method returns a list of all the customers that the database has.
    * 
    * @return List of users.
    */

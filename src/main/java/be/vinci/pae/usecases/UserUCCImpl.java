@@ -2,6 +2,7 @@ package be.vinci.pae.usecases;
 
 
 
+import java.util.List;
 import be.vinci.pae.domain.AddressDAO;
 import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;
@@ -110,6 +111,23 @@ public class UserUCCImpl implements UserUCC {
       e.printStackTrace();
       throw new FatalException(e.getMessage(), e);
     }
+  }
+
+
+  @Override
+  public List<UserDTO> allCustomers() {
+    List<UserDTO> toReturn = null;
+    
+    try {
+      dal.startTransaction();
+      toReturn = userDao.findAll();
+      dal.commitTransaction();
+    }catch(Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage());
+    }
+    
+    return toReturn;
   }
 
 

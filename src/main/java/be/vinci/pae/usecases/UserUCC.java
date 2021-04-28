@@ -1,5 +1,6 @@
 package be.vinci.pae.usecases;
 
+import java.util.List;
 import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.UserDTO;
 
@@ -24,5 +25,11 @@ public interface UserUCC {
    * @return UserDTO with full fields or null if the user is not found.
    */
   UserDTO login(String username, String password);
+  
+  /**
+   * This method is the use case method to see all the customers in the system.
+   * @return List of all customers
+   */
+  List<UserDTO> allCustomers();
 
 }

@@ -1,12 +1,13 @@
 package be.vinci.pae.api;
 
 import org.glassfish.jersey.server.ContainerRequest;
-
+import java.util.List;
 import be.vinci.pae.api.utils.Json;
+import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDAO;
 import be.vinci.pae.domain.UserFactory;
-
+import be.vinci.pae.usecases.UserUCC;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
@@ -22,6 +23,9 @@ public class UserResource {
 
   @Inject
   private UserDAO dataService;
+  
+  @Inject
+  private UserUCC uccService;
 
   @Inject
   private UserFactory userFactory;
@@ -58,6 +62,14 @@ public class UserResource {
   public User getUser(@Context ContainerRequest request) {
     User currentUser = (User) request.getProperty("user");
     return Json.filterPublicJsonView(currentUser, User.class);
+  }
+  
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  //@Authorize
+  public List<UserDTO> getAllCustomers(){
+    return uccService.allCustomers();
+    
   }
 
 }
