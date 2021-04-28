@@ -64,6 +64,11 @@ public class UserResource {
     return Json.filterPublicJsonView(currentUser, User.class);
   }
   
+  
+  /**
+   * {@inheritDoc} Show all users in list
+   * @return a list of UserDTO
+   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   //@Authorize
