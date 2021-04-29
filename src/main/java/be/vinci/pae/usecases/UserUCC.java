@@ -7,7 +7,7 @@ import be.vinci.pae.domain.UserDTO;
 public interface UserUCC {
 
   /**
-   * This method is the use case method to register a user.
+   * {@inheritDoc}This method is the use case method to register a user.
    * 
    * @param userDTO - UserDTO, user that has most of it fields
    *    full, fulfilled by the front-end.
@@ -18,7 +18,7 @@ public interface UserUCC {
   boolean register(UserDTO userDTO, AddressDTO addressDTO);
 
   /**
-   * This method is the use case method to log in into the system with a password and a login.
+   * {@inheritDoc}This method is the use case method to log in into the system with a password and a login.
    * 
    * @param username - String , username of the user.
    * @param password - String , password of the user.

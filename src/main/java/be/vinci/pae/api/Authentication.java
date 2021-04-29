@@ -52,9 +52,9 @@ public class Authentication {
    * {@inheritDoc} This method log in the user
    * 
    * @param json - JsonNode which contains the pseudo and password
-   *  entered by the user via the form
+   *    entered by the user via the form
    * @return a response.ok saying that the login method worked.
-   *  This response gives access to the user's id and token, gives an exception.
+   *    This response gives access to the user's id and token, gives an exception.
    */
   @POST
   @Path("login")

@@ -57,7 +57,7 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
     return list;
   }
-  
+
   @Override
   public FurnitureDTO getFurnitureById(int id) {
     FurnitureDTO toReturn = null;
@@ -65,7 +65,7 @@ public class FurnitureUCCImpl implements FurnitureUCC {
       dal.startTransaction();
       toReturn = furnitureDAO.findByID(id);
       dal.commitTransaction();
-    }catch (Exception e) {
+    } catch (Exception e) {
       rollBackError();
       throw new DataBaseException(e.getMessage());
     }
@@ -73,11 +73,9 @@ public class FurnitureUCCImpl implements FurnitureUCC {
   }
 
   /**
-   * {@inheritDoc}This method
-   * is used to roll back the
-   * database if an exception was caught.
-   * It also frees the connection and release
-   * the thread.
+   * {@inheritDoc}This method is used to roll back the database
+   * if an exception was caught.
+   * It also frees the connection and release the thread.
    */
   private void rollBackError() {
     try {
@@ -90,6 +88,6 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
   }
 
-  
+
 
 }

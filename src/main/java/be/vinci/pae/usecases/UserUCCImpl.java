@@ -100,9 +100,9 @@ public class UserUCCImpl implements UserUCC {
   }
 
   /**
-   * {@inheritDoc} This method is used to roll back the database
-   * if an exception was caught.
-   * It also frees the connection and release the thread
+   * {@inheritDoc} This method is used to roll back the database if
+   *    an exception was caught. It also frees the
+   *    connection and release the thread
    */
   private void rollBackError() {
     try {
@@ -117,16 +117,16 @@ public class UserUCCImpl implements UserUCC {
   @Override
   public List<UserDTO> allCustomers() {
     List<UserDTO> toReturn = null;
-    
+
     try {
       dal.startTransaction();
       toReturn = userDao.findAll();
       dal.commitTransaction();
-    }catch(Exception e) {
+    } catch (Exception e) {
       rollBackError();
       throw new FatalException(e.getMessage());
     }
-    
+
     return toReturn;
   }
 

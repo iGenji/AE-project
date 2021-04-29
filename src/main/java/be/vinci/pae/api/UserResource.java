@@ -67,14 +67,15 @@ public class UserResource {
   
   /**
    * {@inheritDoc} Show all users in list
+   * 
    * @return a list of UserDTO
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  //@Authorize
-  public List<UserDTO> getAllCustomers(){
+  // @Authorize
+  public List<UserDTO> getAllCustomers() {
     return uccService.allCustomers();
-    
+
   }
 
 }
