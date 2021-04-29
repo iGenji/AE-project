@@ -69,7 +69,7 @@ public class FurnitureUCCImpl implements FurnitureUCC {
       rollBackError();
       throw new DataBaseException(e.getMessage());
     }
-    return null;
+    return toReturn;
   }
 
   /**
