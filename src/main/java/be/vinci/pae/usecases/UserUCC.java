@@ -18,7 +18,7 @@ public interface UserUCC {
   boolean register(UserDTO userDTO, AddressDTO addressDTO);
 
   /**
-   * {@inheritDoc}This method is the use case method to log in into the system with a password and a login.
+   * {@inheritDoc}This method is the use case method.
    * 
    * @param username - String , username of the user.
    * @param password - String , password of the user.

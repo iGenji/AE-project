@@ -150,8 +150,6 @@ public interface FurnitureDTO {
    * {@inheritDoc} This method set the boss's furniture collection date of the furniture DTO.
    * 
    * @param furnitureCollectionDateBoss - Timestamp
-   *  the boss's furniture collection date of the
-   *  furniture DTO.
    */
   void setFurnitureCollectionDateBoss(Timestamp furnitureCollectionDateBoss);
 
