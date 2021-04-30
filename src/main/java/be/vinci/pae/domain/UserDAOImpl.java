@@ -14,7 +14,8 @@ public class UserDAOImpl implements UserDAO {
 
   private final String findAllUsers =
       "SELECT u.id_utilisateur, u.pseudo, u.nom, u.mot_de_passe, u.prenom"
-          + ", u.email, u.date_inscription, u.role, u.adresse FROM pae_project.utilisateurs u";
+          + ", u.email, u.date_inscription, u.role, u.adresse FROM pae_project.utilisateurs u"
+          + " WHERE u.role!='admin' ";
 
   private final String findUserByUsername =
       "SELECT u.id_utilisateur, u.pseudo, u.nom, u.mot_de_passe, u.prenom"

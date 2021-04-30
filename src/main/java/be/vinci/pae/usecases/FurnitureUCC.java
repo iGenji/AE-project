@@ -21,4 +21,11 @@ public interface FurnitureUCC {
    * @return List of the furniture
    */
   List<FurnitureDTO> seeAll();
+  
+  /**
+   * {@inheritDoc}This method is used to get a furniture dto object by its id
+   * @param id - integer
+   * @return Furniture DTO object if found or null
+   */
+  FurnitureDTO getFurnitureById(int id);
 }

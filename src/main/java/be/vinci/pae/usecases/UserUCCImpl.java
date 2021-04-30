@@ -2,6 +2,7 @@ package be.vinci.pae.usecases;
 
 
 
+import java.util.List;
 import be.vinci.pae.domain.AddressDAO;
 import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;
@@ -63,9 +64,8 @@ public class UserUCCImpl implements UserUCC {
       return false;
 
     } catch (Exception e) {
-      throw new FatalException(e.getMessage(), e);
-    } finally {
       rollBackError();
+      throw new FatalException(e.getMessage(), e);
     }
   }
 
@@ -100,9 +100,9 @@ public class UserUCCImpl implements UserUCC {
   }
 
   /**
-   * {@inheritDoc} This method is used to roll back the database
-   * if an exception was caught.
-   * It also frees the connection and release the thread
+   * {@inheritDoc} This method is used to roll back the database if
+   *    an exception was caught. It also frees the
+   *    connection and release the thread
    */
   private void rollBackError() {
     try {
@@ -111,6 +111,23 @@ public class UserUCCImpl implements UserUCC {
       e.printStackTrace();
       throw new FatalException(e.getMessage(), e);
     }
+  }
+
+
+  @Override
+  public List<UserDTO> allCustomers() {
+    List<UserDTO> toReturn = null;
+
+    try {
+      dal.startTransaction();
+      toReturn = userDao.findAll();
+      dal.commitTransaction();
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage());
+    }
+
+    return toReturn;
   }
 
 
