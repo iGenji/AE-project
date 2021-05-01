@@ -112,6 +112,7 @@ public class FurnitureUCCImpl implements FurnitureUCC {
     }
   }
 
+  @Override
   public FurnitureDTO toWorkshop(int idMeuble) {
     FurnitureDTO furnitureDTO = null;
     try {
