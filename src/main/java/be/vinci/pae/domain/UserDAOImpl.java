@@ -31,8 +31,8 @@ public class UserDAOImpl implements UserDAO {
       + " prenom," + " nom," + " email," + " mot_de_passe," + " date_inscription," + " role,"
       + " adresse ) VALUES (" + " ?, ?, ?, ?, ?, ?, ?, ?)";
   
-  private final String getAdress = "SELECT rue,numero,boite,code_postal,commune,pays"
-      + " FROM pae_project.adresses WHERE id_adresse=?";
+  //private final String getAdress = "SELECT rue,numero,boite,code_postal,commune,pays"
+      //+ " FROM pae_project.adresses WHERE id_adresse=?";
 
 
   @Inject
