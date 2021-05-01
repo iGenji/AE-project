@@ -194,20 +194,20 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public AddressDTO getAdress(int id) {
     AddressDTO toReturn = null;
-    ResultSet rs = null;
-    PreparedStatement ps;
+    //ResultSet rs = null;
+    //PreparedStatement ps;
     System.out.println("id=" + id);
-    try {
-
-      ps = dalServices.getPreparedStatement(getAdress);
-      ps.setInt(1, id);
-      rs = ps.executeQuery();
-      //while (rs.next()) {
-        //toReturn = setAddress(rs);
-      //}
-    } catch (Exception e) {
-      throw new FatalException(e.getMessage(), e);
-    }
+//    try {
+//
+//      ps = dalServices.getPreparedStatement(getAdress);
+//      ps.setInt(1, id);
+//      rs = ps.executeQuery();
+//      //while (rs.next()) {
+//        //toReturn = setAddress(rs);
+//      //}
+//    } catch (Exception e) {
+//      throw new FatalException(e.getMessage(), e);
+//    }
     return toReturn;
   }
 
