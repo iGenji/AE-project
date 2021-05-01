@@ -3,6 +3,8 @@ package be.vinci.pae.api;
 import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -17,6 +19,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/furnitures")
 public class FurnitureResource {
 
+  private final ObjectMapper jsonMapper = new ObjectMapper();
 
   @Inject
   private FurnitureUCC uccService;
@@ -24,6 +27,28 @@ public class FurnitureResource {
   /*
    * @Inject private FurnitureFactory furnitureFactory;
    */
+
+  /**
+   * {@inheritDoc} This method is to complete
+   *
+   * @param furnitureDTO - FurnitureDTO fulfilled by the frontend
+   * @return furnitureDTO Object
+   */
+  @POST
+  @Path("purchasedSubmitted")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response soldSubmitted(FurnitureDTO furnitureDTO) {
+
+    // check if furniture exists
+    boolean furnitureDTOconfirm = this.uccService.confirmPurchase(furnitureDTO);
+    if (!furnitureDTOconfirm) {
+      return Response.status(Status.CONFLICT).entity("This furniture does not exist")
+          .type(MediaType.TEXT_PLAIN).build();
+    }
+    ObjectNode node = jsonMapper.createObjectNode().put("success", true);
+    // Build response
+    return Response.ok(node, MediaType.APPLICATION_JSON).build();
+  }
 
   /**
    * {@inheritDoc} This method is to complete
@@ -49,8 +74,6 @@ public class FurnitureResource {
   }
 
   /**
-   * {@inheritDoc} This method is to complete
-   *
    * @param json - Json file non empty
    * @return FurnitureDTO Object
    */
