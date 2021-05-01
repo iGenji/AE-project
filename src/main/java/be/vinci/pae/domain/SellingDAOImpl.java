@@ -3,9 +3,7 @@ package be.vinci.pae.domain;
 import be.vinci.pae.exceptions.FatalException;
 import be.vinci.pae.services.DalServices;
 import jakarta.inject.Inject;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
