@@ -190,24 +190,7 @@ public class UserDAOImpl implements UserDAO {
     return user;
   }
 
-  private AddressDTO setAddress(ResultSet rs) {
-
-    AddressDTO address = addressFactory.getInstance();
-    try {
-      address.setIdAddress(rs.getInt("id_adresse"));
-      address.setStreet(rs.getString("rue"));
-      address.setBuildingNumber(rs.getInt("numero"));
-      address.setUnitNumber(rs.getString("boite"));
-      address.setPostcode(rs.getInt("code_postal"));
-      address.setCommune(rs.getString("commune"));
-      address.setCountry(rs.getString("pays"));
-
-    } catch (Exception e) {
-      throw new FatalException(e.getMessage(), e);
-    }
-
-    return address;
-  }
+ 
 
   @Override
   public AddressDTO getAdress(int id) {
@@ -221,7 +204,7 @@ public class UserDAOImpl implements UserDAO {
       ps.setInt(1, id);
       rs = ps.executeQuery();
       while (rs.next()) {
-        toReturn = setAddress(rs);
+        //toReturn = setAddress(rs);
       }
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
