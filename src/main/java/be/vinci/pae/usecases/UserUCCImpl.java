@@ -155,7 +155,6 @@ public class UserUCCImpl implements UserUCC {
       dal.commitTransaction();
     } catch (Exception e) {
       rollBackError();
-      System.out.println("rollBack ucc");
       throw new FatalException(e.getMessage());
     }
     return toReturn;
