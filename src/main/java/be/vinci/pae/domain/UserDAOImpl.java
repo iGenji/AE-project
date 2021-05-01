@@ -12,6 +12,11 @@ import jakarta.inject.Inject;
 
 public class UserDAOImpl implements UserDAO {
 
+  private final String findUserById =
+      "SELECT u.id_utilisateur, u.pseudo, u.nom, u.mot_de_passe, u.prenom"
+          + ", u.email, u.date_inscription, u.role, u.adresse "
+          + "FROM pae_project.utilisateurs u WHERE u.id_utilisateur=?";
+
   private final String findAllUsers =
       "SELECT u.id_utilisateur, u.pseudo, u.nom, u.mot_de_passe, u.prenom"
           + ", u.email, u.date_inscription, u.role, u.adresse FROM pae_project.utilisateurs u"
@@ -59,8 +64,22 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public UserDTO findByID(int userID) {
-    // TODO Auto-generated method stub
-    return null;
+    UserDTO user = null;
+    ResultSet rs;
+    PreparedStatement ps;
+    try {
+      ps = dalServices.getPreparedStatement(findUserById);
+      ps.setInt(1, userID);
+      rs = ps.executeQuery();
+      while (rs.next()) {
+        user = setUser(rs);
+      }
+
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return user;
   }
 
   @Override
@@ -135,7 +154,7 @@ public class UserDAOImpl implements UserDAO {
 
   /**
    * {@inheritDoc} this method retrieves the data of a user present in a ResultSet.
-   * 
+   *
    * @param rs - ResultSet.
    * @return the new user DTO.
    */

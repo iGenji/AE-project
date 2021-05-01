@@ -1,4 +1,3 @@
-
 package be.vinci.pae.api;
 
 import be.vinci.pae.domain.FurnitureDTO;
@@ -18,7 +17,6 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/furnitures")
 public class FurnitureResource {
 
-  
 
   @Inject
   private FurnitureUCC uccService;
@@ -29,7 +27,7 @@ public class FurnitureResource {
 
   /**
    * {@inheritDoc} This method is to complete
-   * 
+   *
    * @param json - Json file non empty
    * @return FurnitureDTO Object
    */
@@ -47,19 +45,34 @@ public class FurnitureResource {
     double prixVente = json.get("prix_vente").asDouble();
     double prixSpecial = json.get("prix_special").asDouble();
 
-    FurnitureDTO toReturn = uccService.proposedToSell(idMeuble, prixVente, prixSpecial);
-    return toReturn;
+    return uccService.proposedToSell(idMeuble, prixVente, prixSpecial);
   }
 
+  /**
+   * {@inheritDoc} This method is to complete
+   *
+   * @param json - Json file non empty
+   * @return FurnitureDTO Object
+   */
+  @POST
+  @Path("soldSubmitted")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public FurnitureDTO soldSubmitted(JsonNode json) {
+    // Get and check credentials
+    checkJson("idFurniture", json);
+    int idMeuble = json.get("idFurniture").asInt();
+
+    return uccService.confirmSelling(idMeuble);
+  }
 
 
   /**
    * {@inheritDoc} This method checks if this field contained in the Json object is empty.
    *
    * @param field - String , field's name of a user.
-   *
-   * @return Response Status.ACCEPTED if the field is not empty,
-   *  if not, run an Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response
+   * Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

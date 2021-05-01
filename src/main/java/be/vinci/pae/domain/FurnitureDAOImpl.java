@@ -89,7 +89,13 @@ public class FurnitureDAOImpl implements FurnitureDAO {
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
+    
+    return updateState(furniture);
+  }
 
+  @Override
+  public FurnitureDTO updateState(FurnitureDTO furniture) {
+    PreparedStatement ps;
     try {
       ps = dalServices.getPreparedStatement(updateFurnitureState);
       ps.setString(1, furniture.getStateFurniture());
@@ -101,6 +107,8 @@ public class FurnitureDAOImpl implements FurnitureDAO {
 
     return furniture;
   }
+
+  ;
 
   @Override
   public List<FurnitureDTO> findAll() {
