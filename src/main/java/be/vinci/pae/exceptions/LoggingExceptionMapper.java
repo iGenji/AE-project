@@ -35,15 +35,15 @@ public class LoggingExceptionMapper implements ExceptionMapper<Throwable> {
     logger.error("Erreur ! getStatusCode");
     if (exception instanceof ClientErrorException) {
       logger.error("Error: WebApplication");
-      logger.error(exception.getMessage());
-      logger.error(exception.getStackTrace());
+      logger.warn(exception.getMessage());
+      logger.warn(exception.getStackTrace());
       System.out.println(exception.getClass().getName());
       return ((WebApplicationException) exception).getResponse().getStatus();
     } else {
       logger.error("Error: Database level");
       System.out.println("DataBaseException instanceOf");
-      logger.error(exception.getMessage());
-      logger.error(exception.getStackTrace());
+      logger.fatal(exception.getMessage());
+      logger.fatal(exception.getStackTrace());
       return ((ServerErrorException) exception).getResponse().getStatus();
     }
 

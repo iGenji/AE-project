@@ -10,9 +10,9 @@ public interface UserUCC {
    * {@inheritDoc}This method is the use case method to register a user.
    * 
    * @param userDTO - UserDTO, user that has most of it fields
-   *    full, fulfilled by the front-end.
+   *     full, fulfilled by the front-end.
    * @param addressDTO - AddressDTO, address that has most
-   *    of it fields full, fulfilled by the front end.
+   *     of it fields full, fulfilled by the front end.
    * @return return false if failed, true if succeed.
    */
   boolean register(UserDTO userDTO, AddressDTO addressDTO);
@@ -31,5 +31,19 @@ public interface UserUCC {
    * @return List of all customers
    */
   List<UserDTO> allCustomers();
+  
+  /**
+   * {@inheritDoc} Returns the userDTO with the pseudo
+   * @param pseudo - String
+   * @return UserDTO that match the pseudo or null
+   */
+  UserDTO getCustomer(String pseudo);
+  
+  /**
+   * {@inheritDoc} Returns the address with the id
+   * @param idAdress - integer
+   * @return AddressDTO
+   */
+  AddressDTO getAdress(int idAdress);
 
 }
