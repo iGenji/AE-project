@@ -53,8 +53,6 @@ public class DalServicesImpl implements DalServices, DalTransactions {
     bds.setMinIdle(10);
     bds.setMaxIdle(20);
 
-
-
   }
 
 
@@ -71,6 +69,7 @@ public class DalServicesImpl implements DalServices, DalTransactions {
     try {
       ps = connection.prepareStatement(sqlQuery);
     } catch (SQLException e) {
+      closeConnections(connection);
       throw new DataBaseException(e.getMessage(), e);
     }
 
@@ -90,6 +89,7 @@ public class DalServicesImpl implements DalServices, DalTransactions {
     try {
       ps = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
     } catch (SQLException e) {
+      closeConnections(connection);
       throw new DataBaseException(e.getMessage(), e);
     }
 
