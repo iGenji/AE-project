@@ -1,5 +1,11 @@
 package be.vinci.pae.utils;
 
+import be.vinci.pae.domain.SellingDAO;
+import be.vinci.pae.domain.SellingDAOImpl;
+import be.vinci.pae.domain.SellingFactory;
+import be.vinci.pae.domain.SellingFactoryImpl;
+import be.vinci.pae.usecases.SellingUCC;
+import be.vinci.pae.usecases.SellingUCCImpl;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import be.vinci.pae.domain.AddressDAO;
 import be.vinci.pae.domain.AddressDAOImpl;
@@ -40,7 +46,9 @@ public class ApplicationBinder extends AbstractBinder {
     bind(PhotoFactoryImpl.class).to(PhotoFactory.class).in(Singleton.class);
     bind(DalServicesImpl.class).to(DalTransactions.class).to(DalServices.class).in(Singleton.class);
     bind(AddressDAOImpl.class).to(AddressDAO.class).in(Singleton.class);
-
+    bind(SellingFactoryImpl.class).to(SellingFactory.class).in(Singleton.class);
+    bind(SellingUCCImpl.class).to(SellingUCC.class).in(Singleton.class);
+    bind(SellingDAOImpl.class).to(SellingDAO.class).in(Singleton.class);
 
 
   }

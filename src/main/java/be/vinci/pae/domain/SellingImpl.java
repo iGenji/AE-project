@@ -1,9 +1,11 @@
 package be.vinci.pae.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import views.Views;
 
 /*
@@ -22,47 +24,13 @@ public class SellingImpl implements Selling {
   @JsonView(Views.Public.class)
   private String stateSelling;
   @JsonView(Views.Public.class)
-  private LocalDateTime soldDate;
+  @JsonFormat
+      (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  private Date soldDate;
   @JsonView(Views.Public.class)
   private LocalDateTime userTakeawayDate;
   @JsonView(Views.Public.class)
   private LocalDateTime deliveryDate;
-
-  /**
-   * Constructor for SellingImpl.
-   * @param idSelling - int that represents the id
-   * @param idFurniture - int that represents the furniture id
-   * @param idUser - int that represents the user id
-   * @param stateSelling - String that represents the state of the selling
-   * @param soldDate - LocalDateTime that represents the sold date
-   * @param userTakeawayDate - LocalDateTime that represents the user's takeaway date
-   * @param deliveryDate - LocalDateTime that represents the delivery date
-   */
-  public SellingImpl(int idSelling, int idFurniture, int idUser, String stateSelling,
-      LocalDateTime soldDate, LocalDateTime userTakeawayDate, LocalDateTime deliveryDate) {
-    super();
-    this.idSelling = idSelling;
-    this.idFurniture = idFurniture;
-    this.idUser = idUser;
-    this.stateSelling = stateSelling;
-    this.soldDate = soldDate;
-    this.userTakeawayDate = userTakeawayDate;
-    this.deliveryDate = deliveryDate;
-  }
-
-  /**
-   * constructor of this class with 0 parameters.
-   */
-  public SellingImpl() {
-    super();
-    this.idSelling = -1;
-    this.idFurniture = -1;
-    this.idUser = -1;
-    this.stateSelling = null;
-    this.soldDate = null;
-    this.userTakeawayDate = null;
-    this.deliveryDate = null;
-  }
 
   @Override
   public int getIdSelling() {
@@ -105,12 +73,12 @@ public class SellingImpl implements Selling {
   }
 
   @Override
-  public LocalDateTime getSoldDate() {
+  public Date getSoldDate() {
     return soldDate;
   }
 
   @Override
-  public void setSoldDate(LocalDateTime soldDate) {
+  public void setSoldDate(Date soldDate) {
     this.soldDate = soldDate;
   }
 

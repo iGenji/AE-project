@@ -1,8 +1,12 @@
 package be.vinci.pae.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+@JsonDeserialize(as = SellingImpl.class)
 public interface SellingDTO {
+
   /**
    * {@inheritDoc} This method returns the selling ID of the selling DTO.
    *
@@ -64,14 +68,14 @@ public interface SellingDTO {
    *
    * @return LocalDateTime sold date of the address.
    */
-  LocalDateTime getSoldDate();
+  Date getSoldDate();
 
   /**
    * {@inheritDoc} This method set the sold date of the selling DTO.
    *
    * @param soldDate - LocalDateTime sold date of the selling.
    */
-  void setSoldDate(LocalDateTime soldDate);
+  void setSoldDate(Date soldDate);
 
   /**
    * {@inheritDoc} This method returns the user's takeaway date of the selling DTO.
