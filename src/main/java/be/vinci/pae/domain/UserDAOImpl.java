@@ -41,8 +41,7 @@ public class UserDAOImpl implements UserDAO {
   @Inject
   private UserFactory factory;
   
-  @Inject
-  private AddressFactory addressFactory;
+ 
 
   @Override
   public List<UserDTO> findAll() {
@@ -203,9 +202,9 @@ public class UserDAOImpl implements UserDAO {
       ps = dalServices.getPreparedStatement(getAdress);
       ps.setInt(1, id);
       rs = ps.executeQuery();
-      while (rs.next()) {
+      //while (rs.next()) {
         //toReturn = setAddress(rs);
-      }
+      //}
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
