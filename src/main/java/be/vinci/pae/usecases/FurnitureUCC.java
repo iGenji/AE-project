@@ -45,4 +45,20 @@ public interface FurnitureUCC {
    * @return return false if failed, true if succeed.
    */
   boolean confirmPurchase(FurnitureDTO furnitureDTO);
+
+  /**
+   * {@inheritDoc}This method is the use case method to send a furniture to the workshop.
+   *
+   * @param idMeuble - int, id of the furniture.
+   * @return furnitureDTO with full fields.
+   */
+  FurnitureDTO toWorkshop(int idMeuble);
+
+  /**
+   * {@inheritDoc}This method is the use case method to indicate the deposit of a furniture.
+   *
+   * @param furnitureDTO - that has most of it fields full, fulfilled by the front-end.
+   * @return return false if failed, true if succeed.
+   */
+  boolean confirmDeposit(FurnitureDTO furnitureDTO);
 }

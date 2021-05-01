@@ -25,6 +25,9 @@ public class FurnitureDAOImpl implements FurnitureDAO {
   private final String updateFurniturePurchasePrice =
       "UPDATE pae_project.meubles SET prix_achat=? WHERE id_meuble=?";
 
+  private final String updateFurnitureDepositDate =
+      "Update pae_project.meubles SET date_depot=? WHERE id_meuble=?";
+
   private final String updateFurnitureSellingPrice =
       "UPDATE pae_project.meubles SET prix_vente=? WHERE id_meuble=?";
 
@@ -136,6 +139,21 @@ public class FurnitureDAOImpl implements FurnitureDAO {
     try {
       ps = dalServices.getPreparedStatement(updateFurnitureCollectionDate);
       ps.setTimestamp(1, Timestamp.from(furniture.getFurnitureCollectionDateBoss().toInstant()));
+      ps.setInt(2, furniture.getIdFurniture());
+      ps.executeUpdate();
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return furniture;
+  }
+
+  @Override
+  public FurnitureDTO updateDepositDate(FurnitureDTO furniture) {
+    PreparedStatement ps;
+    try {
+      ps = dalServices.getPreparedStatement(updateFurnitureDepositDate);
+      ps.setTimestamp(1, Timestamp.from(furniture.getDepositDate().toInstant()));
       ps.setInt(2, furniture.getIdFurniture());
       ps.executeUpdate();
     } catch (Exception e) {

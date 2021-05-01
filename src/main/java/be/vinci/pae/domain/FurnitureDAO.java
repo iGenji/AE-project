@@ -64,6 +64,15 @@ public interface FurnitureDAO {
   FurnitureDTO updateCollectionDate(FurnitureDTO furniture);
 
   /**
+   * {@inheritDoc} This method update the deposit date of the furniture DTO in argument from the
+   * database.
+   *
+   * @param furniture - FurnitureDTO.
+   * @return the new furniture DTO or null if the furniture was not found.
+   */
+  FurnitureDTO updateDepositDate(FurnitureDTO furniture);
+
+  /**
    * {@inheritDoc} This method returns all furniture from the database
    *
    * @return List of all furniture from the database
