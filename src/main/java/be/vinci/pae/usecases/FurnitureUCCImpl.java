@@ -73,7 +73,6 @@ public class FurnitureUCCImpl implements FurnitureUCC {
       throw new DataBaseException(e.getMessage(), e);
     }
 
-
     return list;
   }
 
@@ -91,10 +90,31 @@ public class FurnitureUCCImpl implements FurnitureUCC {
     return toReturn;
   }
 
+  @Override
+  public boolean confirmPurchase(FurnitureDTO furnitureDTO) {
+    try {
+      dal.startTransaction();
+      if (furnitureDAO.findByID(furnitureDTO.getIdFurniture()) == null) {
+        dal.commitTransaction();
+        return false;
+      }
+      furnitureDTO.setStateFurniture("achete");
+      furnitureDAO.updateState(furnitureDTO);
+      furnitureDAO.updateCollectionDate(furnitureDTO);
+      furnitureDAO.updatePurchasePrice(furnitureDTO);
+      dal.commitTransaction();
+      System.out.println("purchase confirmed");
+      return true;
+
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+  }
+
   /**
-   * {@inheritDoc}This method is used to roll back the database
-   * if an exception was caught.
-   * It also frees the connection and release the thread.
+   * {@inheritDoc}This method is used to roll back the database if an exception was caught. It also
+   * frees the connection and release the thread.
    */
   private void rollBackError() {
     try {
@@ -106,7 +126,6 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
 
   }
-
 
 
 }

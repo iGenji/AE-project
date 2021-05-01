@@ -29,11 +29,20 @@ public interface FurnitureUCC {
    * @return List of the furniture
    */
   List<FurnitureDTO> seeAll();
-  
+
   /**
    * {@inheritDoc}This method is used to get a furniture dto object by its id
+   *
    * @param id - integer
    * @return Furniture DTO object if found or null
    */
   FurnitureDTO getFurnitureById(int id);
+
+  /**
+   * {@inheritDoc}This method is the use case method to indicate the purchase of a furniture.
+   *
+   * @param furnitureDTO - that has most of it fields full, fulfilled by the front-end.
+   * @return return false if failed, true if succeed.
+   */
+  boolean confirmPurchase(FurnitureDTO furnitureDTO);
 }

@@ -46,6 +46,24 @@ public interface FurnitureDAO {
   FurnitureDTO updateState(FurnitureDTO furniture);
 
   /**
+   * {@inheritDoc} This method update the purchase price of the furniture DTO in argument from the
+   * database.
+   *
+   * @param furniture - FurnitureDTO.
+   * @return the new furniture DTO or null if the furniture was not found.
+   */
+  FurnitureDTO updatePurchasePrice(FurnitureDTO furniture);
+
+  /**
+   * {@inheritDoc} This method update the collection date of the furniture DTO in argument from the
+   * database.
+   *
+   * @param furniture - FurnitureDTO.
+   * @return the new furniture DTO or null if the furniture was not found.
+   */
+  FurnitureDTO updateCollectionDate(FurnitureDTO furniture);
+
+  /**
    * {@inheritDoc} This method returns all furniture from the database
    *
    * @return List of all furniture from the database
