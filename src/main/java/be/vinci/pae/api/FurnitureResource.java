@@ -29,7 +29,7 @@ public class FurnitureResource {
    */
 
   /**
-   * {@inheritDoc} This method is to complete
+   * {@inheritDoc} This method indicates the purchase of a furniture
    *
    * @param furnitureDTO - FurnitureDTO fulfilled by the frontend
    * @return furnitureDTO Object
@@ -37,7 +37,7 @@ public class FurnitureResource {
   @POST
   @Path("purchasedSubmitted")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response soldSubmitted(FurnitureDTO furnitureDTO) {
+  public Response purchaseSubmitted(FurnitureDTO furnitureDTO) {
 
     // check if furniture exists
     boolean furnitureDTOconfirm = this.uccService.confirmPurchase(furnitureDTO);
@@ -51,7 +51,7 @@ public class FurnitureResource {
   }
 
   /**
-   * {@inheritDoc} This method is to complete
+   * {@inheritDoc} This method update the prices of a furniture
    *
    * @param json - Json file non empty
    * @return FurnitureDTO Object
@@ -74,6 +74,8 @@ public class FurnitureResource {
   }
 
   /**
+   * {@inheritDoc} This method indicates the sale of a furniture
+   *
    * @param json - Json file non empty
    * @return FurnitureDTO Object
    */
@@ -87,6 +89,46 @@ public class FurnitureResource {
     int idMeuble = json.get("idFurniture").asInt();
 
     return uccService.confirmSelling(idMeuble);
+  }
+
+  /**
+   * {@inheritDoc} This method indicate that a furniture is sent to the workshop
+   *
+   * @param json - Json file non empty
+   * @return FurnitureDTO Object
+   */
+  @POST
+  @Path("toWorkshop")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public FurnitureDTO toWorkshop(JsonNode json) {
+    // Get and check credentials
+    checkJson("idFurniture", json);
+    int idMeuble = json.get("idFurniture").asInt();
+
+    return uccService.toWorkshop(idMeuble);
+  }
+
+  /**
+   * {@inheritDoc} This method is to complete
+   *
+   * @param furnitureDTO - FurnitureDTO fulfilled by the frontend
+   * @return furnitureDTO Object
+   */
+  @POST
+  @Path("deposit")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response deposit(FurnitureDTO furnitureDTO) {
+
+    // check if furniture exists
+    boolean furnitureDTOconfirm = this.uccService.confirmDeposit(furnitureDTO);
+    if (!furnitureDTOconfirm) {
+      return Response.status(Status.CONFLICT).entity("This furniture does not exist")
+          .type(MediaType.TEXT_PLAIN).build();
+    }
+    ObjectNode node = jsonMapper.createObjectNode().put("success", true);
+    // Build response
+    return Response.ok(node, MediaType.APPLICATION_JSON).build();
   }
 
 

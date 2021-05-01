@@ -112,6 +112,47 @@ public class FurnitureUCCImpl implements FurnitureUCC {
     }
   }
 
+  @Override
+  public FurnitureDTO toWorkshop(int idMeuble) {
+    FurnitureDTO furnitureDTO = null;
+    try {
+      dal.startTransaction();
+      furnitureDTO = this.furnitureDAO.findByID(idMeuble);
+      if (furnitureDTO == null) {
+        dal.rollBackTransaction();
+      } else {
+        furnitureDTO.setStateFurniture("reparation");
+        furnitureDAO.updateState(furnitureDTO);
+        dal.commitTransaction();
+      }
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+    return furnitureDTO;
+  }
+
+  @Override
+  public boolean confirmDeposit(FurnitureDTO furnitureDTO) {
+    try {
+      dal.startTransaction();
+      if (furnitureDAO.findByID(furnitureDTO.getIdFurniture()) == null) {
+        dal.commitTransaction();
+        return false;
+      }
+      furnitureDTO.setStateFurniture("depose");
+      furnitureDAO.updateState(furnitureDTO);
+      furnitureDAO.updateDepositDate(furnitureDTO);
+      dal.commitTransaction();
+      System.out.println("purchase confirmed");
+      return true;
+
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+  }
+
   /**
    * {@inheritDoc}This method is used to roll back the database if an exception was caught. It also
    * frees the connection and release the thread.
