@@ -48,8 +48,8 @@ public class Authentication {
   /**
    * {@inheritDoc} This method log in the user
    * 
-   * @param json - JsonNode which contains the pseudo and password entered by the user via the form
-   * @return a response.ok saying that the login method worked. This response gives access to the user's id and token, gives an exception.
+   * @param json - JsonNode which contains the pseudo
+   * @return a response.ok saying that the login method worked
    */
   @POST
   @Path("login")
@@ -139,11 +139,11 @@ public class Authentication {
 
 
   /**
-   * {@inheritDoc} This method checks if this field contained in the Json object is empty.
+   * {@inheritDoc}checks if this field contained in the Json object is empty.
    * 
    * @param field - String , field's name of a user.
    * 
-   * @return Response Status.ACCEPTED if the field is not empty, if not,run an Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED 
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

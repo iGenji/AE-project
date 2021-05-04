@@ -5,15 +5,14 @@ import java.util.List;
 public interface UserDAO {
 
   /**
-   * {@inheritDoc} This method returns a list of all the users that the database has.
+   * {@inheritDoc} This method returns a list of all the customers that the database has.
    * 
    * @return List of users.
    */
   List<UserDTO> findAll();
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled
-   * from the database with the ID that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled from the database with the ID that was given.
    * 
    * @param userID - int.
    * @return The user or null if not found.
@@ -21,8 +20,8 @@ public interface UserDAO {
   UserDTO findByID(int userID);
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled
-   * from the database with the username that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled from the
+   *     database with the username that was given.
    * 
    * @param username - String.
    * @return The user or null if not found. {
@@ -30,8 +29,8 @@ public interface UserDAO {
   UserDTO findByUsername(String username);
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled from
-   * the database with the last name that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled
+   *     from the database with the last name that was given.
    * 
    * @param lastName - String.
    * @return The user or null if not found.
@@ -47,7 +46,8 @@ public interface UserDAO {
   boolean insert(UserDTO user);
 
   /**
-   * {@inheritDoc} This method delete the user DTO in argument from the database.
+   * {@inheritDoc} This method delete the user DTO in
+   *     argument from the database.
    * 
    * @param user - UserDTO.
    * @return true if it succeed, false if it failed.
@@ -61,5 +61,13 @@ public interface UserDAO {
    * @return the new user DTO or null if the user was not found.
    */
   UserDTO update(UserDTO user);
+
+  /**
+   * {@inheritDoc}This method returns the address
+   * 
+   * @param id - int id of the user
+   * @return AddressDTO
+   */
+  AddressDTO getAdress(int id);
 
 }

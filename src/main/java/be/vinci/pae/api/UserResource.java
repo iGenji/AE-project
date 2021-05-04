@@ -1,20 +1,25 @@
 package be.vinci.pae.api;
 
 import org.glassfish.jersey.server.ContainerRequest;
-
+import java.util.List;
 import be.vinci.pae.api.utils.Json;
+import be.vinci.pae.domain.UserDTO;
+import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDAO;
 import be.vinci.pae.domain.UserFactory;
-
+import be.vinci.pae.usecases.UserUCC;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response.Status;
 
 @Singleton
 @Path("/users")
@@ -22,6 +27,9 @@ public class UserResource {
 
   @Inject
   private UserDAO dataService;
+  
+  @Inject
+  private UserUCC uccService;
 
   @Inject
   private UserFactory userFactory;
@@ -58,6 +66,56 @@ public class UserResource {
   public User getUser(@Context ContainerRequest request) {
     User currentUser = (User) request.getProperty("user");
     return Json.filterPublicJsonView(currentUser, User.class);
+  }
+  
+  
+  /**
+   * {@inheritDoc} Show all users in list
+   * 
+   * @return a list of UserDTO
+   */
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  // @Authorize
+  public List<UserDTO> getAllCustomers() {
+    return uccService.allCustomers();
+
+  }
+
+  /**
+   * {@inheritDoc} Show all users in list
+   * 
+   * @return a list of UserDTO
+   */
+  @GET
+  @Path("/{pseudo}")
+  @Produces(MediaType.APPLICATION_JSON)
+  // @Authorize
+  public UserDTO getCustomer(@PathParam("pseudo") String pseudo) {
+    UserDTO toReturn = null;
+    toReturn = uccService.getCustomer(pseudo);
+    if (toReturn == null) {
+      throw new WebApplicationException("User not found", null, Status.NOT_FOUND);
+    }
+    return toReturn;
+
+  }
+
+  /**
+   * {@inheritDoc} Show all users in list
+   * 
+   * @return a list of UserDTO
+   */
+  @POST
+  @Path("/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  // @Authorize
+  public AddressDTO getAddress(@PathParam("id") int idAdresse) {
+    AddressDTO toReturn = null;
+    toReturn = uccService.getAdress(idAdresse);
+
+    return toReturn;
+
   }
 
 }

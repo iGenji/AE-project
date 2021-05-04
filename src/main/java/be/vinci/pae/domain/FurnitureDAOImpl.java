@@ -5,6 +5,7 @@ import be.vinci.pae.services.DalServices;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,15 @@ public class FurnitureDAOImpl implements FurnitureDAO {
 
   private final String updateFurnitureState =
       "Update pae_project.meubles SET etat_meuble=? WHERE id_meuble=?";
+
+  private final String updateFurnitureCollectionDate =
+      "Update pae_project.meubles SET date_emporte_patron=? WHERE id_meuble=?";
+
+  private final String updateFurniturePurchasePrice =
+      "UPDATE pae_project.meubles SET prix_achat=? WHERE id_meuble=?";
+
+  private final String updateFurnitureDepositDate =
+      "Update pae_project.meubles SET date_depot=? WHERE id_meuble=?";
 
   private final String updateFurnitureSellingPrice =
       "UPDATE pae_project.meubles SET prix_vente=? WHERE id_meuble=?";
@@ -90,9 +100,60 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       throw new FatalException(e.getMessage(), e);
     }
 
+    return updateState(furniture);
+  }
+
+  @Override
+  public FurnitureDTO updateState(FurnitureDTO furniture) {
+    PreparedStatement ps;
     try {
       ps = dalServices.getPreparedStatement(updateFurnitureState);
       ps.setString(1, furniture.getStateFurniture());
+      ps.setInt(2, furniture.getIdFurniture());
+      ps.executeUpdate();
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return furniture;
+  }
+
+  @Override
+  public FurnitureDTO updatePurchasePrice(FurnitureDTO furniture) {
+    PreparedStatement ps;
+    try {
+      ps = dalServices.getPreparedStatement(updateFurniturePurchasePrice);
+      ps.setDouble(1, furniture.getPurchasePrice());
+      ps.setInt(2, furniture.getIdFurniture());
+      ps.executeUpdate();
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return furniture;
+  }
+
+  @Override
+  public FurnitureDTO updateCollectionDate(FurnitureDTO furniture) {
+    PreparedStatement ps;
+    try {
+      ps = dalServices.getPreparedStatement(updateFurnitureCollectionDate);
+      ps.setTimestamp(1, Timestamp.from(furniture.getFurnitureCollectionDateBoss().toInstant()));
+      ps.setInt(2, furniture.getIdFurniture());
+      ps.executeUpdate();
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return furniture;
+  }
+
+  @Override
+  public FurnitureDTO updateDepositDate(FurnitureDTO furniture) {
+    PreparedStatement ps;
+    try {
+      ps = dalServices.getPreparedStatement(updateFurnitureDepositDate);
+      ps.setTimestamp(1, Timestamp.from(furniture.getDepositDate().toInstant()));
       ps.setInt(2, furniture.getIdFurniture());
       ps.executeUpdate();
     } catch (Exception e) {

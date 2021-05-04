@@ -41,6 +41,25 @@ public class FurnitureUCCImpl implements FurnitureUCC {
     return furnitureDTO;
   }
 
+  public FurnitureDTO confirmSelling(int idMeuble) {
+    FurnitureDTO furnitureDTO = null;
+    try {
+      dal.startTransaction();
+      furnitureDTO = this.furnitureDAO.findByID(idMeuble);
+      if (furnitureDTO == null) {
+        dal.rollBackTransaction();
+      } else {
+        furnitureDTO.setStateFurniture("vendu");
+        furnitureDAO.updateState(furnitureDTO);
+        dal.commitTransaction();
+      }
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+    return furnitureDTO;
+  }
+
   @Override
   public List<FurnitureDTO> seeAll() {
     List<FurnitureDTO> list = new ArrayList<FurnitureDTO>();
@@ -54,16 +73,89 @@ public class FurnitureUCCImpl implements FurnitureUCC {
       throw new DataBaseException(e.getMessage(), e);
     }
 
-
     return list;
   }
 
+  @Override
+  public FurnitureDTO getFurnitureById(int id) {
+    FurnitureDTO toReturn = null;
+    try {
+      dal.startTransaction();
+      toReturn = furnitureDAO.findByID(id);
+      dal.commitTransaction();
+    } catch (Exception e) {
+      rollBackError();
+      throw new DataBaseException(e.getMessage());
+    }
+    return toReturn;
+  }
+
+  @Override
+  public boolean confirmPurchase(FurnitureDTO furnitureDTO) {
+    try {
+      dal.startTransaction();
+      if (furnitureDAO.findByID(furnitureDTO.getIdFurniture()) == null) {
+        dal.commitTransaction();
+        return false;
+      }
+      furnitureDTO.setStateFurniture("achete");
+      furnitureDAO.updateState(furnitureDTO);
+      furnitureDAO.updateCollectionDate(furnitureDTO);
+      furnitureDAO.updatePurchasePrice(furnitureDTO);
+      dal.commitTransaction();
+      System.out.println("purchase confirmed");
+      return true;
+
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public FurnitureDTO toWorkshop(int idMeuble) {
+    FurnitureDTO furnitureDTO = null;
+    try {
+      dal.startTransaction();
+      furnitureDTO = this.furnitureDAO.findByID(idMeuble);
+      if (furnitureDTO == null) {
+        dal.rollBackTransaction();
+      } else {
+        furnitureDTO.setStateFurniture("reparation");
+        furnitureDAO.updateState(furnitureDTO);
+        dal.commitTransaction();
+      }
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+    return furnitureDTO;
+  }
+
+  @Override
+  public boolean confirmDeposit(FurnitureDTO furnitureDTO) {
+    try {
+      dal.startTransaction();
+      if (furnitureDAO.findByID(furnitureDTO.getIdFurniture()) == null) {
+        dal.commitTransaction();
+        return false;
+      }
+      furnitureDTO.setStateFurniture("depose");
+      furnitureDAO.updateState(furnitureDTO);
+      furnitureDAO.updateDepositDate(furnitureDTO);
+      dal.commitTransaction();
+      System.out.println("purchase confirmed");
+      return true;
+
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+  }
+
   /**
-   * {@inheritDoc}This method
-   * is used to roll back the
-   * database if an exception was caught.
-   * It also frees the connection and release
-   * the thread.
+   * {@inheritDoc}This method is used to roll back the database if an exception was caught. It also
+   * frees the connection and release the thread.
    */
   private void rollBackError() {
     try {
@@ -75,5 +167,6 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
 
   }
+
 
 }

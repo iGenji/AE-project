@@ -1,9 +1,11 @@
 package be.vinci.pae.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
+import java.util.Date;
 import views.Views;
 
 /*
@@ -32,59 +34,14 @@ public class FurnitureImpl implements Furniture {
   @JsonView(Views.Public.class)
   private int visit; // FK, id lié à table visites
   @JsonView(Views.Public.class)
-  private Timestamp furnitureCollectionDateBoss;
+  @JsonFormat
+      (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  private Date furnitureCollectionDateBoss;
   @JsonView(Views.Public.class)
-  private Timestamp depositDate;
-
-  /**
-   * Constructor of the class.
-   * 
-   * @param idFurniture - int
-   * @param stateFurniture - String
-   * @param typeFurniture - int
-   * @param description - String
-   * @param purchasePrice - double
-   * @param sellingPrice - double
-   * @param specialSalePrice - double
-   * @param favouritePhoto - int
-   * @param visit - int
-   * @param furnitureCollectionDateBoss - Timestamp
-   * @param depositDate - Timestamp
-   */
-  public FurnitureImpl(int idFurniture, String stateFurniture, int typeFurniture,
-      String description, double purchasePrice, double sellingPrice, double specialSalePrice,
-      int favouritePhoto, int visit, Timestamp furnitureCollectionDateBoss, Timestamp depositDate) {
-    super();
-    this.idFurniture = idFurniture;
-    this.stateFurniture = stateFurniture;
-    this.typeFurniture = typeFurniture;
-    this.description = description;
-    this.purchasePrice = purchasePrice;
-    this.sellingPrice = sellingPrice;
-    this.specialSalePrice = specialSalePrice;
-    this.favouritePhoto = favouritePhoto;
-    this.visit = visit;
-    this.furnitureCollectionDateBoss = furnitureCollectionDateBoss;
-    this.depositDate = depositDate;
-  }
-
-  /**
-   * Another constructor of the class.
-   */
-  public FurnitureImpl() {
-    super();
-    this.idFurniture = -1;
-    this.stateFurniture = null;
-    this.typeFurniture = -1;
-    this.description = null;
-    this.purchasePrice = -1;
-    this.sellingPrice = -1;
-    this.specialSalePrice = -1;
-    this.favouritePhoto = -1;
-    this.visit = -1;
-    this.furnitureCollectionDateBoss = null;
-    this.depositDate = null;
-  }
+  @JsonFormat
+      (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  private Date depositDate;
+  
 
   @Override
   public int getIdFurniture() {
@@ -175,7 +132,7 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public Timestamp getFurnitureCollectionDateBoss() {
+  public Date getFurnitureCollectionDateBoss() {
     return furnitureCollectionDateBoss;
   }
 
@@ -185,7 +142,7 @@ public class FurnitureImpl implements Furniture {
   }
 
   @Override
-  public Timestamp getDepositDate() {
+  public Date getDepositDate() {
     return depositDate;
   }
 
@@ -219,7 +176,6 @@ public class FurnitureImpl implements Furniture {
     }
     return true;
   }
-
 
 
 }

@@ -5,6 +5,8 @@ import java.io.StringWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import be.vinci.pae.utils.Config;
+import jakarta.ws.rs.ClientErrorException;
+import jakarta.ws.rs.ServerErrorException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
@@ -30,21 +32,21 @@ public class LoggingExceptionMapper implements ExceptionMapper<Throwable> {
    */
   private int getStatusCode(Throwable exception) {
     System.out.println("getStatusCode()");
-    if (exception instanceof WebApplicationException) {
+    logger.error("Erreur ! getStatusCode");
+    if (exception instanceof ClientErrorException) {
       logger.error("Error: WebApplication");
-      logger.error(exception.getMessage());
-      logger.error(exception.getStackTrace());
+      logger.warn(exception.getMessage());
+      logger.warn(exception.getStackTrace());
       System.out.println(exception.getClass().getName());
       return ((WebApplicationException) exception).getResponse().getStatus();
     } else {
       logger.error("Error: Database level");
       System.out.println("DataBaseException instanceOf");
-      logger.error(exception.getMessage());
-      logger.error(exception.getStackTrace());
+      logger.fatal(exception.getMessage());
+      logger.fatal(exception.getStackTrace());
+      return ((ServerErrorException) exception).getResponse().getStatus();
     }
-    logger.error("Erreur ! getStatusCode");
 
-    return Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
   }
 
   /*
