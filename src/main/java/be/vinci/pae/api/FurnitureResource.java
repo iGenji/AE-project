@@ -136,8 +136,8 @@ public class FurnitureResource {
    * {@inheritDoc} This method checks if this field contained in the Json object is empty.
    *
    * @param field - String , field's name of a user.
-   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response
-   * Status.UNAUTHORIZED.
+   * @param json - Json , json that contains every fields.
+   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

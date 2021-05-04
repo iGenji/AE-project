@@ -99,7 +99,8 @@ public class UserUCCImpl implements UserUCC {
   }
 
   /**
-   * {@inheritDoc} This method is used to roll back the database if an exception was caught. It also frees the connection and release the thread
+   * {@inheritDoc} This method is used to roll back the database if an exception was caught. 
+   * It also frees the connection and release the thread
    */
   private void rollBackError() {
     try {

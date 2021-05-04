@@ -11,10 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import be.vinci.pae.api.utils.Json;
-import be.vinci.pae.domain.AddressFactory;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDTO;
-import be.vinci.pae.domain.UserFactory;
 import be.vinci.pae.usecases.UserUCC;
 import be.vinci.pae.utils.Config;
 import jakarta.inject.Inject;
@@ -33,15 +31,9 @@ public class Authentication {
 
   private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
   private final ObjectMapper jsonMapper = new ObjectMapper();
-  public final long EXPIRATION_TIME = (long) Config.getIntProperty("expirationTime"); // 30min (1 800 000 ms)
+  public final long expirationTime = (long) Config.getIntProperty("expirationTime");
   @Inject
   private UserUCC uccService;
-
-  @Inject
-  private UserFactory userFactory;
-
-  @Inject
-  private AddressFactory addressFactory;
 
 
 
@@ -75,7 +67,7 @@ public class Authentication {
     // Create token
     String token;
     try {
-      token = JWT.create().withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+      token = JWT.create().withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
           .withIssuer("auth0").withClaim("user", userDTO.getIdUser()).sign(this.jwtAlgorithm);
     } catch (Exception e) {
       throw new WebApplicationException("Unable to create token", e, Status.INTERNAL_SERVER_ERROR);
@@ -143,7 +135,7 @@ public class Authentication {
    * 
    * @param field - String , field's name of a user.
    * 
-   * @return Response Status.ACCEPTED 
+   * @return Response Status.ACCEPTED
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {
