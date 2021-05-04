@@ -12,7 +12,7 @@ public interface MethodDuplicated {
    * @param text - String.
    * @return Response.status(Status.CONFLICT) build with the text.
    */
-  public static Response statusConflict(String text) {
+  static Response statusConflict(String text) {
     return Response.status(Status.CONFLICT).entity(text).type(MediaType.TEXT_PLAIN).build();
   }
 
