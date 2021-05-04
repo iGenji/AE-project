@@ -15,6 +15,7 @@ import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.usecases.UserUCC;
 import be.vinci.pae.utils.Config;
+import be.vinci.pae.utils.MethodDuplicated;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -121,8 +122,7 @@ public class Authentication {
     // check if user exists
     boolean result = this.uccService.register(userDTO);
     if (!result) {
-      return Response.status(Status.CONFLICT).entity("This username is already in use")
-          .type(MediaType.TEXT_PLAIN).build();
+      return MethodDuplicated.statusConflict("This username is already in use");
     }
     ObjectNode node = jsonMapper.createObjectNode().put("success", true);
     // Build response
