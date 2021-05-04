@@ -4,6 +4,7 @@ package be.vinci.pae.usecases;
 
 import java.util.List;
 import be.vinci.pae.domain.AddressDAO;
+import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDAO;
 import be.vinci.pae.domain.UserDTO;

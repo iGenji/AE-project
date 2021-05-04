@@ -1,10 +1,8 @@
 package be.vinci.pae.usecases;
 
-<<<<<<< HEAD
-=======
+
 import java.util.List;
 import be.vinci.pae.domain.AddressDTO;
->>>>>>> f8c1964071870e6dce22e9f0b0647a8061bdb896
 import be.vinci.pae.domain.UserDTO;
 
 public interface UserUCC {
