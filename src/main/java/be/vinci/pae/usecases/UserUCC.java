@@ -1,6 +1,5 @@
 package be.vinci.pae.usecases;
 
-import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.UserDTO;
 
 public interface UserUCC {
@@ -8,13 +7,10 @@ public interface UserUCC {
   /**
    * This method is the use case method to register a user.
    * 
-   * @param userDTO - UserDTO, user that has most of it fields
-   *  full, fulfilled by the front-end.
-   * @param addressDTO - AddressDTO, address that has most
-   *  of it fields full, fulfilled by the front end.
+   * @param userDTO - UserDTO, user that has most of it fields full, fulfilled by the front-end.
    * @return return false if failed, true if succeed.
    */
-  boolean register(UserDTO userDTO, AddressDTO addressDTO);
+  boolean register(UserDTO userDTO);
 
   /**
    * This method is the use case method to log in into the system with a password and a login.

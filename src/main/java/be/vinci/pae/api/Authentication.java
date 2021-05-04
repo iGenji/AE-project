@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import be.vinci.pae.api.utils.Json;
-import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.AddressFactory;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDTO;
@@ -32,11 +31,9 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/auths")
 public class Authentication {
 
-
-
   private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
   private final ObjectMapper jsonMapper = new ObjectMapper();
-  public final static long EXPIRATION_TIME = 1800 * 1000; // 30min (1 800 000 ms)
+  public final long EXPIRATION_TIME = (long) Config.getIntProperty("expirationTime"); // 30min (1 800 000 ms)
   @Inject
   private UserUCC uccService;
 
@@ -51,10 +48,8 @@ public class Authentication {
   /**
    * {@inheritDoc} This method log in the user
    * 
-   * @param json - JsonNode which contains the pseudo and password
-   *  entered by the user via the form
-   * @return a response.ok saying that the login method worked.
-   *  This response gives access to the user's id and token, gives an exception.
+   * @param json - JsonNode which contains the pseudo and password entered by the user via the form
+   * @return a response.ok saying that the login method worked. This response gives access to the user's id and token, gives an exception.
    */
   @POST
   @Path("login")
@@ -99,49 +94,32 @@ public class Authentication {
   /**
    * This method register a user to the database.
    * 
-   * @param json - Json file non empty
+   * @param userDTO - UserDTO file non empty
    * @return response
    */
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response register(JsonNode json) {
-    // Get and check credentials
-    checkJson("username", json);
-    checkJson("firstname", json);
-    checkJson("lastname", json);
-    checkJson("email", json);
-    checkJson("password", json);
-    checkJson("street", json);
-    checkJson("building_number", json);
-    checkJson("unit_number", json);
-    checkJson("postcode", json);
-    checkJson("commune", json);
-    checkJson("country", json);
-    UserDTO userDTO = userFactory.getInstance();
-    String username = json.get("username").asText();
-    userDTO.setUsername(username);
-    String firstname = json.get("firstname").asText();
-    userDTO.setFirstName(firstname);
-    String lastname = json.get("lastname").asText();
-    userDTO.setLastName(lastname);
-    String email = json.get("email").asText();
-    userDTO.setEmail(email);
-    String password = json.get("password").asText();
-    userDTO.setPassword(password);
-    String street = json.get("street").asText();
-    AddressDTO addressDTO = addressFactory.getInstance();
-    addressDTO.setStreet(street);
-    int buildingNumber = json.get("building_number").asInt();
-    addressDTO.setBuildingNumber(buildingNumber);
-    String unitNumber = json.get("unit_number").asText();
-    addressDTO.setUnitNumber(unitNumber);
-    int postcode = json.get("postcode").asInt();
-    addressDTO.setPostcode(postcode);
-    String commune = json.get("commune").asText();
-    addressDTO.setCommune(commune);
-    String country = json.get("country").asText();
-    addressDTO.setCountry(country);
+  public Response register(UserDTO userDTO) {
+
+    // peut check dans le frontend si buildingNumber = 0 pour opti
+    // check if required fields is null or empty
+    if (userDTO == null || userDTO.getUsername() == null || userDTO.getUsername().isEmpty()
+        || userDTO.getFirstName() == null || userDTO.getFirstName().isEmpty()
+        || userDTO.getLastName() == null || userDTO.getLastName().isEmpty()
+        || userDTO.getEmail() == null || userDTO.getEmail().isEmpty()
+        || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()
+        || userDTO.getAddressObject().getStreet() == null
+        || userDTO.getAddressObject().getStreet().isEmpty()
+        || userDTO.getAddressObject().getBuildingNumber() == 0
+        || userDTO.getAddressObject().getPostcode() == 0
+        || userDTO.getAddressObject().getCommune() == null
+        || userDTO.getAddressObject().getCommune().isEmpty()
+        || userDTO.getAddressObject().getCountry() == null
+        || userDTO.getAddressObject().getCountry().isEmpty()) {
+      return Response.status(Status.UNAUTHORIZED).entity("Please fill in the required fields")
+          .type(MediaType.TEXT_PLAIN).build();
+    }
 
     // puting role
     userDTO.setRole("inactif");
@@ -149,24 +127,23 @@ public class Authentication {
     userDTO.setRegistrationDate(now);
 
     // check if user exists
-    boolean userDTORegister = this.uccService.register(userDTO, addressDTO);
-    if (userDTORegister == false) {
+    boolean result = this.uccService.register(userDTO);
+    if (!result) {
       return Response.status(Status.CONFLICT).entity("This username is already in use")
           .type(MediaType.TEXT_PLAIN).build();
     }
-
+    ObjectNode node = jsonMapper.createObjectNode().put("success", true);
     // Build response
-    return Response.ok(MediaType.APPLICATION_JSON).build();
-
+    return Response.ok(node, MediaType.APPLICATION_JSON).build();
   }
+
 
   /**
    * {@inheritDoc} This method checks if this field contained in the Json object is empty.
    * 
    * @param field - String , field's name of a user.
    * 
-   * @return Response Status.ACCEPTED if the field is not empty,
-   *  if not,run an Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED if the field is not empty, if not,run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

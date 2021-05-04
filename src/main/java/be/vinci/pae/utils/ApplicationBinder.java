@@ -42,6 +42,5 @@ public class ApplicationBinder extends AbstractBinder {
     bind(AddressDAOImpl.class).to(AddressDAO.class).in(Singleton.class);
 
 
-
   }
 }
