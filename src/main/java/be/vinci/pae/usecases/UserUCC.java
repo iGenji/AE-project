@@ -12,14 +12,7 @@ public interface UserUCC {
   /**
    * {@inheritDoc}This method is the use case method to register a user.
    * 
-<<<<<<< HEAD
    * @param userDTO - UserDTO, user that has most of it fields full, fulfilled by the front-end.
-=======
-   * @param userDTO - UserDTO, user that has most of it fields
-   *     full, fulfilled by the front-end.
-   * @param addressDTO - AddressDTO, address that has most
-   *     of it fields full, fulfilled by the front end.
->>>>>>> f8c1964071870e6dce22e9f0b0647a8061bdb896
    * @return return false if failed, true if succeed.
    */
   boolean register(UserDTO userDTO);
