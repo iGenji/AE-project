@@ -30,31 +30,30 @@ public class UserUCCImpl implements UserUCC {
   private UserFactory factory;
 
   @Override
-  public boolean register(UserDTO userDTO, AddressDTO addressDTO) {
+  public boolean register(UserDTO userDTO) {
     try {
       dal.startTransaction();
 
-      UserDTO userDto = userDTO;
-
       // check if username already in use
-      if (userDao.findByUsername(userDto.getUsername()) != null) {
+      if (userDao.findByUsername(userDTO.getUsername()) != null) {
+        dal.commitTransaction();
         return false;
       }
       // insert the address and get her autoIncremented Id
-      int idAdresse = addressDao.insert(addressDTO);
+      int idAdresse = addressDao.insert(userDTO.getAddressObject());
 
       // put the id_address into the user
-      userDto.setAddress(idAdresse);
+      userDTO.setAddress(idAdresse);
 
       // get the password of the user
-      String password = userDto.getPassword();
+      String password = userDTO.getPassword();
       // create a UserImpl to have access to the method passwordEncryption()
       User userImplNull = (User) factory.getInstance();
       // encrypt the password
       String passwordBCrypt = userImplNull.passwordEncryption(password);
-      userDto.setPassword(passwordBCrypt);
+      userDTO.setPassword(passwordBCrypt);
 
-      if (userDao.insert(userDto)) {
+      if (userDao.insert(userDTO)) {
         dal.commitTransaction();
         System.out.println("register fait");
         return true;
@@ -100,7 +99,8 @@ public class UserUCCImpl implements UserUCC {
   }
 
   /**
-   * {@inheritDoc} This method is used to roll back the database if an exception was caught. It also frees the connection and release the thread
+   * {@inheritDoc} This method is used to roll back the database if an exception was caught. 
+   * It also frees the connection and release the thread
    */
   private void rollBackError() {
     try {

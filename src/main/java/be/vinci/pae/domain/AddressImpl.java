@@ -27,40 +27,6 @@ public class AddressImpl implements Address {
   @JsonView(Views.Public.class)
   private String country;
 
-  /**
-   * Constructor for AdresseImpl.
-   * @param idAddress - int that represents the id
-   * @param street - String that represents the street
-   * @param buildingNumber - int that represents the number
-   * @param unitNumber - String 
-   * @param postCode - int post code
-   * @param commune - String area
-   * @param country - String country
-   */
-  public AddressImpl(int idAddress, String street, int buildingNumber, String unitNumber,
-      int postCode, String commune, String country) {
-    super();
-    this.idAddress = idAddress;
-    this.street = street;
-    this.buildingNumber = buildingNumber;
-    this.unitNumber = unitNumber;
-    this.postCode = postCode;
-    this.commune = commune;
-    this.country = country;
-  }
-  
-  /**
-   * constructor of this class with 0 parameters.
-   */
-  public AddressImpl() {
-    super();
-    this.idAddress = -1;
-    this.street = null;
-    this.buildingNumber = -1;
-    this.unitNumber = null;
-    this.commune = null;
-    this.country = null;
-  }
 
   @Override
   public int getIdAddress() {

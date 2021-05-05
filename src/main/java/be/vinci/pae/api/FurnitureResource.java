@@ -2,6 +2,7 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
+import be.vinci.pae.utils.MethodDuplicated;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -42,8 +43,7 @@ public class FurnitureResource {
     // check if furniture exists
     boolean furnitureDTOconfirm = this.uccService.confirmPurchase(furnitureDTO);
     if (!furnitureDTOconfirm) {
-      return Response.status(Status.CONFLICT).entity("This furniture does not exist")
-          .type(MediaType.TEXT_PLAIN).build();
+      return MethodDuplicated.statusConflict("This furniture does not exist");
     }
     ObjectNode node = jsonMapper.createObjectNode().put("success", true);
     // Build response
@@ -136,8 +136,8 @@ public class FurnitureResource {
    * {@inheritDoc} This method checks if this field contained in the Json object is empty.
    *
    * @param field - String , field's name of a user.
-   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response
-   * Status.UNAUTHORIZED.
+   * @param json - Json , json that contains every fields.
+   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

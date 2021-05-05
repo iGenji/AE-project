@@ -49,7 +49,5 @@ public class ApplicationBinder extends AbstractBinder {
     bind(SellingFactoryImpl.class).to(SellingFactory.class).in(Singleton.class);
     bind(SellingUCCImpl.class).to(SellingUCC.class).in(Singleton.class);
     bind(SellingDAOImpl.class).to(SellingDAO.class).in(Singleton.class);
-
-
   }
 }

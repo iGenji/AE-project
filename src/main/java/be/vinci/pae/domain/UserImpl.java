@@ -3,7 +3,6 @@ package be.vinci.pae.domain;
 import java.time.LocalDateTime;
 
 import org.mindrot.jbcrypt.BCrypt;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -16,7 +15,6 @@ import views.Views;
  * ignore all null fields in order to avoid sending props not linked to a JSON view
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
 
 class UserImpl implements User {
 
@@ -41,49 +39,9 @@ class UserImpl implements User {
 
   @JsonView(Views.Internal.class)
   private String password;
+  @JsonView(Views.Internal.class)
+  private AddressDTO addressObject;
 
-  /**
-   * Constructor of the class.
-   * 
-   * @param idUser - int
-   * @param username - String
-   * @param lastName - String
-   * @param password - String
-   * @param firstName - String
-   * @param email - String
-   * @param registrationDate - LocalDateTime
-   * @param role - String
-   * @param address - String
-   */
-  public UserImpl(int idUser, String username, String lastName, String password, String firstName,
-      String email, LocalDateTime registrationDate, String role, int address) {
-    super();
-    this.idUser = idUser;
-    this.username = username;
-    this.lastName = lastName;
-    this.password = password;
-    this.firstName = firstName;
-    this.email = email;
-    this.registrationDate = registrationDate;
-    this.role = role;
-    this.address = address;
-  }
-
-  /**
-   * Another constructor of the class.
-   */
-  public UserImpl() {
-    super();
-    this.idUser = -1;
-    this.username = null;
-    this.lastName = null;
-    this.password = null;
-    this.firstName = null;
-    this.email = null;
-    this.registrationDate = null;
-    this.role = null;
-    this.address = -1;
-  }
 
   @Override
   public int getIdUser() {
@@ -237,6 +195,12 @@ class UserImpl implements User {
   public String toString() {
     // TODO Auto-generated method stub
     return "";
+  }
+
+  @Override
+  public AddressDTO getAddressObject() {
+    // TODO Auto-generated method stub
+    return this.addressObject;
   }
 
 
