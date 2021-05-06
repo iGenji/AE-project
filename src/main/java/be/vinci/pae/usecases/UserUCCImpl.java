@@ -134,7 +134,7 @@ public class UserUCCImpl implements UserUCC {
   public UserDTO getCustomer(String pseudo) {
     UserDTO toReturn = null;
     AddressDTO toSetup = null;
-    //getting the user and setting up the address
+    // getting the user and setting up the address
     try {
       dal.startTransaction();
       toReturn = userDao.findByUsername(pseudo);
@@ -145,13 +145,10 @@ public class UserUCCImpl implements UserUCC {
       throw new FatalException(e.getMessage());
     }
     // setting up the address of the user
-    toReturn.setAddressObject(toSetup);
-    //System.out.println(toReturn.getAddressObject().getStreet());
-    System.out.println(toSetup.getStreet());
-    
+    toReturn.setAddressObject(toSetup);;
+
     return toReturn;
   }
-
 
   
 

@@ -90,7 +90,7 @@ class UserImpl implements User {
   public void setAddressObject(AddressDTO addressObject) {
     this.addressObject = addressObject;
   }
-  
+
 
   @Override
   public String getUsername() {
@@ -203,7 +203,7 @@ class UserImpl implements User {
 
   @Override
   public AddressDTO getAddressObject() {
-    
+
     return this.addressObject;
   }
 
