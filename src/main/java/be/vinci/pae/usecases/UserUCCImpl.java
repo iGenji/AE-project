@@ -84,6 +84,7 @@ public class UserUCCImpl implements UserUCC {
 
       User user = (User) userDTO;
       if (user == null || !user.passwordCheck(password)) {
+        dal.commitTransaction();
         return null;
       }
       dal.commitTransaction();
@@ -132,34 +133,27 @@ public class UserUCCImpl implements UserUCC {
   @Override
   public UserDTO getCustomer(String pseudo) {
     UserDTO toReturn = null;
-
+    AddressDTO toSetup = null;
+    //getting the user and setting up the address
     try {
       dal.startTransaction();
       toReturn = userDao.findByUsername(pseudo);
+      toSetup = addressDao.findByID(toReturn.getAddress());
       dal.commitTransaction();
     } catch (Exception e) {
       rollBackError();
       throw new FatalException(e.getMessage());
     }
+    // setting up the address of the user
+    toReturn.setAddressObject(toSetup);
+    //System.out.println(toReturn.getAddressObject().getStreet());
+    System.out.println(toSetup.getStreet());
+    
     return toReturn;
   }
 
 
-  @Override
-  public AddressDTO getAdress(int idAdress) {
-    AddressDTO toReturn = null;
-
-    try {
-      dal.startTransaction();
-      toReturn = userDao.getAdress(idAdress);
-      dal.commitTransaction();
-    } catch (Exception e) {
-      rollBackError();
-      throw new FatalException(e.getMessage());
-    }
-    return toReturn;
-  }
-
+  
 
 }
 

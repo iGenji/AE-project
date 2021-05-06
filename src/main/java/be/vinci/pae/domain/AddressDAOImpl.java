@@ -16,6 +16,11 @@ public class AddressDAOImpl implements AddressDAO {
       + " ad.code_postal, ad.commune, ad.pays" + " FROM pae_project.adresses ad"
       + " WHERE ad.rue =?" + " AND ad.numero =?" + " AND ad.boite =?" + " AND ad.code_postal =?"
       + " AND ad.commune =?" + " AND ad.pays =?";
+  
+    private final String getAdress = "SELECT id_adresse,rue,numero,boite,code_postal,commune,pays"
+     + " FROM pae_project.adresses WHERE id_adresse=?";
+   
+  
 
   @Inject
   private DalServices dalServices;
@@ -31,8 +36,22 @@ public class AddressDAOImpl implements AddressDAO {
 
   @Override
   public AddressDTO findByID(int addressID) {
-    // TODO Auto-generated method stub
-    return null;
+    PreparedStatement ps;
+    AddressDTO toReturn = null;
+    ResultSet rs;
+    
+    try {
+      ps = dalServices.getPreparedStatement(getAdress);
+      ps.setInt(1, addressID);
+      rs = ps.executeQuery();
+      while(rs.next()) {
+        toReturn = setAddress(rs);
+      }
+    }catch(Exception e) {
+      throw new FatalException(e.getMessage());
+    }
+    
+    return toReturn;
   }
 
   @Override

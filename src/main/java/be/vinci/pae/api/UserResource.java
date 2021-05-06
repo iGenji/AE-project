@@ -97,25 +97,11 @@ public class UserResource {
     if (toReturn == null) {
       throw new WebApplicationException("User not found", null, Status.NOT_FOUND);
     }
+    toReturn = Json.filterPublicJsonView(toReturn, UserDTO.class);
+    
     return toReturn;
 
   }
 
-  /**
-   * {@inheritDoc} Show all users in list
-   * 
-   * @return a list of UserDTO
-   */
-  @POST
-  @Path("/{id}")
-  @Produces(MediaType.APPLICATION_JSON)
-  // @Authorize
-  public AddressDTO getAddress(@PathParam("id") int idAdresse) {
-    AddressDTO toReturn = null;
-    toReturn = uccService.getAdress(idAdresse);
-
-    return toReturn;
-
-  }
 
 }

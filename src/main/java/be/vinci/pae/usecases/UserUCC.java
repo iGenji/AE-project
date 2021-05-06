@@ -37,11 +37,6 @@ public interface UserUCC {
    */
   UserDTO getCustomer(String pseudo);
   
-  /**
-   * {@inheritDoc} Returns the address with the id
-   * @param idAdress - integer
-   * @return AddressDTO
-   */
-  AddressDTO getAdress(int idAdress);
+  
 
 }

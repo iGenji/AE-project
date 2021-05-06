@@ -77,7 +77,7 @@ public class Authentication {
 
     // load the user data from a public JSON view to filter out the private info not
     // to be returned by the API (such as password)
-    User publicUser = Json.filterPublicJsonView(user, User.class);
+    UserDTO publicUser = Json.filterPublicJsonView(user, UserDTO.class);
     ObjectNode node = jsonMapper.createObjectNode().put("token", token).putPOJO("user", publicUser)
         .put("checked", checked);
     return Response.ok(node, MediaType.APPLICATION_JSON).build();

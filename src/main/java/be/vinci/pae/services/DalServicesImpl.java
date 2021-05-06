@@ -91,7 +91,7 @@ public class DalServicesImpl implements DalServices, DalTransactions {
       if (connection == null) {
         connection = bds.getConnection();
         threadLocal.set(connection);
-        System.out.println("Nouvelle connexion cr��e");
+        System.out.println("Nouvelle connexion cree");
       }
       connection.setAutoCommit(false);
     } catch (Exception e) {
@@ -107,6 +107,7 @@ public class DalServicesImpl implements DalServices, DalTransactions {
       connection.commit();
       threadLocal.remove();
       connection.close();
+      System.out.println("Commit done");
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
