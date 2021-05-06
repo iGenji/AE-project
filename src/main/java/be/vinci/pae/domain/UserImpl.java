@@ -36,10 +36,9 @@ class UserImpl implements User {
   private String role;
   @JsonView(Views.Public.class)
   private int address;
-
   @JsonView(Views.Internal.class)
   private String password;
-  @JsonView(Views.Internal.class)
+  @JsonView(Views.Public.class)
   private AddressDTO addressObject;
 
 
@@ -85,6 +84,11 @@ class UserImpl implements User {
   public void setFirstName(String firstName) {
     this.firstName = firstName;
 
+  }
+
+
+  public void setAddressObject(AddressDTO addressObject) {
+    this.addressObject = addressObject;
   }
 
 
@@ -199,7 +203,7 @@ class UserImpl implements User {
 
   @Override
   public AddressDTO getAddressObject() {
-    // TODO Auto-generated method stub
+
     return this.addressObject;
   }
 

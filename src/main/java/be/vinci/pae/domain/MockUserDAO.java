@@ -46,10 +46,6 @@ class MockUserDAO implements UserDAO {
     return null;
   }
 
-  @Override
-  public AddressDTO getAdress(int id) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  
 
 }

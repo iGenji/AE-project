@@ -119,6 +119,12 @@ public interface UserDTO {
    * @return AddressDTO - addressDTO.
    */
   AddressDTO getAddressObject();
+  
+  /**
+   * {@inheritDoc} This method sets up an AddressDTO
+   * @param address - address of the user
+   */
+  void setAddressObject(AddressDTO address);
 
   /**
    * {@inheritDoc} This method sets user's DTO ID address.
@@ -141,5 +147,6 @@ public interface UserDTO {
    * @param username - String user's DTO username.
    */
   void setUsername(String username);
+  
 
 }

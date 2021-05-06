@@ -57,7 +57,8 @@ public interface AddressDAO {
   int insert(AddressDTO address);
 
   /**
-   * {@inheritDoc} This method delete the address DTO in argument from the database.
+   * {@inheritDoc} This method delete the address
+   *     DTO in argument from the database.
    * 
    * @param address - AddressDTO.
    * @return true if it succeed, false if it failed.

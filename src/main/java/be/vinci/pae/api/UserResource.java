@@ -5,7 +5,6 @@ import java.util.List;
 import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.api.utils.Json;
 import be.vinci.pae.domain.UserDTO;
-import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDAO;
 import be.vinci.pae.domain.UserFactory;
@@ -99,25 +98,11 @@ public class UserResource {
     if (toReturn == null) {
       throw new WebApplicationException("User not found", null, Status.NOT_FOUND);
     }
+    toReturn = Json.filterPublicJsonView(toReturn, UserDTO.class);
+    
     return toReturn;
 
   }
 
-  /**
-   * {@inheritDoc} Show all users in list
-   * 
-   * @return a list of UserDTO
-   */
-  @POST
-  @Path("/{id}")
-  @Produces(MediaType.APPLICATION_JSON)
-  // @Authorize
-  public AddressDTO getAddress(@PathParam("id") int idAdresse) {
-    AddressDTO toReturn = null;
-    toReturn = uccService.getAdress(idAdresse);
-
-    return toReturn;
-
-  }
 
 }

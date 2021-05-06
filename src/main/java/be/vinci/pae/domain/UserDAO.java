@@ -62,12 +62,6 @@ public interface UserDAO {
    */
   UserDTO update(UserDTO user);
 
-  /**
-   * {@inheritDoc}This method returns the address
-   * 
-   * @param id - int id of the user
-   * @return AddressDTO
-   */
-  AddressDTO getAdress(int id);
+ 
 
 }

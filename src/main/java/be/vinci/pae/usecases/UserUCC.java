@@ -2,7 +2,7 @@ package be.vinci.pae.usecases;
 
 
 import java.util.List;
-import be.vinci.pae.domain.AddressDTO;
+
 import be.vinci.pae.domain.UserDTO;
 
 public interface UserUCC {
@@ -37,11 +37,6 @@ public interface UserUCC {
    */
   UserDTO getCustomer(String pseudo);
   
-  /**
-   * {@inheritDoc} Returns the address with the id
-   * @param idAdress - integer
-   * @return AddressDTO
-   */
-  AddressDTO getAdress(int idAdress);
+  
 
 }

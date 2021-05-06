@@ -31,10 +31,7 @@ public class UserDAOImpl implements UserDAO {
       + " prenom," + " nom," + " email," + " mot_de_passe," + " date_inscription," + " role,"
       + " adresse ) VALUES (" + " ?, ?, ?, ?, ?, ?, ?, ?)";
 
-  /*
-   * private final String getAdress = "SELECT rue,numero,boite,code_postal,commune,pays"
-   *  + " FROM pae_project.adresses WHERE id_adresse=?";
-   */
+  
 
 
 
@@ -169,6 +166,7 @@ public class UserDAOImpl implements UserDAO {
   private UserDTO setUser(ResultSet rs) {
 
     UserDTO user = factory.getInstance();
+    
     try {
       user.setIdUser(rs.getInt("id_utilisateur"));
       user.setUsername(rs.getString("pseudo"));
@@ -188,30 +186,9 @@ public class UserDAOImpl implements UserDAO {
       // TODO Auto-generated catch block
       throw new FatalException(e.getMessage(), e);
     }
+    
 
     return user;
-  }
-
-
-
-  @Override
-  public AddressDTO getAdress(int id) {
-    AddressDTO toReturn = null;
-    /*
-     * ResultSet rs = null; 
-     * PreparedStatement ps;
-     */
-
-    System.out.println("id=" + id);
-    /*
-     * try {
-     * 
-     * ps = dalServices.getPreparedStatement(getAdress); ps.setInt(1, id);
-     * rs = ps.executeQuery(); //while (rs.next()) { //toReturn = setAddress(rs); //}
-     * } catch (Exception e) { throw new FatalException(e.getMessage(), e); }
-     */
-
-    return toReturn;
   }
 
 
