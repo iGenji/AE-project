@@ -2,6 +2,7 @@ package be.vinci.pae.api;
 
 import org.glassfish.jersey.server.ContainerRequest;
 import java.util.List;
+import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.api.utils.Json;
 import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.domain.AddressDTO;
@@ -27,7 +28,7 @@ public class UserResource {
 
   @Inject
   private UserDAO dataService;
-  
+
   @Inject
   private UserUCC uccService;
 
@@ -63,12 +64,13 @@ public class UserResource {
   @GET
   @Path("me")
   @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
   public User getUser(@Context ContainerRequest request) {
     User currentUser = (User) request.getProperty("user");
     return Json.filterPublicJsonView(currentUser, User.class);
   }
-  
-  
+
+
   /**
    * {@inheritDoc} Show all users in list
    * 

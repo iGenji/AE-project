@@ -97,6 +97,7 @@ hs_err_pid*
 ### Java-Web ###
 ## ignoring target file
 target/
+lib/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,java-web
 
