@@ -24,7 +24,7 @@ public class DalServicesImpl implements DalServices, DalTransactions {
 
 
   /**
-   * Constructor of the class
+   * Constructor of the class.
    */
   public DalServicesImpl() {
     bds = new BasicDataSource();

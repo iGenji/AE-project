@@ -5,7 +5,6 @@ import java.util.List;
 import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.api.utils.Json;
 import be.vinci.pae.domain.UserDTO;
-import be.vinci.pae.domain.AddressDTO;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDAO;
 import be.vinci.pae.domain.UserFactory;

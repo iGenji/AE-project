@@ -2,7 +2,7 @@ package be.vinci.pae.usecases;
 
 
 import java.util.List;
-import be.vinci.pae.domain.AddressDTO;
+
 import be.vinci.pae.domain.UserDTO;
 
 public interface UserUCC {

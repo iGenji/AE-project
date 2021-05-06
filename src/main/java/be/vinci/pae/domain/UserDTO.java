@@ -122,7 +122,7 @@ public interface UserDTO {
   
   /**
    * {@inheritDoc} This method sets up an AddressDTO
-   * @param address
+   * @param address - address of the user
    */
   void setAddressObject(AddressDTO address);
 

@@ -145,7 +145,7 @@ public class UserUCCImpl implements UserUCC {
       throw new FatalException(e.getMessage());
     }
     // setting up the address of the user
-    toReturn.setAddressObject(toSetup);;
+    toReturn.setAddressObject(toSetup);
 
     return toReturn;
   }

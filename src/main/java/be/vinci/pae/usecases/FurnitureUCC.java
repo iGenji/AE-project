@@ -61,4 +61,6 @@ public interface FurnitureUCC {
    * @return return false if failed, true if succeed.
    */
   boolean confirmDeposit(FurnitureDTO furnitureDTO);
+  
+  
 }

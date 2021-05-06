@@ -166,7 +166,7 @@ public class UserDAOImpl implements UserDAO {
   private UserDTO setUser(ResultSet rs) {
 
     UserDTO user = factory.getInstance();
-    AddressDTO addressUser = null;
+    
     try {
       user.setIdUser(rs.getInt("id_utilisateur"));
       user.setUsername(rs.getString("pseudo"));

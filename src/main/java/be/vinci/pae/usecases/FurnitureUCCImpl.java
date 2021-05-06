@@ -40,7 +40,8 @@ public class FurnitureUCCImpl implements FurnitureUCC {
     }
     return furnitureDTO;
   }
-
+  
+  @Override
   public FurnitureDTO confirmSelling(int idMeuble) {
     FurnitureDTO furnitureDTO = null;
     try {
