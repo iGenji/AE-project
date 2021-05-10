@@ -30,6 +30,8 @@ public class FurnitureImpl implements Furniture {
   @JsonView(Views.Public.class)
   private double specialSalePrice;
   @JsonView(Views.Public.class)
+  private String typeString;
+  @JsonView(Views.Public.class)
   private int favouritePhoto; // FK, id lié à table photos_meubles
   @JsonView(Views.Public.class)
   private int visit; // FK, id lié à table visites
@@ -149,6 +151,17 @@ public class FurnitureImpl implements Furniture {
   @Override
   public void setDepositDate(Timestamp depositDate) {
     this.depositDate = depositDate;
+  }
+  
+  
+  @Override
+  public String getTypeString() {
+    return typeString;
+  }
+  
+  @Override
+  public void setTypeString(String typeString) {
+    this.typeString = typeString;
   }
 
   @Override
