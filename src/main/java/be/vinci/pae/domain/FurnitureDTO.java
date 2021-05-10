@@ -174,11 +174,11 @@ public interface FurnitureDTO {
    * {@inheritDoc} This method returns the string of the type.
    * @return String of the type
    */
-  public String getTypeString();
+  String getTypeString();
   
   /**
    * {@inheritDoc} This method sets the string type
    * @param typeString - String
    */
-  public void setTypeString(String typeString);
+  void setTypeString(String typeString);
 }
