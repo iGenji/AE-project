@@ -135,7 +135,7 @@ a{
   align-items: center;
 }
 
-.buy-btn{
+.buyBtn{
   width: 160px;
   height: 40px;
   display: flex;
@@ -149,7 +149,7 @@ a{
   box-shadow: 2px 2px 30px rgba(0, 0, 0, .2);
 }
 
-.buy-btn:hover{
+.buyBtn:hover{
   color: white;
   background-color: palevioletred;
   transition: all ease 0.3s;

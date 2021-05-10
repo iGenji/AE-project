@@ -4,6 +4,7 @@ import Navbar from "./Navbar.js";
 import callAPI from "../utils/api.js";
 import PrintError from "./PrintError.js";
 const API_BASE_URL = "/api/";
+const API_BASE_URL_FURNITURE = "/api/furnitures/";
 
 
 const HomePage = async () => {
@@ -16,7 +17,10 @@ const HomePage = async () => {
   title.innerText = "Home";
   page.appendChild(title);
 
-  const user = getUserSessionData();
+  //const user = getUserSessionData();
+  //if (user) {
+  //  loginForm.addEventListener("submit", onLogin)
+ // };
 
   try {
     const furnitures = await callAPI(API_BASE_URL+"furnitureList", "POST");
@@ -41,11 +45,11 @@ const onFurnituresList = (data) => {
     const str = element.registrationDate+'';
     const words = str.split(',');
     table += `<li class="item-a">
-    <div class="box">
+    <div class="box" data-id="${element.idFurniture}">
       <div class="slide-img">
         <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="" />
         <div class="overlay">
-          <a href="#" class="buy-btn">Buy Now</a>
+          <button href="#" class="buyBtn">Buy Now</button>
         </div>
       </div>
       <div class="detail-box">
@@ -64,27 +68,51 @@ const onFurnituresList = (data) => {
   </body>`;
   page.innerHTML += table;
 
-  page.innerHTML +=
-    '<button id="addBtn" class="btn btn-primary mt-2">Add film</button>';
-
-  const seeBtns = document.querySelectorAll(".seeBtn");
+  const buyBtns = document.querySelectorAll(".buyBtn");
   
 
-  seeBtns.forEach((seeBtn) => {
-    seeBtn.addEventListener("click", onSeen);
+  buyBtns.forEach((buyBtn) => {
+    buyBtn.addEventListener("click", onBuy);
   });
 
 };
 
-const onSeen = async (e) => {
+const onBuy = async (e) => {
  
-  const username = e.target.parentElement.parentElement.dataset.username;
-  console.log(username);
-  window.location.href = "/user?name="+username;
+  const idFurniture = e.target.parentElement.parentElement.parentElement.dataset.id;
+  //window.location.href = "http://localhost/furnitureCustomer?furnitureId="+idFurniture;
+  const user = getUserSessionData();
+  if(!user){
+    RedirectUrl("/login");
+    //+ajouter message disant que la personne doit être connecté
+  }else{
+      onFurniturePageCustomer(user, idFurniture);
+  }
+  
 };
 
+const onFurniturePageCustomer = async (user, id) =>{
+  try {
+      console.log(id);
+      const furniture = await callAPI(
+        API_BASE_URL_FURNITURE + id,
+        "GET",
+        user.token,
 
- 
+      );
+      //user.user = userLogged;
+      onDisplayFurnitureCostumer(furniture);
+    } catch (err) {
+      console.error("FurniturePageCustomer::onFurniturePageCustomer", err);
+      PrintError(err);
+    }
+};
+
+const onDisplayFurnitureCostumer = (furniture) => {
+  console.log("onDisplayFurnitureCostumer:", furniture);
+  
+};
+
 export default HomePage;
 
 
