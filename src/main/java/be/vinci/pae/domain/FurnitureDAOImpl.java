@@ -35,9 +35,11 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       "UPDATE pae_project.meubles SET prix_special=? WHERE id_meuble=?";
 
   private final String findFurnitures =
-      "SELECT " + "id_meuble,etat_meuble,type_meuble,description,prix_achat,prix_vente,"
-          + "prix_special,photo_preferee"
-          + "visite,date_emporte_patron,date_depot FROM pae_project.meubles";
+      "SELECT " + "m.id_meuble,m.etat_meuble,m.type_meuble,m.description,m.prix_achat,m.prix_vente,"
+          + "m.prix_special,m.photo_preferee,"
+          + "m.visite,m.date_emporte_patron,m.date_depot,"
+          + "t.nom FROM pae_project.meubles m,pae_project.types_meubles t"
+          + " WHERE t.id_type=m.type_meuble";
 
   @Inject
   private DalServices dalServices;
@@ -205,6 +207,7 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       furniture.setVisit(rs.getInt("visite"));
       furniture.setFurnitureCollectionDateBoss(rs.getTimestamp("date_emporte_patron"));
       furniture.setDepositDate(rs.getTimestamp("date_depot"));
+      furniture.setTypeString(rs.getString("nom"));
     } catch (Exception e) {
       // TODO Auto-generated catch block
       throw new FatalException(e.getMessage(), e);
