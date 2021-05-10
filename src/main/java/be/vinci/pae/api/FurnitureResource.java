@@ -143,10 +143,10 @@ public class FurnitureResource {
   /**
    * {@inheritDoc} This method gives the accessible attributes of a furniture
    *
-   * @param request - ContainerRequest 
+   * @param id - Integer
    * @return FurnitureDTO Object
    */
-  @GET
+  @GET  
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize

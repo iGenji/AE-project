@@ -1,6 +1,5 @@
-import { getUserSessionData, setUserSessionData } from "../utils/session.js";
+import { getUserSessionData} from "../utils/session.js";
 import { RedirectUrl } from "./Router.js";
-import Navbar from "./Navbar.js";
 import callAPI from "../utils/api.js";
 import PrintError from "./PrintError.js";
 const API_BASE_URL = "/api/";
@@ -16,11 +15,6 @@ const HomePage = async () => {
   title.id = "pageTitle";
   title.innerText = "Home";
   page.appendChild(title);
-
-  //const user = getUserSessionData();
-  //if (user) {
-  //  loginForm.addEventListener("submit", onLogin)
- // };
 
   try {
     const furnitures = await callAPI(API_BASE_URL+"furnitureList", "POST");
@@ -100,7 +94,6 @@ const onFurniturePageCustomer = async (user, id) =>{
         user.token,
 
       );
-      //user.user = userLogged;
       onDisplayFurnitureCostumer(furniture);
     } catch (err) {
       console.error("FurniturePageCustomer::onFurniturePageCustomer", err);
@@ -110,7 +103,57 @@ const onFurniturePageCustomer = async (user, id) =>{
 
 const onDisplayFurnitureCostumer = (furniture) => {
   console.log("onDisplayFurnitureCostumer:", furniture);
-  
+    // show the furniture's page
+    page.innerHTML = 
+    `
+    <div class="container-fluid-width row" style="background-color: grey;">
+      <a align="left" class="border col-md-4" href="http://localhost/"><button>Retour</button></a>
+      <div align="center" class="border col-md-4">Nom: ${furniture.idFurniture}</div>
+      <a align="right" class="border col-md-4"><button>Voir mes options (non demandé)</button></a>
+    </div>
+
+    <div class="container-fluid-width" style="background-color: black;">
+      <div id="demo" class="carousel slide" data-ride="carousel">
+        <!-- Indicateurs -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+        <!-- Carrousel -->
+        <div class="carousel-inner" >
+          <div class="carousel-item active">
+            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Carrousel slide 1" class="rounded mx-auto d-block w-25" >
+          </div>
+          <div class="carousel-item">
+            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Carrousel slide 2" class="rounded mx-auto d-block w-25" >
+          </div>
+          <div class="carousel-item">
+            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Carrousel slide 3" class="rounded mx-auto d-block w-25" >
+          </div>
+        </div>
+
+        <!-- Contrôles -->
+        <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Précédent</span>
+        </a>
+        <a class="carousel-control-next" href="#demo" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Suivant</span>
+        </a>
+      </div>
+    </div> 
+
+    <div class="container-fluid-width row" style="background-color: grey;">
+      <div align="left" class="border title col-md-3">Prix: <br/>${furniture.sellingPrice}€</div>
+      <div align="center" class="border col-md-6">Description: <br/>${furniture.description}</div>
+      <a align="right" class="border col-md-3"><button>Introduire une option ou Annuler une option (non demandé)</button></a>
+    </div>
+    `;
+;
+
 };
 
 export default HomePage;
