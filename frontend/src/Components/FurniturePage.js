@@ -4,6 +4,7 @@ import Navbar from "./Navbar.js";
 import callAPI from "../utils/api.js";
 import PrintError from "./PrintError.js";
 const API_BASE_URL = "/api/furnitures/";
+let elementGlobal;
 
 let furniturePage = `<div class="container">
 </br>
@@ -18,20 +19,13 @@ let furniturePage = `<div class="container">
 
           <div class="row gy-3">
 
-            <div class="col-md-4">
-              
-              <div class="invalid-feedback">
-                Please enter the id of the furniture purchased.
-              </div>
-            </div>
-
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="furniturePurchasedPrice" class="form-label">Purchase price</label>
               <input type="number" min="0" class="form-control" id="purchasePrice" placeholder="100" required>
               
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="cc-name" class="form-label">Collection date</label>
               <input type="date" class="form-control" id="collectionDate" placeholder="" required>
               <div class="invalid-feedback">
@@ -50,15 +44,6 @@ let furniturePage = `<div class="container">
 
           <h4 class="mb-3">Send to the workshop</h4>
 
-          <div class="row gy-3">
-
-            <div class="col-md-4">
-              
-              <div class="invalid-feedback">
-                Please enter the id of the furniture sent to the workshop.
-              </div>
-            </div>
-          </div>
           <br>
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Confirm sending</button>
@@ -71,14 +56,7 @@ let furniturePage = `<div class="container">
 
           <div class="row gy-3">
 
-            <div class="col-md-4">
-              
-              <div class="invalid-feedback">
-                Please enter the id of the furniture purchased.
-              </div>
-            </div>
-
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="cc-name" class="form-label">Deposit date</label>
               <input type="date" class="form-control" id="depositDate" placeholder="" required>
               <div class="invalid-feedback">
@@ -94,16 +72,9 @@ let furniturePage = `<div class="container">
 
         <h4 class="mb-3">Furniture price</h4>
         <form id="selling" class="needs-validation" novalidate>
-          <div class="row g-3">
+          <div class="row g-3"> 
 
-            <div class="col-md-4">
-              
-              <div class="invalid-feedback">
-                Please enter the id of the furniture.
-              </div>
-            </div>  
-
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="price" class="form-label">Selling price (€)</label>
               <input type="number" min="0.01" step="0.01" class="form-control" id="price" placeholder="200" required>
               <div class="invalid-feedback">
@@ -124,14 +95,7 @@ let furniturePage = `<div class="container">
 
           <div class="row gy-3">
 
-            <div class="col-md-3">
-              
-              <div class="invalid-feedback">
-                Please enter the id of the furniture sold.
-              </div>
-            </div>
-
-            <div class="col-md-3">
+            <div class="col-md-4">
               <label for="specialPrice" class="form-label">Special sale price (€)</label>
               <input type="number" min="-1" step="0.01" class="form-control" id="specialPrice" placeholder="-1" required>
               <div class="invalid-feedback">
@@ -139,7 +103,7 @@ let furniturePage = `<div class="container">
               </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
               <label for="furnitureSoldID" class="form-label">Customer ID</label>
               <input type="number" min="-1" class="form-control" id="customerID" placeholder="-1" required>
               <div class="invalid-feedback">
@@ -147,7 +111,7 @@ let furniturePage = `<div class="container">
               </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
               <label for="cc-name" class="form-label">Date of sale</label>
               <input type="date" class="form-control" id="soldDate" placeholder="" required>
               <div class="invalid-feedback">
@@ -161,17 +125,14 @@ let furniturePage = `<div class="container">
         </form>
 
         <form id="description_form" class="needs-validation" novalidate>
+        <hr class="my-4">
+
+          <h4 class="mb-3">Update description</h4>
           <div class="row g-3">
 
-            <div class="col-md-4">
-              
-              <div class="invalid-feedback">
-                Please enter the id of the furniture.
-              </div>
-            </div>  
 
-            <div class="col-md-4">
-              <label for="price" class="form-label">Update Description</label>
+            <div class="col-md-6">
+              <label for="price" class="form-label">New description</label>
               <input type="text"  class="form-control" id="description_text" placeholder="description" required>
               <div class="invalid-feedback">
                 Please enter the new description.
@@ -195,6 +156,7 @@ const FurniturePage = (element) =>{
   if(!user){
     RedirectUrl("/login");
   }
+  elementGlobal=element;
 
   console.log("id furniture depuis homePage");
   console.log(element);
@@ -216,7 +178,7 @@ const FurniturePage = (element) =>{
 const onPurchaseSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: element,
+    idFurniture: elementGlobal,
     purchasePrice: document.getElementById("purchasePrice").value,
     furnitureCollectionDateBoss: document.getElementById("collectionDate").value
   }
@@ -243,7 +205,7 @@ const onPurchaseSubmitted = (furnitureData) =>{
 const onWorkshopSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: element,
+    idFurniture: elementGlobal,
   }
   try{
     const furnitureWorkshop = await callAPI(
@@ -267,7 +229,7 @@ const onWorkshopSubmitted = (furnitureData) =>{
 const onDepositSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: element,
+    idFurniture: elementGlobal,
     depositDate: document.getElementById("depositDate").value
   }
   console.log(furniture);
@@ -293,7 +255,7 @@ const onDepositSubmitted = (furnitureData) =>{
 const onSellingSubmit = async (e) =>{
   e.preventDefault();
   let furniture= {
-    id_meuble: element,
+    id_meuble: elementGlobal,
     prix_vente: document.getElementById("price").value,
   };
   try {
@@ -318,7 +280,7 @@ const onPriceSubmitted = (furnitureData) =>{
 const onSoldSubmit = async (e) =>{
   e.preventDefault();
   let sale={
-    idFurniture: element,
+    idFurniture: elementGlobal,
     idUser: document.getElementById("customerID").value,
     soldDate: document.getElementById("soldDate").value,
     specialSalePrice: document.getElementById("specialPrice").value,
@@ -346,7 +308,7 @@ const onSoldSubmitted = (saleData) =>{
 const onDescriptionSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: element,
+    idFurniture: elementGlobal,
     description: document.getElementById("description_text").value,
     
   }
