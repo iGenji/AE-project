@@ -25,5 +25,4 @@ Router();
 // deal with header and footer
 document.querySelector("#headerTitle").innerText = HEADER_TITLE;
 document.querySelector("#footerText").innerText = FOOTER_TEXT;
-//document.querySelector("#imgHeader").innerText = HEADER;
 document.getElementById("imgHeader").src = HEADER;
