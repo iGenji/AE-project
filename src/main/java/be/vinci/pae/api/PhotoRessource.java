@@ -1,7 +1,6 @@
 package be.vinci.pae.api;
 
 import java.util.List;
-import be.vinci.pae.domain.PhotoDAO;
 import be.vinci.pae.domain.PhotoDTO;
 import be.vinci.pae.usecases.PhotoUCC;
 import jakarta.inject.Inject;
@@ -15,9 +14,6 @@ import jakarta.ws.rs.core.MediaType;
 @Singleton
 @Path("/photo")
 public class PhotoRessource {
-
-  @Inject
-  private PhotoDAO dataService;
 
   @Inject
   private PhotoUCC uccService;

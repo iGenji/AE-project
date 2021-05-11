@@ -1,6 +1,5 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.domain.FurnitureDAO;
 import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
 import be.vinci.pae.utils.MethodDuplicated;
@@ -25,10 +24,6 @@ public class FurnitureResource {
 
   @Inject
   private FurnitureUCC uccService;
-
-  @Inject
-  private FurnitureDAO dataService;
-
 
   /*
    * @Inject private FurnitureFactory furnitureFactory;

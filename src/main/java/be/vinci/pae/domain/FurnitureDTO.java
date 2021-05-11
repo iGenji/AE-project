@@ -190,12 +190,12 @@ public interface FurnitureDTO {
    * 
    * @return String of the URL favorite photo
    */
-  public String getFavouritePhotoString();
+  String getFavouritePhotoString();
 
   /**
    * {@inheritDoc} This method sets the string URL favorite photo.
    * 
    * @param favouritePhotoString - String
    */
-  public void setFavouritePhotoString(String favouritePhotoString);
+  void setFavouritePhotoString(String favouritePhotoString);
 }
