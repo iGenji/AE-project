@@ -231,8 +231,8 @@ public class FurnitureDAOImpl implements FurnitureDAO {
   public FurnitureDTO updateDescription(FurnitureDTO furniture) {
     PreparedStatement ps;
     try {
-      ps = dalServices.getPreparedStatement(updateFurnitureDepositDate);
-      ps.setString(1, furniture.getDescription());;
+      ps = dalServices.getPreparedStatement(updateDescription);
+      ps.setString(1, furniture.getDescription());
       ps.setInt(2, furniture.getIdFurniture());
       ps.executeUpdate();
     } catch (Exception e) {
