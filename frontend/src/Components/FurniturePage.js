@@ -28,9 +28,7 @@ let furniturePage = `<div class="container">
             <div class="col-md-4">
               <label for="furniturePurchasedPrice" class="form-label">Purchase price</label>
               <input type="number" min="0" class="form-control" id="purchasePrice" placeholder="100" required>
-              <div class="invalid-feedback">
-                Please enter the price of the furniture purchased.
-              </div>
+              
             </div>
 
             <div class="col-md-4">

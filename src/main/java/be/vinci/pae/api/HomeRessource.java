@@ -36,8 +36,6 @@ public class HomeRessource {
   @Inject
   private FurnitureUCC uccService;
 
-  private String pathImage = "D:\\Utilisateurs\\pboyc\\Desktop\\imagesPAE\\ImageDemoFinale\\";
-
 
   /**
    * {@inheritDoc} Show all furniture in a list
@@ -77,43 +75,6 @@ public class HomeRessource {
     return Json.filterPublicJsonView(currentFurniture, FurnitureDTO.class);
   }
 
-  /**
-   * {@inheritDoc} Upload the file into a path
-   * 
-   * @param stream - InputStream
-   * @param fileInfo - FormDataContentDisposition
-   */
-  @POST
-  @Path("/uploadImage")
-  @Consumes(MediaType.MULTIPART_FORM_DATA)
-  // @Authorize
-  public void uploadImage(@FormDataParam("image") InputStream stream,
-      @FormDataParam("image") FormDataContentDisposition fileInfo) {
-
-    String fileName = fileInfo.getName();
-    // String extension = fileInfo.getFileName();
-
-    System.out.println("uploadImage Called");
-    try {
-      int read = 0;
-      FileOutputStream f = new FileOutputStream(pathImage + fileName);
-      CountingOutputStream out = new CountingOutputStream(f);
-      byte[] bytes = new byte[2048];
-      while ((read = stream.read(bytes)) != -1) {
-        out.write(bytes, 0, read);
-      }
-      out.flush();
-      out.close();
-
-    } catch (FileNotFoundException e) {
-
-      e.printStackTrace();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-
-
-  }
+  
 
 }
