@@ -111,6 +111,28 @@ public class FurnitureResource {
     // Build response
     return Response.ok(node, MediaType.APPLICATION_JSON).build();
   }
+  
+  /**
+   * {@inheritDoc} This method update the description
+   *
+   * @param furnitureDTO - FurnitureDTO fulfilled by the frontend
+   * @return furnitureDTO Object
+   */
+  @POST
+  @Path("description")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response updateDescription(FurnitureDTO furnitureDTO) {
+
+    // check if furniture exists
+    boolean furnitureDTOconfirm = this.uccService.updateDescription(furnitureDTO);
+    if (!furnitureDTOconfirm) {
+      return Response.status(Status.CONFLICT).entity("This furniture does not exist")
+          .type(MediaType.TEXT_PLAIN).build();
+    }
+    ObjectNode node = jsonMapper.createObjectNode().put("success", true);
+    // Build response
+    return Response.ok(node, MediaType.APPLICATION_JSON).build();
+  }
 
   /**
    * {@inheritDoc} This method checks if this field contained in the Json object is empty.

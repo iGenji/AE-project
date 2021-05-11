@@ -22,13 +22,11 @@ const Navbar = () => {
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="#" data-uri="/">Home</a>    
       <a class="nav-item nav-link" href="#" data-uri="/logout">Logout</a>
-      <a class="nav-item nav-link" href="#" data-uri="/furniture">Furniture</a>
-      <a class="nav-item nav-link" href="#" data-uri="/users">List of users</a>
       <a class="nav-item nav-link disabled" href="#">${user.user.username}</a>
     </div>
   </div>
   </nav>`;
-  } else {
+  }else {
     navbar = `<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="navBar">
   <a class="navbar-brand" href="/" data-uri="/">MyCMS</a
   ><button
