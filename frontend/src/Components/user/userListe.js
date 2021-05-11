@@ -15,6 +15,9 @@ const UserListPage = async () => {
   page.appendChild(title);
 
   const user = getUserSessionData();
+  if(!user || user.user.role !== "admin"){
+    RedirectUrl("/");
+  } 
 
   try {
     const users = await callAPI(API_BASE_URL, "GET", user.token);
