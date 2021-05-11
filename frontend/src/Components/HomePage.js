@@ -3,7 +3,7 @@ import { RedirectUrl } from "./Router.js";
 import callAPI from "../utils/api.js";
 import PrintError from "./PrintError.js";
 const API_BASE_URL = "/api/";
-const API_BASE_URL_FURNITURE = "/api/furnitures/";
+const API_BASE_PHOTO = "/api/photo/";
 
 
 const HomePage = async () => {
@@ -41,7 +41,7 @@ const onFurnituresList = (data) => {
     table += `<li class="item-a">
     <div class="box" data-id="${element.idFurniture}">
       <div class="slide-img">
-        <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="" />
+        <img src="${element.favouritePhotoString}" alt="" />
         <div class="overlay">
           <button href="#" class="buyBtn">Buy Now</button>
         </div>
@@ -74,11 +74,9 @@ const onFurnituresList = (data) => {
 const onBuy = async (e) => {
  
   const idFurniture = e.target.parentElement.parentElement.parentElement.dataset.id;
-  //window.location.href = "http://localhost/furnitureCustomer?furnitureId="+idFurniture;
   const user = getUserSessionData();
   if(!user){
     RedirectUrl("/login");
-    //+ajouter message disant que la personne doit être connecté
   }else{
       onFurniturePageCustomer(user, idFurniture);
   }
@@ -89,7 +87,7 @@ const onFurniturePageCustomer = async (user, id) =>{
   try {
       console.log(id);
       const furniture = await callAPI(
-        API_BASE_URL_FURNITURE + id,
+        API_BASE_URL + id,
         "GET",
         user.token,
 
@@ -101,39 +99,62 @@ const onFurniturePageCustomer = async (user, id) =>{
     }
 };
 
-const onDisplayFurnitureCostumer = (furniture) => {
+const onDisplayFurnitureCostumer = async (furniture) => {
   console.log("onDisplayFurnitureCostumer:", furniture);
     // show the furniture's page
-    page.innerHTML = 
-    `
+    
+        try {
+          const id = furniture.idFurniture;
+          console.log("test", id);
+          const photos = await callAPI(API_BASE_PHOTO + id, "GET");
+          console.log(photos);
+          onPhotoList(photos, furniture);
+        } catch (err) {
+          console.error("PhotoListPage::onPhotoList", err);
+          PrintError(err);
+        }
+      };
+      
+      const onPhotoList = (data, furniture) => {
+        if (!data) return;
+       
+        let table = `<body>
+        
     <div class="container-fluid-width row" style="background-color: grey;">
       <a align="left" class="border col-md-4" href="http://localhost/"><button>Retour</button></a>
-      <div align="center" class="border col-md-4">Nom: ${furniture.idFurniture}</div>
+      <div align="center" class="border col-md-4">Type: ${furniture.typeString}</div>
       <a align="right" class="border col-md-4"><button>Voir mes options (non demandé)</button></a>
     </div>
 
     <div class="container-fluid-width" style="background-color: black;">
       <div id="demo" class="carousel slide" data-ride="carousel">
-        <!-- Indicateurs -->
-        <ul class="carousel-indicators">
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-
+      <div class="carousel-inner" >
+      
+    `;
+      
+        data.forEach((element) => {
+          //si element n'est pas autorisé à être vu, alors on passe l'affichage de cette photo
+          if(element.isVisible ==="false"){
+            return;
+          }
+          if(element.idPhoto == furniture.favouritePhoto){
+            table += `
         <!-- Carrousel -->
-        <div class="carousel-inner" >
           <div class="carousel-item active">
-            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Carrousel slide 1" class="rounded mx-auto d-block w-25" >
+            <img src="${element.photo}" alt="" class="rounded mx-auto d-block w-25" >
           </div>
-          <div class="carousel-item">
-            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Carrousel slide 2" class="rounded mx-auto d-block w-25" >
-          </div>
-          <div class="carousel-item">
-            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Carrousel slide 3" class="rounded mx-auto d-block w-25" >
-          </div>
+        `;
+          }else{
+            table += `
+            <!-- Carrousel -->
+              <div class="carousel-item">
+                <img src="${element.photo}" alt="" class="rounded mx-auto d-block w-25" >
+              </div>
+            `;
+          }      
+      });
+        table += `
         </div>
-
         <!-- Contrôles -->
         <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -151,10 +172,12 @@ const onDisplayFurnitureCostumer = (furniture) => {
       <div align="center" class="border col-md-6">Description: <br/>${furniture.description}</div>
       <a align="right" class="border col-md-3"><button>Introduire une option ou Annuler une option (non demandé)</button></a>
     </div>
+    
+    
+    </body>
     `;
-;
-
-};
+    page.innerHTML = table;  
+  };
 
 export default HomePage;
 

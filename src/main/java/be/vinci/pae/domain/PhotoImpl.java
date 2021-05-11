@@ -17,34 +17,8 @@ public class PhotoImpl implements Photo {
   @JsonView(Views.Public.class)
   private String photo;
   @JsonView(Views.Public.class)
-  private int isVisible;
+  private boolean isVisible;
 
-  /**
-   * Constructor of the class.
-   * 
-   * @param idPhoto - int
-   * @param furniture - int
-   * @param photo - String
-   * @param isVisible - int
-   */
-  public PhotoImpl(int idPhoto, int furniture, String photo, int isVisible) {
-    super();
-    this.idPhoto = idPhoto;
-    this.furniture = furniture;
-    this.photo = photo;
-    this.isVisible = isVisible;
-  }
-
-  /**
-   * Another constructor of the class.
-   */
-  public PhotoImpl() {
-    super();
-    this.idPhoto = -1;
-    this.furniture = -1;
-    this.photo = null;
-    this.isVisible = -1;
-  }
 
   @Override
   public int getIdPhoto() {
@@ -77,12 +51,12 @@ public class PhotoImpl implements Photo {
   }
 
   @Override
-  public int getIsVisible() {
+  public boolean getIsVisible() {
     return isVisible;
   }
 
   @Override
-  public void setIsVisible(int isVisible) {
+  public void setIsVisible(boolean isVisible) {
     this.isVisible = isVisible;
   }
 
