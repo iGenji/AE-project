@@ -5,8 +5,8 @@ import java.util.List;
 public interface PhotoDAO {
 
   /**
-   * {@inheritDoc} This method returns a photo DTO fulfilled
-   * from the database with the ID that was given.
+   * {@inheritDoc} This method returns a photo DTO fulfilled from the database 
+   * with the ID that was given.
    * 
    * @param photoId - int.
    * @return The photo or null if not found.
@@ -14,8 +14,8 @@ public interface PhotoDAO {
   PhotoDTO findByID(int photoId);
 
   /**
-   * {@inheritDoc} This method returns a list of all the photos that
-   * the database has with the ID of furniture that was given.
+   * {@inheritDoc} This method returns a list of all the photos that the database has 
+   * with the ID of furniture that was given.
    * 
    * @param idFurniture - int.
    * @return List of photos.

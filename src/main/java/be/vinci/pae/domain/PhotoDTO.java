@@ -45,18 +45,18 @@ public interface PhotoDTO {
   void setPhoto(String photo);
 
   /**
-   * {@inheritDoc} This method returns 0 or 1 to indicate whether
+   * {@inheritDoc} This method returns 0 or 1 to indicate whether 
    * the image is visible or not of the photo DTO.
    * 
-   * @return int 0 or 1, 0 for false and 1 for true, of the photo DTO.
+   * @return boolean false or true, of the photo DTO.
    */
-  int getIsVisible();
+  boolean getIsVisible();
 
   /**
-   * {@inheritDoc} This method set the attribute "est_visible" to
-   *    indicate whether the image is visible or not of the photo DTO.
+   * {@inheritDoc} This method set the attribute "est_visible" 
+   * to indicate whether the image is visible or not of the photo DTO.
    * 
-   * @param isVisible - int 0 or 1, 0 for false and 1 for true, of the photo DTO.
+   * @param b - boolean false or true, of the photo DTO.
    */
-  void setIsVisible(int isVisible);
+  void setIsVisible(boolean b);
 }

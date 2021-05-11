@@ -99,7 +99,7 @@ public class UserResource {
       throw new WebApplicationException("User not found", null, Status.NOT_FOUND);
     }
     toReturn = Json.filterPublicJsonView(toReturn, UserDTO.class);
-    
+
     return toReturn;
 
   }

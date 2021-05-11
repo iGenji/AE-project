@@ -34,16 +34,16 @@ public class FurnitureImpl implements Furniture {
   @JsonView(Views.Public.class)
   private int favouritePhoto; // FK, id lié à table photos_meubles
   @JsonView(Views.Public.class)
+  private String favouritePhotoString;
+  @JsonView(Views.Public.class)
   private int visit; // FK, id lié à table visites
   @JsonView(Views.Public.class)
-  @JsonFormat
-      (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date furnitureCollectionDateBoss;
   @JsonView(Views.Public.class)
-  @JsonFormat
-      (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date depositDate;
-  
+
 
   @Override
   public int getIdFurniture() {
@@ -152,13 +152,13 @@ public class FurnitureImpl implements Furniture {
   public void setDepositDate(Timestamp depositDate) {
     this.depositDate = depositDate;
   }
-  
-  
+
+
   @Override
   public String getTypeString() {
     return typeString;
   }
-  
+
   @Override
   public void setTypeString(String typeString) {
     this.typeString = typeString;
@@ -188,6 +188,14 @@ public class FurnitureImpl implements Furniture {
       return false;
     }
     return true;
+  }
+
+  public String getFavouritePhotoString() {
+    return favouritePhotoString;
+  }
+
+  public void setFavouritePhotoString(String favouritePhotoString) {
+    this.favouritePhotoString = favouritePhotoString;
   }
 
 
