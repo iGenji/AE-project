@@ -6,6 +6,7 @@ const API_BASE_URL = "/api/users/";
 console.log(location.search.split('=')[1]);
 var pseudo = location.search.split('=')[1];
 const UserPage = async () => {
+
   // deal with page title
   let page = document.querySelector("#page");
   // clear the page
@@ -17,6 +18,9 @@ const UserPage = async () => {
   var idAdress;
   var adresse;
   const user = getUserSessionData();
+  /* if(user.user.role!=="admin"){
+    RedirectUrl("/error");
+  } */
 
   try {
     const users = await callAPI(API_BASE_URL+pseudo, "GET", user.token);

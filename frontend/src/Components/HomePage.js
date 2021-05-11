@@ -2,9 +2,11 @@ import { getUserSessionData} from "../utils/session.js";
 import { RedirectUrl } from "./Router.js";
 import callAPI from "../utils/api.js";
 import PrintError from "./PrintError.js";
+import FurniturePage from "./FurniturePage.js";
 const API_BASE_URL = "/api/";
 const API_BASE_PHOTO = "/api/photo/";
 
+var idFurnitureGlobal;
 
 const HomePage = async () => {
   // deal with page title
@@ -23,6 +25,7 @@ const HomePage = async () => {
   } catch (err) {
     console.error("UserListPage::onFilmList", err);
     PrintError(err);
+    RedirectUrl("/error");
   }
 };
 
@@ -36,6 +39,7 @@ const onFurnituresList = (data) => {
     if(element.stateFurniture==="achete"){
       vendu="Vendu!";
     }
+    idFurnitureGlobal = element.idFurniture;
     const str = element.registrationDate+'';
     const words = str.split(',');
     table += `<li class="item-a">
@@ -172,11 +176,30 @@ const onDisplayFurnitureCostumer = async (furniture) => {
       <div align="center" class="border col-md-6">Description: <br/>${furniture.description}</div>
       <a align="right" class="border col-md-3"><button>Introduire une option ou Annuler une option (non demandé)</button></a>
     </div>
-    
-    
+
+    <div class="modification_button">
+      
+    </div>
     </body>
     `;
-    page.innerHTML = table;  
+    page.innerHTML = table;
+    const user = getUserSessionData();
+    console.log(user.user.role);
+    if(user.user.role==='admin'){
+      page.innerHTML = table + `<br><button class="btn btn-dark modificationBtn">Modifier</button>`;
+      const modificationBtns = document.querySelectorAll(".modificationBtn");
+      modificationBtns.forEach((modificationBtn) => {
+        modificationBtn.addEventListener("click", onClicked);
+      });
+    }
+
+  };
+
+  
+
+  const onClicked = async (e) => {
+    
+    FurniturePage(idFurnitureGlobal);
   };
 
 export default HomePage;

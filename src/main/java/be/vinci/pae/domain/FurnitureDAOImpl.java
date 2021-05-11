@@ -42,6 +42,9 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       + "t.nom, p.photo FROM pae_project.meubles m,pae_project.types_meubles t, "
       + " pae_project.photos_meubles p"
       + " WHERE t.id_type=m.type_meuble AND p.id_photo = m.photo_preferee";
+  
+  private final String updateDescription =
+      "Update pae_project.meubles SET description=? WHERE id_meuble=?";
 
   @Inject
   private DalServices dalServices;
@@ -218,6 +221,21 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       furniture.setFavouritePhotoString(rs.getString("photo"));
     } catch (Exception e) {
       // TODO Auto-generated catch block
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return furniture;
+  }
+
+  @Override
+  public FurnitureDTO updateDescription(FurnitureDTO furniture) {
+    PreparedStatement ps;
+    try {
+      ps = dalServices.getPreparedStatement(updateDescription);
+      ps.setString(1, furniture.getDescription());
+      ps.setInt(2, furniture.getIdFurniture());
+      ps.executeUpdate();
+    } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
 

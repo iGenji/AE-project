@@ -19,8 +19,7 @@ let furniturePage = `<div class="container">
           <div class="row gy-3">
 
             <div class="col-md-4">
-              <label for="furniturePurchasedID" class="form-label">Furniture purchased ID</label>
-              <input type="number" min="0" class="form-control" id="furniturePurchasedID" placeholder="1" required>
+              
               <div class="invalid-feedback">
                 Please enter the id of the furniture purchased.
               </div>
@@ -56,8 +55,7 @@ let furniturePage = `<div class="container">
           <div class="row gy-3">
 
             <div class="col-md-4">
-              <label for="furnitureSentToWorkshop" class="form-label">Furniture ID</label>
-              <input type="number" min="0" class="form-control" id="furnitureSentID" placeholder="1" required>
+              
               <div class="invalid-feedback">
                 Please enter the id of the furniture sent to the workshop.
               </div>
@@ -76,8 +74,7 @@ let furniturePage = `<div class="container">
           <div class="row gy-3">
 
             <div class="col-md-4">
-              <label for="furnitureDepositID" class="form-label">Furniture ID</label>
-              <input type="number" min="0" class="form-control" id="furnitureDepositID" placeholder="1" required>
+              
               <div class="invalid-feedback">
                 Please enter the id of the furniture purchased.
               </div>
@@ -102,8 +99,7 @@ let furniturePage = `<div class="container">
           <div class="row g-3">
 
             <div class="col-md-4">
-              <label for="furnitureID" class="form-label">Furniture ID</label>
-              <input type="number" min="0" class="form-control" id="furnitureID" placeholder="1" required>
+              
               <div class="invalid-feedback">
                 Please enter the id of the furniture.
               </div>
@@ -131,8 +127,7 @@ let furniturePage = `<div class="container">
           <div class="row gy-3">
 
             <div class="col-md-3">
-              <label for="furnitureSoldID" class="form-label">Furniture sold ID</label>
-              <input type="number" min="0" class="form-control" id="furnitureSoldID" placeholder="1" required>
+              
               <div class="invalid-feedback">
                 Please enter the id of the furniture sold.
               </div>
@@ -165,20 +160,46 @@ let furniturePage = `<div class="container">
           <br>
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Confirm selling</button>
-        </form> 
+        </form>
+
+        <form id="description_form" class="needs-validation" novalidate>
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              
+              <div class="invalid-feedback">
+                Please enter the id of the furniture.
+              </div>
+            </div>  
+
+            <div class="col-md-4">
+              <label for="price" class="form-label">Update Description</label>
+              <input type="text"  class="form-control" id="description_text" placeholder="description" required>
+              <div class="invalid-feedback">
+                Please enter the new description.
+              </div>
+            </div>
+
+          </div>
+          </br>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Confirm description</button>
+        </form>
       </br>
       </br>
       </br>
       </br>
 </div>`;
 
-const FurniturePage = () =>{
+const FurniturePage = (element) =>{
   let page = document.querySelector("#page");
   page.innerHTML= furniturePage;
   const user = getUserSessionData();
   if(!user){
     RedirectUrl("/login");
   }
+
+  console.log("id furniture depuis homePage");
+  console.log(element);
   let purchaseForm = document.querySelector('#purchase');
   purchaseForm.addEventListener("submit",onPurchaseSubmit);
   let workshopForm = document.querySelector('#workshop');
@@ -189,12 +210,15 @@ const FurniturePage = () =>{
   sellingForm.addEventListener("submit", onSellingSubmit);
   let soldForm = document.querySelector('#sold');
   soldForm.addEventListener("submit",onSoldSubmit);
+
+  let descriptionForm = document.querySelector('#description_form');
+  descriptionForm.addEventListener("submit",onDescriptionSubmit);
 };
 
 const onPurchaseSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: document.getElementById("furniturePurchasedID").value,
+    idFurniture: element,
     purchasePrice: document.getElementById("purchasePrice").value,
     furnitureCollectionDateBoss: document.getElementById("collectionDate").value
   }
@@ -221,7 +245,7 @@ const onPurchaseSubmitted = (furnitureData) =>{
 const onWorkshopSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: document.getElementById("furnitureSentID").value,
+    idFurniture: element,
   }
   try{
     const furnitureWorkshop = await callAPI(
@@ -245,7 +269,7 @@ const onWorkshopSubmitted = (furnitureData) =>{
 const onDepositSubmit = async (e) =>{
   e.preventDefault();
   let furniture={
-    idFurniture: document.getElementById("furnitureDepositID").value,
+    idFurniture: element,
     depositDate: document.getElementById("depositDate").value
   }
   console.log(furniture);
@@ -271,7 +295,7 @@ const onDepositSubmitted = (furnitureData) =>{
 const onSellingSubmit = async (e) =>{
   e.preventDefault();
   let furniture= {
-    id_meuble: document.getElementById("furnitureID").value,
+    id_meuble: element,
     prix_vente: document.getElementById("price").value,
   };
   try {
@@ -296,7 +320,7 @@ const onPriceSubmitted = (furnitureData) =>{
 const onSoldSubmit = async (e) =>{
   e.preventDefault();
   let sale={
-    idFurniture: document.getElementById("furnitureSoldID").value,
+    idFurniture: element,
     idUser: document.getElementById("customerID").value,
     soldDate: document.getElementById("soldDate").value,
     specialSalePrice: document.getElementById("specialPrice").value,
@@ -317,6 +341,34 @@ const onSoldSubmit = async (e) =>{
   }
 }
 const onSoldSubmitted = (saleData) =>{
+  console.log("FurniturePage::onSoldSubmitted",saleData);
+  RedirectUrl("/");
+}
+
+const onDescriptionSubmit = async (e) =>{
+  e.preventDefault();
+  let furniture={
+    idFurniture: element,
+    description: document.getElementById("description_text").value,
+    
+  }
+  console.log(sale);
+  try{
+    const onDescriptionSubmitted = await callAPI(
+      API_BASE_URL + "description",
+      "POST",
+      undefined,
+      furniture
+    );
+    console.log(saleSoldSubmitted)
+    onDescriptionSubmitted(onDescriptionSubmitted);
+  } catch (err) {
+    console.error("FurniturePage::onSoldSubmit", err);
+    PrintError(err);
+  }
+}
+
+const onDescriptionSubmitted = (saleData) =>{
   console.log("FurniturePage::onSoldSubmitted",saleData);
   RedirectUrl("/");
 }

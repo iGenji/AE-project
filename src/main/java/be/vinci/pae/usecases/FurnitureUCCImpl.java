@@ -165,5 +165,23 @@ public class FurnitureUCCImpl implements FurnitureUCC {
 
   }
 
+  @Override
+  public boolean updateDescription(FurnitureDTO furnitureDTO) {
+    try {
+      dal.startTransaction();
+
+
+      furnitureDAO.updateDescription(furnitureDTO);
+      dal.commitTransaction();
+      System.out.println("description changed");
+      return true;
+
+    } catch (Exception e) {
+      rollBackError();
+      throw new FatalException(e.getMessage(), e);
+    }
+
+  }
+
 
 }
