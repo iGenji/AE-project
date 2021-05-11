@@ -1,6 +1,5 @@
 package be.vinci.pae.usecases;
 
-import be.vinci.pae.domain.UserDAO;
 import java.util.ArrayList;
 import java.util.List;
 import be.vinci.pae.domain.FurnitureDAO;
