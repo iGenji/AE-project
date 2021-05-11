@@ -46,7 +46,6 @@ const Navbar = () => {
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="#" data-uri="/">Home</a>    
         <a class="nav-item nav-link" href="#" data-uri="/logout">Logout</a>
-        <a class="nav-item nav-link" href="#" data-uri="/furniture">Furniture</a>
         <a class="nav-item nav-link" href="#" data-uri="/users">UsersList</a>     
         <a class="nav-item nav-link disabled" href="#">${user.user.username}</a>
       </div>
