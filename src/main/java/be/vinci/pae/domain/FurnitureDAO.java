@@ -79,6 +79,13 @@ public interface FurnitureDAO {
    * @return the new furniture DTO or null if the furniture was not found.
    */
   FurnitureDTO updateDepositDate(FurnitureDTO furniture);
+  
+  /**
+   * {@inheritDoc}This method returns
+   * @param furniture
+   * @return boolean - true if done false otherwise
+   */
+  FurnitureDTO updateDescription(FurnitureDTO furniture);
 
   /**
    * {@inheritDoc} This method returns all furniture from the database

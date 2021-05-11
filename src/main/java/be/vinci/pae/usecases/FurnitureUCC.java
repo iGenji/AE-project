@@ -60,6 +60,13 @@ public interface FurnitureUCC {
    * @return return false if failed, true if succeed.
    */
   boolean confirmDeposit(FurnitureDTO furnitureDTO);
+  
+  /**
+   * {@inheritDoc} This method change the description.
+   * @param furniture - FurnitureDTO
+   * @return boolean - true if it succeed
+   */
+  boolean updateDescription(FurnitureDTO furniture);
 
 
 }
