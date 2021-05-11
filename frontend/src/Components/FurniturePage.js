@@ -51,8 +51,6 @@ let furniturePage = `<div class="container">
 
         <form id="workshop" class="needs-validation" novalidate>
 
-          <hr class="my-4">
-
           <h4 class="mb-3">Send to the workshop</h4>
 
           <div class="row gy-3">
@@ -72,8 +70,6 @@ let furniturePage = `<div class="container">
         <hr class="my-4">
 
         <form id="deposit" class="needs-validation" novalidate>
-
-          <hr class="my-4">
 
           <h4 class="mb-3">Deposit</h4>
 
@@ -121,17 +117,9 @@ let furniturePage = `<div class="container">
               </div>
             </div>
 
-            <div class="col-md-4">
-              <label for="specialPrice" class="form-label">Special selling price (€)</label>
-              <input type="number" min="0.01" step="0.01" class="form-control" id="specialPrice" placeholder="150" required>
-              <div class="invalid-feedback">
-                Please enter the special price for this furniture.
-              </div>
-            </div>
-
           </div>
           </br>
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Confirm prices</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Confirm price</button>
         </form> 
 
         <form id="sold" class="needs-validation" novalidate>
@@ -142,7 +130,7 @@ let furniturePage = `<div class="container">
 
           <div class="row gy-3">
 
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label for="furnitureSoldID" class="form-label">Furniture sold ID</label>
               <input type="number" min="0" class="form-control" id="furnitureSoldID" placeholder="1" required>
               <div class="invalid-feedback">
@@ -150,7 +138,15 @@ let furniturePage = `<div class="container">
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
+              <label for="specialPrice" class="form-label">Special sale price (€)</label>
+              <input type="number" min="-1" step="0.01" class="form-control" id="specialPrice" placeholder="-1" required>
+              <div class="invalid-feedback">
+                Please enter the special sale price or -1 if there is none.
+              </div>
+            </div>
+
+            <div class="col-md-3">
               <label for="furnitureSoldID" class="form-label">Customer ID</label>
               <input type="number" min="-1" class="form-control" id="customerID" placeholder="-1" required>
               <div class="invalid-feedback">
@@ -158,7 +154,7 @@ let furniturePage = `<div class="container">
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label for="cc-name" class="form-label">Date of sale</label>
               <input type="date" class="form-control" id="soldDate" placeholder="" required>
               <div class="invalid-feedback">
@@ -277,7 +273,6 @@ const onSellingSubmit = async (e) =>{
   let furniture= {
     id_meuble: document.getElementById("furnitureID").value,
     prix_vente: document.getElementById("price").value,
-    prix_special: document.getElementById("specialPrice").value
   };
   try {
     const priceSubmitted = await callAPI(
@@ -300,35 +295,29 @@ const onPriceSubmitted = (furnitureData) =>{
 
 const onSoldSubmit = async (e) =>{
   e.preventDefault();
-  let furniture={
+  let sale={
     idFurniture: document.getElementById("furnitureSoldID").value,
     idUser: document.getElementById("customerID").value,
-    soldDate: document.getElementById("soldDate").value
+    soldDate: document.getElementById("soldDate").value,
+    specialSalePrice: document.getElementById("specialPrice").value,
   }
-  console.log(furniture);
+  console.log(sale);
   try{
     const saleSoldSubmitted = await callAPI(
       "/api/sales/soldSubmitted",
       "POST",
       undefined,
-      furniture
+      sale
     )
     console.log(saleSoldSubmitted)
-    const furnitureSoldSubmitted = await callAPI(
-      API_BASE_URL + "soldSubmitted",
-      "POST",
-      undefined,
-      furniture
-    );
-    onSoldSubmitted(saleSoldSubmitted,furnitureSoldSubmitted);
+    onSoldSubmitted(saleSoldSubmitted);
   } catch (err) {
     console.error("FurniturePage::onSoldSubmit", err);
     PrintError(err);
   }
 }
-const onSoldSubmitted = (saleData,furnitureData) =>{
+const onSoldSubmitted = (saleData) =>{
   console.log("FurniturePage::onSoldSubmitted",saleData);
-  console.log("FurniturePage::onSoldSubmitted",furnitureData);
   RedirectUrl("/");
 }
 

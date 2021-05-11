@@ -24,6 +24,8 @@ public class SellingImpl implements Selling {
   @JsonView(Views.Public.class)
   private String stateSelling;
   @JsonView(Views.Public.class)
+  private double specialSalePrice;
+  @JsonView(Views.Public.class)
   @JsonFormat
       (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date soldDate;
@@ -70,6 +72,16 @@ public class SellingImpl implements Selling {
   @Override
   public void setStateSelling(String stateSelling) {
     this.stateSelling = stateSelling;
+  }
+
+  @Override
+  public double getSpecialSalePrice() {
+    return specialSalePrice;
+  }
+
+  @Override
+  public void setSpecialSalePrice(double specialSalePrice) {
+    this.specialSalePrice = specialSalePrice;
   }
 
   @Override

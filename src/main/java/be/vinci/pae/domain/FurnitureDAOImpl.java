@@ -92,6 +92,12 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       throw new FatalException(e.getMessage(), e);
     }
 
+    return updateState(furniture);
+  }
+
+  @Override
+  public FurnitureDTO updateSpecialPrice(FurnitureDTO furniture) {
+    PreparedStatement ps;
     try {
       ps = dalServices.getPreparedStatement(updateFurnitureSpecialPrice);
       double specialPrice = furniture.getSpecialSalePrice();
@@ -101,8 +107,7 @@ public class FurnitureDAOImpl implements FurnitureDAO {
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
-
-    return updateState(furniture);
+    return furniture;
   }
 
   @Override

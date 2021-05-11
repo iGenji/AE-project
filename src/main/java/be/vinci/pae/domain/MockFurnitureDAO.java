@@ -29,6 +29,11 @@ class MockFurnitureDAO implements FurnitureDAO {
   }
 
   @Override
+  public FurnitureDTO updateSpecialPrice(FurnitureDTO furniture) {
+    return null;
+  }
+
+  @Override
   public FurnitureDTO updateState(FurnitureDTO furniture) {
     // TODO Auto-generated method stub
     return null;
