@@ -48,4 +48,10 @@ public class PhotoUCCImpl implements PhotoUCC {
 
   }
 
+  @Override
+  public boolean addPhoto(String name,int idMeuble) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
 }

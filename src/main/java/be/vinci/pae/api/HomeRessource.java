@@ -1,13 +1,7 @@
 package be.vinci.pae.api;
 
 
-import org.apache.commons.compress.utils.CountingOutputStream;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.List;
 import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.api.utils.Json;
@@ -16,7 +10,6 @@ import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

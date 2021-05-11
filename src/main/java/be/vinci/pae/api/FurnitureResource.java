@@ -2,6 +2,7 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
+import be.vinci.pae.usecases.PhotoUCC;
 import be.vinci.pae.utils.MethodDuplicated;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,8 +32,11 @@ public class FurnitureResource {
 
   @Inject
   private FurnitureUCC uccService;
+  @Inject
+  private PhotoUCC photoUcc;
 
   private String pathImage = "D:\\Utilisateurs\\pboyc\\Desktop\\imagesPAE\\ImageDemoFinale\\";
+  private int idMeuble;
   /*
    * @Inject private FurnitureFactory furnitureFactory;
    */
@@ -138,6 +142,7 @@ public class FurnitureResource {
           .type(MediaType.TEXT_PLAIN).build();
     }
     ObjectNode node = jsonMapper.createObjectNode().put("success", true);
+    idMeuble = furnitureDTO.getIdFurniture();
     // Build response
     return Response.ok(node, MediaType.APPLICATION_JSON).build();
   }
@@ -184,8 +189,10 @@ public class FurnitureResource {
       while ((read = stream.read(bytes)) != -1) {
         out.write(bytes, 0, read);
       }
+      photoUcc.addPhoto(fileName,idMeuble);
       out.flush();
       out.close();
+      
 
     } catch (FileNotFoundException e) {
 

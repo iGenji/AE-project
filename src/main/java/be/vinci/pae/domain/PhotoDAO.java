@@ -29,7 +29,7 @@ public interface PhotoDAO {
    * @param photo - PhotoDTO.
    * @return true if it succeed, false if it failed.
    */
-  boolean insert(PhotoDTO photo);
+  boolean insert(String photo, int idMeuble);
 
   /**
    * {@inheritDoc} This method delete the photo DTO in argument from the database.
@@ -39,12 +39,6 @@ public interface PhotoDAO {
    */
   boolean delete(PhotoDTO photo);
 
-  /**
-   * {@inheritDoc} This method update the photo DTO in argument from the database.
-   * 
-   * @param photo - PhotoDTO.
-   * @return the new photo DTO or null if the photo was not found.
-   */
-  AddressDTO update(PhotoDTO photo);
+  
 
 }

@@ -6,6 +6,22 @@ import PrintError from "./PrintError.js";
 const API_BASE_URL = "/api/furnitures/";
 let elementGlobal;
 
+function encodeImagetoBase64(element) {
+
+  var file = element.files[0];
+
+  var reader = new FileReader();
+
+  reader.onloadend = function() {
+
+    document.getElementById("img").setAttribute("src",reader.result);
+    //document.getElementById("upload_file").value = reader.result;
+
+  }
+
+  reader.readAsDataURL(file);
+
+}
 let furniturePage = `<div class="container">
 </br>
 
@@ -143,10 +159,26 @@ let furniturePage = `<div class="container">
           </br>
           <button class="w-100 btn btn-primary btn-lg" type="submit">Confirm description</button>
         </form>
+        </br>
+        </br>
+
+        <form action="/api/furnitures/uploadImage" enctype="multipart/form-data" method="post">
+        <label class="form-label">Upload photo</label>
+
+	<input type="file" name="image" id="upload_file">
+
+	<button type="submit">Submit</button>
+
+  
+  <img src="" id="img"/>
+
+</form>
       </br>
       </br>
       </br>
       </br>
+
+      
 </div>`;
 
 const FurniturePage = (element) =>{
@@ -157,6 +189,13 @@ const FurniturePage = (element) =>{
     RedirectUrl("/login");
   }
   elementGlobal=element;
+
+  //upload files
+  document.getElementById("upload_file").onchange = function() {
+
+    //encodeImagetoBase64(this);
+  
+  };
 
   console.log("id furniture depuis homePage");
   console.log(element);
