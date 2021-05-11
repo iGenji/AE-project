@@ -18,9 +18,9 @@ const UserPage = async () => {
   var idAdress;
   var adresse;
   const user = getUserSessionData();
-  /* if(user.user.role!=="admin"){
-    RedirectUrl("/error");
-  } */
+  if(!user || user.user.role !== "admin"){
+    RedirectUrl("/");
+  } 
 
   try {
     const users = await callAPI(API_BASE_URL+pseudo, "GET", user.token);

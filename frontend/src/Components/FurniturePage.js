@@ -185,7 +185,7 @@ const FurniturePage = (element) =>{
   let page = document.querySelector("#page");
   page.innerHTML= furniturePage;
   const user = getUserSessionData();
-  if(!user){
+  if(!user || user.user.role !== "admin"){
     RedirectUrl("/login");
   }
   elementGlobal=element;
