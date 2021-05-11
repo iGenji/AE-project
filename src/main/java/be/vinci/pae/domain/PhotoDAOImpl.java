@@ -10,14 +10,13 @@ import jakarta.inject.Inject;
 
 public class PhotoDAOImpl implements PhotoDAO {
 
-  private final String findPhotoById = "SELECT p.id_photo, p.meuble, "
-      + " p.photo, p.peut_defiler"
+  private final String findPhotoById = "SELECT p.id_photo, p.meuble, " + " p.photo, p.peut_defiler"
       + " FROM pae_project.photos_meubles p" + " WHERE p.id_photo=?";
-  
-  private final String findPhotoByIdFurniture = "SELECT p.id_photo, "
-      + " p.meuble, p.photo, p.peut_defiler"
-      + " FROM pae_project.photos_meubles p" + " WHERE p.meuble=?";
-  
+
+  private final String findPhotoByIdFurniture =
+      "SELECT p.id_photo, " + " p.meuble, p.photo, p.peut_defiler"
+          + " FROM pae_project.photos_meubles p" + " WHERE p.meuble=?";
+
   @Inject
   private DalServices dalServices;
 
@@ -47,24 +46,23 @@ public class PhotoDAOImpl implements PhotoDAO {
 
   @Override
   public List<PhotoDTO> findByIDFurniture(int idFurniture) {
-      ArrayList<PhotoDTO> toReturn = new ArrayList<PhotoDTO>();
-      PhotoDTO photo = null;
-      ResultSet rs = null;
-      try {
-        PreparedStatement ps = dalServices.getPreparedStatement(findPhotoByIdFurniture);
-        ps.setInt(1, idFurniture);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-          photo = setPhoto(rs);
-          toReturn.add(photo);
-        }
-      } catch (Exception e) {
-        throw new FatalException(e.getMessage(), e);
+    ArrayList<PhotoDTO> toReturn = new ArrayList<PhotoDTO>();
+    PhotoDTO photo = null;
+    ResultSet rs = null;
+    try {
+      PreparedStatement ps = dalServices.getPreparedStatement(findPhotoByIdFurniture);
+      ps.setInt(1, idFurniture);
+      rs = ps.executeQuery();
+      while (rs.next()) {
+        photo = setPhoto(rs);
+        toReturn.add(photo);
       }
-      return toReturn;
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+    return toReturn;
   }
-  
-  
+
 
   @Override
   public boolean insert(PhotoDTO photo) {

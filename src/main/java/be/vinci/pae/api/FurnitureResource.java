@@ -122,7 +122,8 @@ public class FurnitureResource {
    *
    * @param field - String , field's name of a user.
    * @param json - Json , json that contains every fields.
-   * @return Response Status.ACCEPTED if the field is not empty, if not, run a Response Status.UNAUTHORIZED.
+   * @return Response Status.ACCEPTED if the field is not empty, if not,
+   * run a Response Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {
