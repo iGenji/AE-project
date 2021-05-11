@@ -37,7 +37,10 @@ public class SellingResource {
     // check if furniture and user exist if necessary
     boolean sellingDTOconfirm = this.uccService.confirmSelling(sellingDTO);
     if (!sellingDTOconfirm) {
-      return Response.status(Status.CONFLICT).entity("This furniture or user does not exist")
+      return Response.status(Status.CONFLICT)
+          .entity(
+              "This furniture or user does not exist, or the furniture is not in the sale state,"
+                  + "or a special price was specified for a non-antique dealer.")
           .type(MediaType.TEXT_PLAIN).build();
     }
     ObjectNode node = jsonMapper.createObjectNode().put("success", true);

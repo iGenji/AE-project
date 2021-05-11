@@ -30,7 +30,7 @@ public class FurnitureResource {
 
   @Inject
   private FurnitureUCC uccService;
-  
+
   @Inject
   private FurnitureDAO dataService;
 
@@ -73,32 +73,13 @@ public class FurnitureResource {
     // Get and check credentials
     checkJson("id_meuble", json);
     checkJson("prix_vente", json);
-    checkJson("prix_special", json);
 
     int idMeuble = json.get("id_meuble").asInt();
     double prixVente = json.get("prix_vente").asDouble();
-    double prixSpecial = json.get("prix_special").asDouble();
 
-    return uccService.proposedToSell(idMeuble, prixVente, prixSpecial);
+    return uccService.proposedToSell(idMeuble, prixVente);
   }
-
-  /**
-   * {@inheritDoc} This method indicates the sale of a furniture
-   *
-   * @param json - Json file non empty
-   * @return FurnitureDTO Object
-   */
-  @POST
-  @Path("soldSubmitted")
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  public FurnitureDTO soldSubmitted(JsonNode json) {
-    // Get and check credentials
-    checkJson("idFurniture", json);
-    int idMeuble = json.get("idFurniture").asInt();
-
-    return uccService.confirmSelling(idMeuble);
-  }
+  
 
   /**
    * {@inheritDoc} This method indicate that a furniture is sent to the workshop
@@ -139,36 +120,38 @@ public class FurnitureResource {
     // Build response
     return Response.ok(node, MediaType.APPLICATION_JSON).build();
   }
-  
+
   /**
    * {@inheritDoc} This method gives the accessible attributes of a furniture
    *
    * @param id - Integer
    * @return FurnitureDTO Object
    */
-  @GET  
+  @GET
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public FurnitureDTO getFurniture(@PathParam("id") int id) {
-    if (id == 0)
+    if (id == 0) {
       throw new WebApplicationException("Lacks of mandatory info", null, Status.BAD_REQUEST);
-   
-      FurnitureDTO currentFurniture = dataService.findByID(id);
-      if (currentFurniture == null) {
-        throw new WebApplicationException("Ressource with id = " + id + " could not be found", null,
-                Status.NOT_FOUND);
-      }     
+    }
+
+    FurnitureDTO currentFurniture = dataService.findByID(id);
+    if (currentFurniture == null) {
+      throw new WebApplicationException("Ressource with id = " + id + " could not be found", null,
+          Status.NOT_FOUND);
+    }
     return Json.filterPublicJsonView(currentFurniture, FurnitureDTO.class);
   }
-  
+
 
   /**
    * {@inheritDoc} This method checks if this field contained in the Json object is empty.
    *
    * @param field - String , field's name of a user.
-   * @param json - Json , json that contains every fields.
-   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response Status.UNAUTHORIZED.
+   * @param json  - Json , json that contains every fields.
+   * @return Response Status.ACCEPTED if the field is not empty, if not, run an Response
+   * Status.UNAUTHORIZED.
    */
   private Response checkJson(String field, JsonNode json) {
     if (!json.hasNonNull(field)) {

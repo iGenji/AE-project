@@ -64,6 +64,20 @@ public interface SellingDTO {
   void setStateSelling(String stateSelling);
 
   /**
+   * {@inheritDoc} This method returns the special sale price of the selling DTO.
+   *
+   * @return double special sale price of the selling.
+   */
+  double getSpecialSalePrice();
+
+  /**
+   * {@inheritDoc} This method set the special sale price of the selling DTO.
+   *
+   * @param specialSalePrice - double special sale price of the selling.
+   */
+  void setSpecialSalePrice(double specialSalePrice);
+
+  /**
    * {@inheritDoc} This method returns the sold date of the selling DTO.
    *
    * @return LocalDateTime sold date of the address.

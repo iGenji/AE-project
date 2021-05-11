@@ -8,20 +8,19 @@ public interface FurnitureUCC {
   /**
    * {@inheritDoc}This method is part of the use case method to confirm a selling.
    *
-   * @param idMeuble - int, id of the furniture.
-   * @return furnitureDTO with full fields.
+   * @param furnitureDTO - that has most of it fields full.
+   * @return return false if failed, true if succeed.
    */
-  FurnitureDTO confirmSelling(int idMeuble);
+  boolean confirmSelling(FurnitureDTO furnitureDTO);
 
   /**
    * {@inheritDoc}This method is the use case method to propose a furniture to sell.
    *
-   * @param idMeuble    - int, id of the furniture.
-   * @param prixVente   - double , selling price of the furniture.
-   * @param prixSpecial - double , special price of the furniture.
+   * @param idMeuble  - int, id of the furniture.
+   * @param prixVente - double , selling price of the furniture.
    * @return furnitureDTO with full fields.
    */
-  FurnitureDTO proposedToSell(int idMeuble, double prixVente, double prixSpecial);
+  FurnitureDTO proposedToSell(int idMeuble, double prixVente);
 
   /**
    * {@inheritDoc} This method returns all the furniture in a list
@@ -61,6 +60,6 @@ public interface FurnitureUCC {
    * @return return false if failed, true if succeed.
    */
   boolean confirmDeposit(FurnitureDTO furnitureDTO);
-  
-  
+
+
 }
