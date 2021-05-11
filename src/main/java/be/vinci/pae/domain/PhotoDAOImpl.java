@@ -16,6 +16,10 @@ public class PhotoDAOImpl implements PhotoDAO {
   private final String findPhotoByIdFurniture =
       "SELECT p.id_photo, " + " p.meuble, p.photo, p.peut_defiler"
           + " FROM pae_project.photos_meubles p" + " WHERE p.meuble=?";
+  
+  private final String insertPhoto = "INSERT INTO pae_project.photos_meubles(meuble,photo,peut_defiler)"
+      + " VALUES"
+      + "(?,?,false)";
 
   @Inject
   private DalServices dalServices;
@@ -65,9 +69,19 @@ public class PhotoDAOImpl implements PhotoDAO {
 
 
   @Override
-  public boolean insert(PhotoDTO photo) {
-    // TODO Auto-generated method stub
-    return false;
+  public boolean insert(String photo, int idMeuble) {
+    PreparedStatement ps;
+    try {
+
+      ps = dalServices.getPreparedStatement(insertPhoto);
+      ps.setInt(1, idMeuble);
+      ps.setString(2, photo);
+      ps.executeUpdate();
+    } catch (Exception e) {
+      throw new FatalException(e.getMessage(), e);
+    }
+
+    return true;
   }
 
   @Override
@@ -76,11 +90,7 @@ public class PhotoDAOImpl implements PhotoDAO {
     return false;
   }
 
-  @Override
-  public AddressDTO update(PhotoDTO photo) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  
 
   /**
    * {@inheritDoc} this method retrieves the data of a user present in a ResultSet.

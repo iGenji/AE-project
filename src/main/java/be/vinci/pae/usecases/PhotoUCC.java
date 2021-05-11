@@ -11,4 +11,13 @@ public interface PhotoUCC {
    * @return List of the furniture's photo of a furniture
    */
   List<PhotoDTO> getAllPhotosOfAFurniture(int idFurniture);
+  
+  
+  /**
+   * {@inheritDoc} This method add photo to the database
+   * @param name - name of the picture
+   * @param idMeuble - id of the furniture
+   * @return boolen - true if succeed
+   */
+  boolean addPhoto(String name,int idMeuble);
 }

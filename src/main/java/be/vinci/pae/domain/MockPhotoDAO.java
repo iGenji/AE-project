@@ -17,7 +17,7 @@ public class MockPhotoDAO implements PhotoDAO {
   }
 
   @Override
-  public boolean insert(PhotoDTO photo) {
+  public boolean insert(String photo, int idMeuble) {
     // TODO Auto-generated method stub
     return false;
   }
@@ -28,10 +28,6 @@ public class MockPhotoDAO implements PhotoDAO {
     return false;
   }
 
-  @Override
-  public AddressDTO update(PhotoDTO photo) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  
 
 }

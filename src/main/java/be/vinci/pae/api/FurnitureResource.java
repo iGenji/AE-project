@@ -2,10 +2,18 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.domain.FurnitureDTO;
 import be.vinci.pae.usecases.FurnitureUCC;
+import be.vinci.pae.usecases.PhotoUCC;
 import be.vinci.pae.utils.MethodDuplicated;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.compress.utils.CountingOutputStream;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -24,7 +32,11 @@ public class FurnitureResource {
 
   @Inject
   private FurnitureUCC uccService;
+  @Inject
+  private PhotoUCC photoUcc;
 
+  private String pathImage = "D:\\Utilisateurs\\pboyc\\Desktop\\imagesPAE\\ImageDemoFinale\\";
+  private int idMeuble;
   /*
    * @Inject private FurnitureFactory furnitureFactory;
    */
@@ -130,6 +142,7 @@ public class FurnitureResource {
           .type(MediaType.TEXT_PLAIN).build();
     }
     ObjectNode node = jsonMapper.createObjectNode().put("success", true);
+    idMeuble = furnitureDTO.getIdFurniture();
     // Build response
     return Response.ok(node, MediaType.APPLICATION_JSON).build();
   }
@@ -148,6 +161,48 @@ public class FurnitureResource {
           .type(MediaType.TEXT_PLAIN).build();
     }
     return Response.status(Status.ACCEPTED).build();
+  }
+  
+  /**
+   * {@inheritDoc} Upload the file into a path
+   * 
+   * @param stream - InputStream
+   * @param fileInfo - FormDataContentDisposition
+   */
+  @POST
+  @Path("/uploadImage")
+  @Consumes(MediaType.MULTIPART_FORM_DATA)
+  // @Authorize
+  public void uploadImage(@FormDataParam("image") InputStream stream,
+      @FormDataParam("image") FormDataContentDisposition fileInfo) {
+
+    String fileName = fileInfo.getFileName();
+    System.out.println(fileName);
+    // String extension = fileInfo.getFileName();
+
+    System.out.println("uploadImage Called");
+    try {
+      int read = 0;
+      FileOutputStream f = new FileOutputStream(pathImage + fileName);
+      CountingOutputStream out = new CountingOutputStream(f);
+      byte[] bytes = new byte[2048];
+      while ((read = stream.read(bytes)) != -1) {
+        out.write(bytes, 0, read);
+      }
+      photoUcc.addPhoto(fileName,idMeuble);
+      out.flush();
+      out.close();
+      
+
+    } catch (FileNotFoundException e) {
+
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+
   }
 }
 
