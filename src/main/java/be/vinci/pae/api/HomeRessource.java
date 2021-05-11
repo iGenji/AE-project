@@ -64,8 +64,9 @@ public class HomeRessource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public FurnitureDTO getFurniture(@PathParam("id") int id) {
-    if (id == 0)
+    if (id == 0) {
       throw new WebApplicationException("Lacks of mandatory info", null, Status.BAD_REQUEST);
+    } 
     // get a FurnitureDTO object by a furniture's id
     FurnitureDTO currentFurniture = dataService.findByID(id);
     if (currentFurniture == null) {
@@ -79,14 +80,14 @@ public class HomeRessource {
   /**
    * {@inheritDoc} Upload the file into a path
    * 
-   * @param stream
-   * @param fileInfo
+   * @param stream - InputStream
+   * @param fileInfo - FormDataContentDisposition
    */
-  @POST
-  @Path("/uploadImage")
-  @Consumes(MediaType.MULTIPART_FORM_DATA)
-  // @Authorize
-  public void uploadImage(@FormDataParam("image") InputStream stream,
+    @POST
+    @Path("/uploadImage")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    // @Authorize
+    public void uploadImage(@FormDataParam("image") InputStream stream,
       @FormDataParam("image") FormDataContentDisposition fileInfo) {
 
     String fileName = fileInfo.getName();

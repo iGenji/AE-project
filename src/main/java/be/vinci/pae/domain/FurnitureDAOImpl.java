@@ -14,7 +14,8 @@ public class FurnitureDAOImpl implements FurnitureDAO {
   private final String findFurnitureById = "SELECT "
       + "m.id_meuble,m.etat_meuble,m.type_meuble,m.description,m.prix_achat,m.prix_vente,"
       + "m.prix_special,m.photo_preferee," + "m.visite,m.date_emporte_patron,m.date_depot,"
-      + "t.nom, p.photo FROM pae_project.meubles m,pae_project.types_meubles t, pae_project.photos_meubles p"
+      + "t.nom, p.photo FROM pae_project.meubles m,pae_project.types_meubles t, "
+      + " pae_project.photos_meubles p"
       + " WHERE t.id_type=m.type_meuble AND p.id_photo = m.photo_preferee AND m.id_meuble=?";
 
   private final String updateFurnitureState =
@@ -38,7 +39,8 @@ public class FurnitureDAOImpl implements FurnitureDAO {
   private final String findFurnitures = "SELECT "
       + "m.id_meuble,m.etat_meuble,m.type_meuble,m.description,m.prix_achat,m.prix_vente,"
       + "m.prix_special,m.photo_preferee," + "m.visite,m.date_emporte_patron,m.date_depot,"
-      + "t.nom, p.photo FROM pae_project.meubles m,pae_project.types_meubles t, pae_project.photos_meubles p"
+      + "t.nom, p.photo FROM pae_project.meubles m,pae_project.types_meubles t, "
+      + " pae_project.photos_meubles p"
       + " WHERE t.id_type=m.type_meuble AND p.id_photo = m.photo_preferee";
 
   @Inject

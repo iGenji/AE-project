@@ -12,7 +12,8 @@ public interface UserDAO {
   List<UserDTO> findAll();
 
   /**
-   * {@inheritDoc} This method returns a user DTO fulfilled from the database with the ID that was given.
+   * {@inheritDoc} This method returns a user DTO fulfilled from the database 
+   * with the ID that was given.
    * 
    * @param userID - int.
    * @return The user or null if not found.
