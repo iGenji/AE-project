@@ -101,7 +101,6 @@ const onFurniturePageCustomer = async (user, id) =>{
 
 const onDisplayFurnitureCostumer = async (furniture) => {
   console.log("onDisplayFurnitureCostumer:", furniture);
-    // show the furniture's page
     
         try {
           const id = furniture.idFurniture;
