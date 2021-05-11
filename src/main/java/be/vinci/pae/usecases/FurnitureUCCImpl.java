@@ -20,7 +20,7 @@ public class FurnitureUCCImpl implements FurnitureUCC {
   private DalTransactions dal;
 
   @Override
-  public FurnitureDTO proposedToSell(int idMeuble, double prixVente, double prixSpecial) {
+  public FurnitureDTO proposedToSell(int idMeuble, double prixVente) {
     FurnitureDTO furnitureDTO = null;
     try {
       dal.startTransaction();
@@ -29,7 +29,6 @@ public class FurnitureUCCImpl implements FurnitureUCC {
         dal.rollBackTransaction();
       } else {
         furnitureDTO.setSellingPrice(prixVente);
-        furnitureDTO.setSpecialSalePrice(prixSpecial);
         furnitureDTO.setStateFurniture("vente");
         furnitureDAO.update(furnitureDTO);
         dal.commitTransaction();
@@ -40,25 +39,22 @@ public class FurnitureUCCImpl implements FurnitureUCC {
     }
     return furnitureDTO;
   }
-  
+
   @Override
-  public FurnitureDTO confirmSelling(int idMeuble) {
-    FurnitureDTO furnitureDTO = null;
+  public boolean confirmSelling(FurnitureDTO furnitureDTO) {
     try {
       dal.startTransaction();
-      furnitureDTO = this.furnitureDAO.findByID(idMeuble);
-      if (furnitureDTO == null) {
-        dal.rollBackTransaction();
-      } else {
-        furnitureDTO.setStateFurniture("vendu");
-        furnitureDAO.updateState(furnitureDTO);
-        dal.commitTransaction();
+      furnitureDTO.setStateFurniture("vendu");
+      furnitureDAO.updateState(furnitureDTO);
+      if (furnitureDTO.getSpecialSalePrice() > 0) {
+        furnitureDAO.updateSpecialPrice(furnitureDTO);
       }
+      dal.commitTransaction();
+      return true;
     } catch (Exception e) {
       rollBackError();
       throw new FatalException(e.getMessage(), e);
     }
-    return furnitureDTO;
   }
 
   @Override

@@ -4,6 +4,7 @@ import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import RegisterPage from "./RegisterPage.js";
 import FurniturePage from "./FurniturePage.js";
+//import FurniturePageCustomer from "./FurniturePageCustomer.js";
 import UserListPage from "./user/userListe.js";
 import UserPage from "./user/user.js";
 
@@ -14,6 +15,7 @@ const routes = {
   "/error": ErrorPage,
   "/register": RegisterPage,
   "/furniture": FurniturePage,
+  //"/furnitureCustomer": FurniturePageCustomer,
   "/users": UserListPage,
   "/user": UserPage
 };

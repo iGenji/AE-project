@@ -170,14 +170,17 @@ public interface FurnitureDTO {
    * @param depositDate - Timestamp the deposit date of the furniture DTO.
    */
   void setDepositDate(Timestamp depositDate);
+  
   /**
    * {@inheritDoc} This method returns the string of the type.
+   *
    * @return String of the type
    */
   String getTypeString();
-  
+
   /**
    * {@inheritDoc} This method sets the string type
+   *
    * @param typeString - String
    */
   void setTypeString(String typeString);

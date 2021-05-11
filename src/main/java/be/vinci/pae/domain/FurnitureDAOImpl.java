@@ -12,9 +12,11 @@ import java.util.List;
 public class FurnitureDAOImpl implements FurnitureDAO {
 
   private final String findFurnitureById =
-      "SELECT m.id_meuble, m.etat_meuble, m.type_meuble, m.description, m.prix_achat, m.prix_vente,"
-          + "m.prix_special, m.photo_preferee, m.visite, m.date_emporte_patron, m.date_depot "
-          + "FROM pae_project.meubles m WHERE m.id_meuble=?";
+      "SELECT " + "m.id_meuble,m.etat_meuble,m.type_meuble,m.description,m.prix_achat,m.prix_vente,"
+          + "m.prix_special,m.photo_preferee,"
+          + "m.visite,m.date_emporte_patron,m.date_depot,"
+          + "t.nom FROM pae_project.meubles m,pae_project.types_meubles t"
+          + " WHERE t.id_type=m.type_meuble AND m.id_meuble=?";
 
   private final String updateFurnitureState =
       "Update pae_project.meubles SET etat_meuble=? WHERE id_meuble=?";
@@ -92,6 +94,12 @@ public class FurnitureDAOImpl implements FurnitureDAO {
       throw new FatalException(e.getMessage(), e);
     }
 
+    return updateState(furniture);
+  }
+
+  @Override
+  public FurnitureDTO updateSpecialPrice(FurnitureDTO furniture) {
+    PreparedStatement ps;
     try {
       ps = dalServices.getPreparedStatement(updateFurnitureSpecialPrice);
       double specialPrice = furniture.getSpecialSalePrice();
@@ -101,8 +109,7 @@ public class FurnitureDAOImpl implements FurnitureDAO {
     } catch (Exception e) {
       throw new FatalException(e.getMessage(), e);
     }
-
-    return updateState(furniture);
+    return furniture;
   }
 
   @Override
